@@ -1,7 +1,7 @@
 ---
 name: core-dynamic-skills
-# Command-based tool - no description to prevent auto-triggering
-# Triggered by: /sync-crate-skills, /clean-crate-skills, /update-crate-skill
+description: "Internal command support for dynamic Rust crate skill management. Use only when explicitly invoked by /sync-crate-skills, /clean-crate-skills, or /update-crate-skill."
+disable-model-invocation: true
 argument-hint: "[--force] | <crate_name>"
 context: fork
 agent: general-purpose

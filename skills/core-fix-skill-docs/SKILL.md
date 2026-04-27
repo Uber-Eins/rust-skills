@@ -1,7 +1,7 @@
 ---
 name: core-fix-skill-docs
-# Internal maintenance tool - no description to prevent auto-triggering
-# Triggered by: /fix-skill-docs command
+description: "Internal maintenance support for checking and fixing generated Rust skill documentation references. Use only when explicitly invoked by /fix-skill-docs."
+disable-model-invocation: true
 argument-hint: "[crate_name] [--check-only]"
 context: fork
 agent: general-purpose
