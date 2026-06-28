@@ -2,9 +2,9 @@
   "name": "rust-skills",
   "version": "2.2.0",
   "description": "Comprehensive Rust learning and development skills for Codex",
-  "author": "ZhangHanDong",
+  "author": "Uber-Eins",
   "license": "MIT",
-  "repository": "https://github.com/actionbook/rust-skills",
+  "repository": "https://github.com/Uber-Eins/rust-skills",
 
   "stats": {
     "meta_skills": 14,

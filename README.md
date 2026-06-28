@@ -4,7 +4,7 @@
 
 > AI-powered Rust development assistant with meta-cognition framework
 
-[![Version](https://img.shields.io/badge/version-2.2.0-green.svg)](https://github.com/actionbook/rust-skills/releases)
+[![Version](https://img.shields.io/badge/version-2.2.0-green.svg)](https://github.com/Uber-Eins/rust-skills/releases)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Codex](https://img.shields.io/badge/Codex-Plugin-blue)](https://openai.com/codex/)
 
@@ -63,7 +63,7 @@ Skills now include **inline fallback logic** — when agent files are not availa
 #### Option A: NPX (Easiest)
 
 ```bash
-npx skills add actionbook/rust-skills
+npx skills add Uber-Eins/rust-skills
 ```
 
 #### Option B: CoWork CLI
@@ -75,7 +75,7 @@ Install via [CoWork](https://crates.io/crates/cowork), a Rust-based skills manag
 cargo install cowork
 
 # Method 1: Direct install
-cowork install actionbook/rust-skills
+cowork install Uber-Eins/rust-skills
 
 # Method 2: Config-based install (recommended for teams)
 cowork config init                    # Create .cowork/Skills.toml
@@ -90,10 +90,10 @@ cowork config install                 # Install all configured skills
 name = "my-rust-project"
 
 [skills.install]
-rust-skills = "actionbook/rust-skills"
+rust-skills = "Uber-Eins/rust-skills"
 
 [security]
-trusted_authors = ["ZhangHanDong"]
+trusted_authors = ["Uber-Eins"]
 ```
 
 > CoWork (`co` for short) provides version management, dependency resolution, lock files, and security auditing. See [CoWork documentation](https://crates.io/crates/cowork) for more details.
@@ -101,7 +101,7 @@ trusted_authors = ["ZhangHanDong"]
 #### Option C: Manual Copy
 
 ```bash
-git clone https://github.com/actionbook/rust-skills.git
+git clone https://github.com/Uber-Eins/rust-skills.git
 cp -r rust-skills/skills/* ~/.codex/skills/
 ```
 
@@ -117,10 +117,10 @@ Use this mode for the complete experience with hooks, background agents, MCP, an
 
 ```bash
 # Step 1: Add the marketplace from GitHub
-codex plugin marketplace add actionbook/rust-skills
+codex plugin marketplace add Uber-Eins/rust-skills
 
 # Step 2: Install the plugin
-codex plugin add rust-skills@rust-skills
+codex plugin add rust-skills@Uber-Eins-Skills
 ```
 
 > **Note**: Step 1 only adds the marketplace source. Step 2 installs the rust-skills plugin with all features enabled.
@@ -129,11 +129,11 @@ codex plugin add rust-skills@rust-skills
 
 ```bash
 # Clone the repository
-git clone https://github.com/actionbook/rust-skills.git
+git clone https://github.com/Uber-Eins/rust-skills.git
 
 # Add the local marketplace and install the plugin
 codex plugin marketplace add /path/to/rust-skills
-codex plugin add rust-skills@rust-skills
+codex plugin add rust-skills@Uber-Eins-Skills
 ```
 
 ---
@@ -310,8 +310,8 @@ Contributions are welcome! Please read our contributing guidelines before submit
 
 ## Acknowledgments
 
-- [@pinghe](https://github.com/pinghe) - `context: fork` support suggestion ([#4](https://github.com/actionbook/rust-skills/issues/4))
-- [@DoiiarX](https://github.com/DoiiarX) - OpenCode installation fix ([#6](https://github.com/actionbook/rust-skills/issues/6))
+- [@pinghe](https://github.com/pinghe) - `context: fork` support suggestion ([#4](https://github.com/Uber-Eins/rust-skills/issues/4))
+- [@DoiiarX](https://github.com/DoiiarX) - OpenCode installation fix ([#6](https://github.com/Uber-Eins/rust-skills/issues/6))
 
 ## License
 
@@ -319,5 +319,5 @@ MIT License - see [LICENSE](LICENSE) for details.
 
 ## Links
 
-- **GitHub**: https://github.com/actionbook/rust-skills
-- **Issues**: https://github.com/actionbook/rust-skills/issues
+- **GitHub**: https://github.com/Uber-Eins/rust-skills
+- **Issues**: https://github.com/Uber-Eins/rust-skills/issues

@@ -174,7 +174,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 #### Plugin Marketplace Support
 - Added repository marketplace metadata with official schema
 - Simplified `.codex-plugin/plugin.json` (skills auto-discovered)
-- Support for `codex plugin marketplace add actionbook/rust-skills`
+- Support for `codex plugin marketplace add Uber-Eins/rust-skills`
 
 #### Domain Skills (Layer 3)
 - **domain-fintech**: Financial technology patterns
@@ -205,7 +205,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated quick test commands
 
 ### Fixed
-- Fixed incorrect repository links to `actionbook/rust-skills`
+- Fixed incorrect repository links to `Uber-Eins/rust-skills`
 - Fixed actionbook link to `actionbook/actionbook`
 
 ### Documentation

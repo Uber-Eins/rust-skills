@@ -4,7 +4,7 @@
 
 > 基于元认知框架的 AI Rust 开发助手
 
-[![Version](https://img.shields.io/badge/version-2.2.0-green.svg)](https://github.com/actionbook/rust-skills/releases)
+[![Version](https://img.shields.io/badge/version-2.2.0-green.svg)](https://github.com/Uber-Eins/rust-skills/releases)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Codex](https://img.shields.io/badge/Codex-Plugin-blue)](https://openai.com/codex/)
 
@@ -63,7 +63,7 @@ Skills 现已内置**内联回退逻辑** —— 当 agent 文件不可用时，
 #### 方式 A：NPX（最简单）
 
 ```bash
-npx skills add actionbook/rust-skills
+npx skills add Uber-Eins/rust-skills
 ```
 
 #### 方式 B：CoWork CLI
@@ -75,7 +75,7 @@ npx skills add actionbook/rust-skills
 cargo install cowork
 
 # 方式 1：直接安装
-cowork install actionbook/rust-skills
+cowork install Uber-Eins/rust-skills
 
 # 方式 2：配置文件安装（推荐团队使用）
 cowork config init                    # 创建 .cowork/Skills.toml
@@ -90,10 +90,10 @@ cowork config install                 # 安装所有配置的 skills
 name = "my-rust-project"
 
 [skills.install]
-rust-skills = "actionbook/rust-skills"
+rust-skills = "Uber-Eins/rust-skills"
 
 [security]
-trusted_authors = ["ZhangHanDong"]
+trusted_authors = ["Uber-Eins"]
 ```
 
 > CoWork（简写 `co`）提供版本管理、依赖解析、lock 文件和安全审计功能。详见 [CoWork 文档](https://crates.io/crates/cowork)。
@@ -101,7 +101,7 @@ trusted_authors = ["ZhangHanDong"]
 #### 方式 C：手动复制
 
 ```bash
-git clone https://github.com/actionbook/rust-skills.git
+git clone https://github.com/Uber-Eins/rust-skills.git
 cp -r rust-skills/skills/* ~/.codex/skills/
 ```
 
@@ -117,10 +117,10 @@ cp -r rust-skills/skills/* ~/.codex/skills/
 
 ```bash
 # 步骤 1: 从 GitHub 添加 marketplace
-codex plugin marketplace add actionbook/rust-skills
+codex plugin marketplace add Uber-Eins/rust-skills
 
 # 步骤 2: 安装插件
-codex plugin add rust-skills@rust-skills
+codex plugin add rust-skills@Uber-Eins-Skills
 ```
 
 > **注意**：步骤 1 仅添加 marketplace（插件源）。步骤 2 才是真正安装 rust-skills 插件，启用所有功能。
@@ -129,11 +129,11 @@ codex plugin add rust-skills@rust-skills
 
 ```bash
 # 克隆仓库
-git clone https://github.com/actionbook/rust-skills.git
+git clone https://github.com/Uber-Eins/rust-skills.git
 
 # 添加本地 marketplace 并安装插件
 codex plugin marketplace add /path/to/rust-skills
-codex plugin add rust-skills@rust-skills
+codex plugin add rust-skills@Uber-Eins-Skills
 ```
 
 ---
@@ -310,8 +310,8 @@ cd my-rust-project
 
 ## 致谢
 
-- [@pinghe](https://github.com/pinghe) - `context: fork` 支持建议 ([#4](https://github.com/actionbook/rust-skills/issues/4))
-- [@DoiiarX](https://github.com/DoiiarX) - OpenCode 安装修复 ([#6](https://github.com/actionbook/rust-skills/issues/6))
+- [@pinghe](https://github.com/pinghe) - `context: fork` 支持建议 ([#4](https://github.com/Uber-Eins/rust-skills/issues/4))
+- [@DoiiarX](https://github.com/DoiiarX) - OpenCode 安装修复 ([#6](https://github.com/Uber-Eins/rust-skills/issues/6))
 
 ## 许可证
 
@@ -319,5 +319,5 @@ MIT 许可证 - 详见 [LICENSE](LICENSE)
 
 ## 链接
 
-- **GitHub**: https://github.com/actionbook/rust-skills
-- **Issues**: https://github.com/actionbook/rust-skills/issues
+- **GitHub**: https://github.com/Uber-Eins/rust-skills
+- **Issues**: https://github.com/Uber-Eins/rust-skills/issues

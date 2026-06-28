@@ -7,16 +7,16 @@
 Install from GitHub:
 
 ```bash
-codex plugin marketplace add actionbook/rust-skills
-codex plugin add rust-skills@rust-skills
+codex plugin marketplace add Uber-Eins/rust-skills
+codex plugin add rust-skills@Uber-Eins-Skills
 ```
 
 Install from a local checkout:
 
 ```bash
-git clone https://github.com/actionbook/rust-skills.git
+git clone https://github.com/Uber-Eins/rust-skills.git
 codex plugin marketplace add /path/to/rust-skills
-codex plugin add rust-skills@rust-skills
+codex plugin add rust-skills@Uber-Eins-Skills
 ```
 
 The plugin manifest is `.codex-plugin/plugin.json`; the repository marketplace
@@ -27,7 +27,7 @@ entry is `.agents/plugins/marketplace.json`.
 Copy only the skills when hooks and background agent manifests are not needed:
 
 ```bash
-git clone https://github.com/actionbook/rust-skills.git
+git clone https://github.com/Uber-Eins/rust-skills.git
 mkdir -p ~/.codex/skills
 cp -r rust-skills/skills/* ~/.codex/skills/
 ```

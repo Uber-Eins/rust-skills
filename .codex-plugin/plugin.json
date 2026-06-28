@@ -3,11 +3,11 @@
   "version": "2.2.0",
   "description": "Rust development assistant with routing skills, hooks, background agents, meta-cognition workflows, and 265 idiomatic Rust rules for Codex.",
   "author": {
-    "name": "ZhangHanDong",
-    "url": "https://github.com/ZhangHanDong"
+    "name": "Uber-Eins",
+    "url": "https://github.com/Uber-Eins"
   },
-  "homepage": "https://github.com/actionbook/rust-skills",
-  "repository": "https://github.com/actionbook/rust-skills",
+  "homepage": "https://github.com/Uber-Eins/rust-skills",
+  "repository": "https://github.com/Uber-Eins/rust-skills",
   "license": "MIT",
   "keywords": [
     "rust",
@@ -30,7 +30,7 @@
     "displayName": "Rust Skills",
     "shortDescription": "Layered Rust reasoning, docs lookup, code review, and rule checks.",
     "longDescription": "Rust Skills helps Codex route Rust questions through ownership, borrowing, async, error handling, unsafe, ecosystem, domain-specific reasoning, and detailed idiomatic Rust rule checks. It includes UserPromptSubmit hooks for Rust-only meta-cognition, background agent manifests, and docs/crate research workflows.",
-    "developerName": "ZhangHanDong",
+    "developerName": "Uber-Eins",
     "category": "Developer Tools",
     "capabilities": [
       "Interactive",
