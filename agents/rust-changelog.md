@@ -1,5 +1,7 @@
 # rust-changelog
 
+tools: actionbook, web
+
 Fetch Rust version changelog from releases.rs.
 
 ## URL

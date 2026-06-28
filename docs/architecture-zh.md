@@ -12,8 +12,8 @@
                                   ▼
 ┌─────────────────────────────────────────────────────────────────────┐
 │                        Hook 触发层                                   │
-│  hooks/hooks.json + .claude/hooks/rust-skill-eval-hook.sh           │
-│  - 400+ 关键词匹配 (中/英/错误码)                                    │
+│  hooks/hooks.json + hooks/rust-skill-eval-hook.sh                   │
+│  - Rust-only 关键词匹配 (中/英/错误码)                               │
 │  - 强制元认知流程                                                    │
 │  - 强制输出格式                                                      │
 └─────────────────────────────────┬───────────────────────────────────┘
@@ -30,12 +30,12 @@
 ┌───────────────────────┐       ┌───────────────────────────────────┐
 │    静态 Skills 层      │       │         动态 Skills 层             │
 │                        │       │                                    │
-│  skills/               │       │  ~/.claude/skills/ (全局)          │
+│  skills/               │       │  ~/.codex/skills/ (全局)          │
 │  ├── m01-m07 (L1)     │       │  ├── tokio/                        │
 │  ├── m09-m15 (L2)     │       │  ├── serde/                        │
 │  ├── domain-* (L3)    │       │  └── std/                          │
 │  ├── rust-router      │       │                                    │
-│  ├── coding-guidelines│       │  .claude/skills/ (项目级)          │
+│  ├── coding-guidelines│       │  .codex/skills/ (项目级)          │
 │  └── unsafe-checker   │       │  └── project-specific-crate/       │
 └───────────┬───────────┘       └───────────────┬───────────────────┘
             │                                   │
@@ -67,16 +67,16 @@
 ```
 rust-skills/
 │
-├── .claude-plugin/
+├── .codex-plugin/
 │   └── plugin.json              # 插件清单 (name, skills, hooks)
 │
-├── .claude/
-│   ├── hooks/
-│   │   └── rust-skill-eval-hook.sh  # 元认知强制脚本
-│   └── settings.json            # 本地设置
+├── .agents/
+│   └── plugins/
+│       └── marketplace.json      # 仓库 marketplace 入口
 │
 ├── hooks/
-│   └── hooks.json               # Hook 触发配置 (400+ 关键词)
+│   ├── hooks.json               # Hook 触发配置 (Rust-only 关键词)
+│   └── rust-skill-eval-hook.sh  # 元认知强制脚本
 │
 ├── skills/                      # 静态 Skills
 │   │
@@ -220,7 +220,7 @@ hooks/hooks.json
     │
     │ 匹配关键词
     ▼
-.claude/hooks/rust-skill-eval-hook.sh
+hooks/rust-skill-eval-hook.sh
     │
     │ 注入元认知指令
     ▼
@@ -235,19 +235,19 @@ skills/m0x-* + skills/domain-*
 
 ```
 ┌─────────────────────────────────────────────────────────┐
-│                    Claude Code                           │
+│                    Codex                           │
 ├─────────────────────────────────────────────────────────┤
 │                                                          │
 │  插件 Skills (rust-skills/)      用户 Skills             │
 │  ┌────────────────────┐         ┌────────────────────┐  │
-│  │ skills/            │         │ ~/.claude/skills/  │  │
+│  │ skills/            │         │ ~/.codex/skills/  │  │
 │  │ - 元认知框架       │         │ - tokio            │  │
 │  │ - 领域约束         │         │ - serde            │  │
 │  │ - 编码规范         │         │ - std              │  │
 │  └────────────────────┘         └────────────────────┘  │
 │                                                          │
 │                                  ┌────────────────────┐  │
-│                                  │ .claude/skills/    │  │
+│                                  │ .codex/skills/    │  │
 │                                  │ (项目级)           │  │
 │                                  │ - sqlx             │  │
 │                                  │ - sea-orm          │  │
@@ -418,8 +418,8 @@ skills/
 
 | 场景 | 存储位置 |
 |------|----------|
-| 常用 crate (tokio, serde, std) | `~/.claude/skills/` |
-| 项目特定依赖 | `项目/.claude/skills/` |
+| 常用 crate (tokio, serde, std) | `~/.codex/skills/` |
+| 项目特定依赖 | `项目/.codex/skills/` |
 | 临时学习 | 项目级，用完删除 |
 
 ### 7. Skill 继承模式
@@ -427,7 +427,7 @@ skills/
 对于复杂的 crate，采用 **父子 Skill** 结构：
 
 ```
-~/.claude/skills/
+~/.codex/skills/
 ├── tokio/                     # 父 Skill (入口)
 │   ├── SKILL.md              # 广泛触发词，概览性内容
 │   └── references/
@@ -503,11 +503,11 @@ edition = "2024"   # 所有子 Skill 共享
 
 ```bash
 # 1. 创建父 Skill
-~/.claude/skills/tokio/SKILL.md
-~/.claude/skills/tokio/references/rust-defaults.md
+~/.codex/skills/tokio/SKILL.md
+~/.codex/skills/tokio/references/rust-defaults.md
 
 # 2. 创建子 Skills，symlink 共享规则
-cd ~/.claude/skills/tokio-task/references
+cd ~/.codex/skills/tokio-task/references
 ln -s ../../tokio/references/rust-defaults.md .
 
 # 3. 子 Skill 引用共享规则
@@ -604,7 +604,7 @@ description: "CRITICAL: Use for [domain]. Triggers on: keyword1, keyword2"
 | 强制层 | rust-skill-eval-hook.sh | 注入元认知指令 |
 | 路由层 | rust-router | 识别层级，双技能加载 |
 | 知识层 | skills/* | 认知框架，决策指引 |
-| 扩展层 | ~/.claude/skills/ | 动态生成的 crate skills |
+| 扩展层 | ~/.codex/skills/ | 动态生成的 crate skills |
 | 数据层 | agents/* | 实时获取最新信息 |
 | 缓存层 | cache/ | 减少重复请求 |
 

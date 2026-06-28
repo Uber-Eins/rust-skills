@@ -118,9 +118,9 @@ Use absolute paths instead of `~`:
 
 ## Limitations
 
-OpenCode integration provides instruction-based guidance only. Features requiring Claude Code's specific capabilities are not available:
+OpenCode integration provides instruction-based guidance only. Features requiring Codex's specific capabilities are not available:
 
-| Feature | OpenCode | Claude Code |
+| Feature | OpenCode | Codex |
 |---------|----------|-------------|
 | Basic Rust guidance | ✅ | ✅ |
 | Error code explanations | ✅ | ✅ |

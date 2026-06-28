@@ -52,7 +52,7 @@ Refer to the local files for detailed documentation:
 
 ## IMPORTANT: Documentation Completeness Check
 
-**Before answering questions, Claude MUST:**
+**Before answering questions, Codex MUST:**
 
 1. Read the relevant reference file(s) listed above
 2. If file read fails or file is empty:
@@ -149,7 +149,7 @@ For each skill:
 
 1. **Create directory structure**:
    ```
-   ~/.claude/skills/{crate_name}-{feature}/
+   ~/.codex/skills/{crate_name}-{feature}/
    ├── SKILL.md
    └── references/
        ├── {api-reference}.md
@@ -196,12 +196,12 @@ For each skill:
 - [ ] Complex content has been split into references/ directory
 - [ ] Code examples use latest Rust idioms
 - [ ] No redundant documentation files (README.md, etc.)
-- [ ] Skills created directly in `~/.claude/skills/` for auto-discovery
+- [ ] Skills created directly in `~/.codex/skills/` for auto-discovery
 
 ---
 
 ## Output Location
 
-All skills are created in: `~/.claude/skills/{crate_name}-*/`
+All skills are created in: `~/.codex/skills/{crate_name}-*/`
 
 This is the local dynamic skills directory, not committed to the rust-skills repository.

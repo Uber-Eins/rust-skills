@@ -12,7 +12,7 @@ set -e
 
 echo "=== Rust Skills Forced Eval Hook Tests ==="
 echo ""
-echo "Testing if hook triggers and Claude evaluates skills..."
+echo "Testing if hook triggers and Codex evaluates skills..."
 echo ""
 
 # Parse arguments
@@ -57,8 +57,8 @@ test_hook() {
     echo -n "Testing: \"$query\" "
     echo -n "→ expecting evaluation of $expected_skill ... "
 
-    # Run claude and capture output (first 50 lines)
-    result=$(run_with_timeout 60 claude -p "$query" 2>&1 | head -50 || true)
+    # Run Codex and capture output (first 50 lines)
+    result=$(run_with_timeout 60 codex exec --dangerously-bypass-hook-trust "$query" 2>&1 | head -50 || true)
 
     # Check if output contains skill evaluation pattern
     # Patterns: "[RUST-SKILL-EVAL]", "YES -", "NO -", skill names, etc.
@@ -110,9 +110,9 @@ echo ""
 
 if [ $FAIL -gt 0 ]; then
     echo -e "${YELLOW}Some hooks didn't trigger. Check:${NC}"
-    echo "  1. Is this a new Claude session? (restart if needed)"
-    echo "  2. Is .claude/settings.local.json configured?"
-    echo "  3. Is .claude/hooks/rust-skill-eval-hook.sh executable?"
+    echo "  1. Is the rust-skills Codex plugin installed?"
+    echo "  2. Does hooks/hooks.json point to ./hooks/rust-skill-eval-hook.sh?"
+    echo "  3. Is hooks/rust-skill-eval-hook.sh executable?"
     exit 1
 else
     echo -e "${GREEN}All hooks triggered successfully!${NC}"

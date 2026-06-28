@@ -57,7 +57,7 @@ Complete list of all achievements with unlock requirements.
 | `monthly_master` | Monthly Master | 💪 | 30 day streak | Month-long dedication |
 | `unstoppable` | Unstoppable | 🚀 | 100 day streak | Legendary consistency |
 
-**Detection:** Automatic daily tracking when using Claude Code
+**Detection:** Automatic daily tracking when using Codex
 
 ---
 

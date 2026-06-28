@@ -276,11 +276,11 @@ async fn upload_handler(data: Vec<u8>) -> Result<String, Error> {
 
 ## 测试方法
 
-### 1. 给普通 Claude
+### 1. 给普通 Codex
 
 直接粘贴问题代码，看回答停在哪个层次。
 
-### 2. 给带 rust-skills 的 Claude
+### 2. 给带 rust-skills 的 Codex
 
 同样的问题，应该看到：
 - 明确的层次追溯 (Layer 1 → 3 → 2)

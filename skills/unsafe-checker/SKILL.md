@@ -83,4 +83,4 @@ pub unsafe fn dangerous() { ... }
 | Python | PyO3 |
 | Node.js | napi-rs |
 
-Claude knows unsafe Rust. Focus on SAFETY comments and soundness.
+Codex knows unsafe Rust. Focus on SAFETY comments and soundness.

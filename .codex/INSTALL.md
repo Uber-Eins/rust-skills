@@ -1,40 +1,56 @@
-# Rust Skills for OpenAI Codex
+# Rust Skills for Codex
 
 ## Installation
 
-### Option 1: Copy AGENTS.md
+### Option 1: Codex Plugin (Full Features)
 
-Copy the main agent instructions to your project:
+Install from GitHub:
 
 ```bash
-# From the rust-skills repository
+codex plugin marketplace add actionbook/rust-skills
+codex plugin add rust-skills@rust-skills
+```
+
+Install from a local checkout:
+
+```bash
+git clone https://github.com/actionbook/rust-skills.git
+codex plugin marketplace add /path/to/rust-skills
+codex plugin add rust-skills@rust-skills
+```
+
+The plugin manifest is `.codex-plugin/plugin.json`; the repository marketplace
+entry is `.agents/plugins/marketplace.json`.
+
+### Option 2: Skills-only
+
+Copy only the skills when hooks and background agent manifests are not needed:
+
+```bash
+git clone https://github.com/actionbook/rust-skills.git
+mkdir -p ~/.codex/skills
+cp -r rust-skills/skills/* ~/.codex/skills/
+```
+
+### Option 3: Project Instructions
+
+Copy the main project instructions to another repository:
+
+```bash
 cp AGENTS.md /path/to/your/project/AGENTS.md
-```
-
-### Option 2: Reference as Submodule
-
-```bash
-cd your-project
-git submodule add https://github.com/actionbook/rust-skills.git .rust-skills
-```
-
-Then reference in your AGENTS.md:
-
-```markdown
-# Project Agents
-
-See `.rust-skills/AGENTS.md` for Rust development guidelines.
 ```
 
 ## What's Included
 
-This plugin provides Rust development assistance:
+The Codex plugin provides Rust development assistance:
 
 - **rust-router**: Master router for all Rust questions
 - **rust-learner**: Rust version and crate information
 - **coding-guidelines**: Code style and best practices
 - **unsafe-checker**: Unsafe code review and FFI guidance
 - **m01-m15**: Meta-question skills for ownership, concurrency, error handling, etc.
+- **UserPromptSubmit hook**: Rust-only meta-cognition trigger
+- **Agent manifests**: Background research and review agents under skill directories
 
 ## Usage
 
@@ -45,6 +61,12 @@ After installation, ask Codex about:
 - Async/await and concurrency
 - Code style and naming conventions
 - Unsafe code review
+
+To test hook execution without persisting hook trust during validation:
+
+```bash
+codex exec --dangerously-bypass-hook-trust "E0382 错误怎么解决"
+```
 
 ## Requirements
 

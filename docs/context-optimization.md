@@ -51,7 +51,7 @@ skills/rust-router/
 
 ### 关键点：自动触发不受影响
 
-Claude Code 的自动触发机制仅依赖 frontmatter 中的 `description` 字段：
+Codex 的自动触发机制仅依赖 frontmatter 中的 `description` 字段：
 
 ```yaml
 ---
@@ -104,7 +104,7 @@ agent: general-purpose  # 或 Explore
 | 隔离执行 | Skill 在新的独立上下文中运行 |
 | 无对话历史 | Subagent **不能访问**主对话历史 |
 | 结果摘要 | 输出被摘要后返回主对话 |
-| 环境继承 | 工作目录、CLAUDE.md、环境变量继承 |
+| 环境继承 | 工作目录、AGENTS.md、环境变量继承 |
 
 ### 继承关系
 
@@ -112,7 +112,7 @@ agent: general-purpose  # 或 Explore
 主上下文 (Main Context)
 ├── 对话历史 ──────────────► ❌ 不继承
 ├── 当前工作目录 ──────────► ✅ 继承
-├── CLAUDE.md ─────────────► ✅ 继承 (作为参考)
+├── AGENTS.md ─────────────► ✅ 继承 (作为参考)
 ├── 预加载的 skills ────────► ✅ 可访问
 └── 环境变量 ──────────────► ✅ 继承
 ```
@@ -276,8 +276,8 @@ Cross-Layer Synthesis (主上下文)
 
 - [ ] rust-router 自动触发测试
   ```bash
-  claude -p "E0382 错误怎么解决"
-  claude -p "比较 tokio 和 async-std"
+  codex exec "E0382 错误怎么解决"
+  codex exec "比较 tokio 和 async-std"
   ```
 
 ### 方法二验证

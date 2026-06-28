@@ -73,7 +73,7 @@ Layer 1: Language Mechanics (HOW)
 
 ---
 
-## INSTRUCTIONS FOR CLAUDE
+## INSTRUCTIONS FOR CODEX
 
 ### CRITICAL: Negotiation Protocol Trigger
 

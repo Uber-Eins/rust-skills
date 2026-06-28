@@ -1,6 +1,6 @@
 # Rust-Skills Capabilities Summary
 
-> Complete capability inventory of the rust-skills Claude Code plugin
+> Complete capability inventory of the rust-skills Codex plugin
 
 ## Overview
 
@@ -405,7 +405,7 @@ following Web domain best practices]
 
 ## Summary
 
-**rust-skills** transforms Claude from a Rust knowledge base into a **domain-aware Rust architect** that:
+**rust-skills** transforms Codex from a Rust knowledge base into a **domain-aware Rust architect** that:
 
 1. **Routes** questions through appropriate cognitive layers
 2. **Traces** to find underlying domain constraints

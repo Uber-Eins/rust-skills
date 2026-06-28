@@ -16,7 +16,7 @@ Orchestrates on-demand generation of crate-specific skills based on project depe
 ## Concept
 
 Dynamic skills are:
-- Generated locally at `~/.claude/skills/`
+- Generated locally at `~/.codex/skills/`
 - Based on Cargo.toml dependencies
 - Created using llms.txt from docs.rs
 - Versioned and updatable
@@ -60,7 +60,7 @@ Cargo.toml
 Parse dependencies
     ↓
 For each crate:
-  ├─ Check ~/.claude/skills/{crate}/
+  ├─ Check ~/.codex/skills/{crate}/
   ├─ If missing: Check actionbook for llms.txt
   │     ├─ Found: /create-skills-via-llms
   │     └─ Not found: /create-llms-for-skills first
@@ -81,7 +81,7 @@ For each crate:
 
 1. Parse Cargo.toml for dependencies
 2. For each dependency:
-   - Check if skill exists at `~/.claude/skills/{crate}/`
+   - Check if skill exists at `~/.codex/skills/{crate}/`
    - If missing (or --force): generate skill
 3. Report results
 
@@ -107,7 +107,7 @@ Or use Read tool to parse Cargo.toml and extract:
 
 ```bash
 # List existing skills
-ls ~/.claude/skills/
+ls ~/.codex/skills/
 ```
 
 Compare with dependencies to find missing skills.
@@ -123,8 +123,8 @@ agent-browser get text ".docblock"
 # Save content
 
 # 2. Create skill directory
-mkdir -p ~/.claude/skills/{crate}
-mkdir -p ~/.claude/skills/{crate}/references
+mkdir -p ~/.codex/skills/{crate}
+mkdir -p ~/.codex/skills/{crate}/references
 
 # 3. Create SKILL.md
 # Use template from rust-skill-creator inline mode
@@ -132,7 +132,7 @@ mkdir -p ~/.claude/skills/{crate}/references
 # 4. Create reference files for key modules
 agent-browser open "https://docs.rs/{crate}/latest/{crate}/{module}/"
 agent-browser get text ".docblock"
-# Save to ~/.claude/skills/{crate}/references/{module}.md
+# Save to ~/.codex/skills/{crate}/references/{module}.md
 
 agent-browser close
 ```
@@ -163,17 +163,17 @@ done
 
 ```bash
 # Clean specific crate
-rm -rf ~/.claude/skills/{crate_name}
+rm -rf ~/.codex/skills/{crate_name}
 
 # Clean all generated skills
-rm -rf ~/.claude/skills/*
+rm -rf ~/.codex/skills/*
 ```
 
 ### Update Command (Inline)
 
 ```bash
 # Remove old skill
-rm -rf ~/.claude/skills/{crate_name}
+rm -rf ~/.codex/skills/{crate_name}
 
 # Re-generate (same as sync for single crate)
 # Follow Step 3 above for the specific crate
@@ -184,7 +184,7 @@ rm -rf ~/.claude/skills/{crate_name}
 ## Local Skills Directory
 
 ```
-~/.claude/skills/
+~/.codex/skills/
 ├── tokio/
 │   ├── SKILL.md
 │   └── references/
@@ -213,4 +213,4 @@ rm -rf ~/.claude/skills/{crate_name}
 | Commands not found | Skills-only install | Use inline mode |
 | Cargo.toml not found | Not in Rust project | Navigate to project root |
 | docs.rs unavailable | Network issue | Retry or skip crate |
-| Permission denied | Directory issue | Check ~/.claude/skills/ permissions |
+| Permission denied | Directory issue | Check ~/.codex/skills/ permissions |

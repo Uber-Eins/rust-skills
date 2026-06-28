@@ -1,5 +1,7 @@
 # crate-researcher
 
+tools: actionbook, web
+
 Fetch crate metadata from lib.rs / crates.io.
 
 ## Fetch

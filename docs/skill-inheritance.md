@@ -1,10 +1,10 @@
 # Skill 继承机制
 
-> Claude Code Skills 没有原生继承，但可以通过多种方法实现类似效果
+> Codex Skills 没有原生继承，但可以通过多种方法实现类似效果
 
 ## 问题背景
 
-Claude Code 的 Skills 是独立的：
+Codex 的 Skills 是独立的：
 - 每个 skill 根据 `description` 关键词独立触发
 - 不会自动加载"父" skill
 - 共享规则需要重复写在每个 skill 中
@@ -15,19 +15,19 @@ Claude Code 的 Skills 是独立的：
 |------|----------|----------|----------|
 | A: 符号链接 + 显式读取 | 低 | 低 | 本地个人 skills |
 | B: Hook 注入 | 高 | 低 | 分发的 plugin |
-| C: 全局 CLAUDE.md | 高 | 低 | 通用规则 |
+| C: 全局 AGENTS.md | 高 | 低 | 通用规则 |
 | D: 复制内联 | 高 | 高 | 简单场景 |
 
 ---
 
 ## 方案 A: 符号链接 + 显式读取
 
-**适用**: 本地个人 skills（`~/.claude/skills/`）
+**适用**: 本地个人 skills（`~/.codex/skills/`）
 
 ### 目录结构
 
 ```
-~/.claude/skills/
+~/.codex/skills/
 ├── _shared/                          # 共享文件目录
 │   ├── rust-defaults.md              # Rust 通用规则
 │   └── python-defaults.md            # Python 通用规则
@@ -52,10 +52,10 @@ Claude Code 的 Skills 是独立的：
 
 ```bash
 # 1. 创建共享目录
-mkdir -p ~/.claude/skills/_shared
+mkdir -p ~/.codex/skills/_shared
 
 # 2. 创建共享规则文件
-cat > ~/.claude/skills/_shared/rust-defaults.md << 'EOF'
+cat > ~/.codex/skills/_shared/rust-defaults.md << 'EOF'
 # Rust Code Generation Defaults
 
 ## Cargo.toml
@@ -69,8 +69,8 @@ EOF
 
 # 3. 为每个 skill 创建符号链接
 for skill in tokio tokio-task tokio-sync serde axum; do
-    mkdir -p ~/.claude/skills/$skill/references
-    ln -sf ../../_shared/rust-defaults.md ~/.claude/skills/$skill/references/rust-defaults.md
+    mkdir -p ~/.codex/skills/$skill/references
+    ln -sf ../../_shared/rust-defaults.md ~/.codex/skills/$skill/references/rust-defaults.md
 done
 ```
 
@@ -105,38 +105,44 @@ Key rules (see rust-defaults.md for full list):
 通过 `UserPromptSubmit` hook 在用户输入时注入共享规则：
 
 ```
-用户输入 → Hook 触发 → 注入规则 → Claude 处理
+用户输入 → Hook 触发 → 注入规则 → Codex 处理
 ```
 
 ### 目录结构
 
 ```
 my-plugin/
-├── .claude/
-│   ├── settings.json           # Hook 配置
-│   └── hooks/
-│       └── inject-rules.sh     # 规则注入脚本
+├── hooks/
+│   ├── hooks.json              # Hook 配置
+│   └── inject-rules.sh         # 规则注入脚本
+├── .codex-plugin/
+│   └── plugin.json             # 引用 hooks/hooks.json
 └── skills/
     └── ...                     # 不需要符号链接
 ```
 
 ### 配置文件
 
-**.claude/settings.json**:
+**hooks/hooks.json**:
 ```json
 {
   "hooks": {
     "UserPromptSubmit": [
       {
         "matcher": "(?i)(rust|cargo|tokio|async|await)",
-        "command": ".claude/hooks/inject-rules.sh"
+        "hooks": [
+          {
+            "type": "command",
+            "command": "./hooks/inject-rules.sh"
+          }
+        ]
       }
     ]
   }
 }
 ```
 
-**.claude/hooks/inject-rules.sh**:
+**hooks/inject-rules.sh**:
 ```bash
 #!/bin/bash
 cat << 'EOF'
@@ -163,20 +169,20 @@ EOF
 
 ---
 
-## 方案 C: 全局 CLAUDE.md
+## 方案 C: 全局 AGENTS.md
 
 **适用**: 所有项目通用的规则
 
 ### 文件位置
 
 ```
-~/.claude/CLAUDE.md    # 全局，所有会话生效
+~/.codex/AGENTS.md    # 全局，所有会话生效
 ```
 
 ### 示例内容
 
 ```markdown
-# Global Claude Code Rules
+# Global Codex Rules
 
 ## Rust Defaults
 - Use edition = "2024"
@@ -258,7 +264,7 @@ EOF
 
 ```bash
 # 使用方案 A
-~/.claude/skills/
+~/.codex/skills/
 ├── _shared/rust-defaults.md
 ├── tokio/references/rust-defaults.md → ...
 ├── tokio-task/references/rust-defaults.md → ...
@@ -270,7 +276,7 @@ EOF
 ```bash
 # 使用方案 B
 rust-skills/
-├── .claude/hooks/rust-skill-eval-hook.sh  # 注入 edition 2024 等规则
+├── hooks/rust-skill-eval-hook.sh  # 注入 edition 2024 等规则
 └── skills/m01-ownership/SKILL.md          # 不需要符号链接
 ```
 
@@ -278,7 +284,7 @@ rust-skills/
 
 ```bash
 # 使用方案 C
-~/.claude/CLAUDE.md  # 写入通用规则，所有项目生效
+~/.codex/AGENTS.md  # 写入通用规则，所有项目生效
 ```
 
 ---
@@ -291,7 +297,7 @@ rust-skills/
 #!/bin/bash
 # setup-skill-inheritance.sh
 
-SHARED_DIR="$HOME/.claude/skills/_shared"
+SHARED_DIR="$HOME/.codex/skills/_shared"
 SHARED_FILE="rust-defaults.md"
 
 # 创建共享目录
@@ -299,7 +305,7 @@ mkdir -p "$SHARED_DIR"
 
 # 为指定 skills 创建符号链接
 for skill in "$@"; do
-    skill_dir="$HOME/.claude/skills/$skill"
+    skill_dir="$HOME/.codex/skills/$skill"
     if [ -d "$skill_dir" ]; then
         mkdir -p "$skill_dir/references"
         ln -sf "../../_shared/$SHARED_FILE" "$skill_dir/references/$SHARED_FILE"
@@ -323,5 +329,5 @@ done
 |----------|----------|
 | 个人本地 skills | **符号链接** (方案 A) |
 | 分发 plugin | **Hook 注入** (方案 B) |
-| 通用全局规则 | **全局 CLAUDE.md** (方案 C) |
+| 通用全局规则 | **全局 AGENTS.md** (方案 C) |
 | 简单独立 skill | **复制内联** (方案 D) |

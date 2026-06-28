@@ -4,13 +4,13 @@
 
 > AI-powered Rust development assistant with meta-cognition framework
 
-[![Version](https://img.shields.io/badge/version-2.0.9-green.svg)](https://github.com/actionbook/rust-skills/releases)
+[![Version](https://img.shields.io/badge/version-2.1.0-green.svg)](https://github.com/actionbook/rust-skills/releases)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Claude Code](https://img.shields.io/badge/Claude%20Code-Plugin-blue)](https://github.com/anthropics/claude-code)
+[![Codex](https://img.shields.io/badge/Codex-Plugin-blue)](https://openai.com/codex/)
 
 ## What is Rust Skills?
 
-**Rust Skills** is a Claude Code plugin that transforms how AI assists with Rust development. Instead of giving surface-level answers, it traces through cognitive layers to provide **domain-correct architectural solutions**.
+**Rust Skills** is a Codex plugin that transforms how AI assists with Rust development. Instead of giving surface-level answers, it traces through cognitive layers to provide **domain-correct architectural solutions**.
 
 ### The Problem
 
@@ -48,14 +48,14 @@ AI (with Rust Skills):
 
 Rust Skills supports two installation modes:
 
-- **Plugin Mode** (Claude Code): Full features including hooks, agents, and auto meta-cognition
-- **Skills-only Mode**: Works with any coding agent that supports skills (Claude Code, Vercel AI, etc.)
+- **Codex Plugin Mode**: Full features including hooks, agents, MCP, and auto meta-cognition
+- **Skills-only Mode**: Works with any coding agent that supports skills
 
 ---
 
 ### Skills-only Install (Recommended)
 
-The simplest way to get started. Works with **any coding agent** that supports skills, including Claude Code, [Vercel's `add-skills`](https://github.com/nicepkg/add-skills), and others.
+The simplest way to get started. Works with **any coding agent** that supports skills, including [Vercel's `add-skills`](https://github.com/nicepkg/add-skills), and others.
 
 Skills now include **inline fallback logic** — when agent files are not available, skills execute directly using built-in tools (actionbook, agent-browser, WebFetch).
 
@@ -101,44 +101,45 @@ trusted_authors = ["ZhangHanDong"]
 
 ```bash
 git clone https://github.com/actionbook/rust-skills.git
-cp -r rust-skills/skills/* ~/.claude/skills/
+cp -r rust-skills/skills/* ~/.codex/skills/
 ```
 
 > **Note**: Skills-only mode does not include hooks, so meta-cognition won't trigger automatically. You can manually call `/rust-router` or specific skills. Background agents fall back to inline execution automatically.
 
 ---
 
-### Claude Code Plugin Install (Full Features)
+### Codex Plugin Install (Full Features)
 
-For **Claude Code users** who want the complete experience with hooks, background agents, and auto meta-cognition triggering.
+Use this mode for the complete experience with hooks, background agents, MCP, and auto meta-cognition triggering.
 
-#### Option A: Marketplace
+#### Option A: Git Marketplace
 
 ```bash
-# Step 1: Add the marketplace
-/plugin marketplace add actionbook/rust-skills
+# Step 1: Add the marketplace from GitHub
+codex plugin marketplace add actionbook/rust-skills
 
 # Step 2: Install the plugin
-/plugin install rust-skills@rust-skills
+codex plugin add rust-skills@rust-skills
 ```
 
-> **Note**: Step 1 only adds the marketplace (plugin source). Step 2 actually installs the rust-skills plugin with all features enabled.
+> **Note**: Step 1 only adds the marketplace source. Step 2 installs the rust-skills plugin with all features enabled.
 
-#### Option B: Full Plugin (Local)
+#### Option B: Local Marketplace
 
 ```bash
 # Clone the repository
 git clone https://github.com/actionbook/rust-skills.git
 
-# Launch with plugin directory
-claude --plugin-dir /path/to/rust-skills
+# Add the local marketplace and install the plugin
+codex plugin marketplace add /path/to/rust-skills
+codex plugin add rust-skills@rust-skills
 ```
 
 ---
 
 ### Feature Comparison
 
-| Feature | Plugin (Marketplace) | Plugin (Local) | Skills-only (NPX/CoWork/Manual) |
+| Feature | Codex Plugin (Git) | Codex Plugin (Local) | Skills-only (NPX/CoWork/Manual) |
 |---------|---------------------|----------------|--------------------------------|
 | All 31 Skills | ✅ | ✅ | ✅ |
 | Auto meta-cognition trigger | ✅ | ✅ | ❌ (manual invoke) |
@@ -146,32 +147,6 @@ claude --plugin-dir /path/to/rust-skills
 | Background agents | ✅ | ✅ | ✅ (inline fallback) |
 | Easy updates | ✅ | ❌ | ✅ (NPX/CoWork) |
 | Works with other agents | ❌ | ❌ | ✅ |
-
-### Permission Configuration
-
-Background agents require permission to run `agent-browser`. Configure in your project:
-
-```bash
-# Copy example config
-cp /path/to/rust-skills/.claude/settings.example.json .claude/settings.local.json
-```
-
-Or create manually:
-
-```bash
-mkdir -p .claude
-cat > .claude/settings.local.json << 'EOF'
-{
-  "permissions": {
-    "allow": [
-      "Bash(agent-browser *)"
-    ]
-  }
-}
-EOF
-```
-
-See [.claude/settings.example.json](.claude/settings.example.json) for reference.
 
 ### Other Platforms
 
@@ -281,12 +256,12 @@ cd my-rust-project
 # Sync all dependencies
 /sync-crate-skills
 
-# Skills are created at ~/.claude/skills/{crate}/
+# Skills are created at ~/.codex/skills/{crate}/
 ```
 
 ### Features
 - **On-demand generation**: Created from Cargo.toml dependencies
-- **Local storage**: `~/.claude/skills/`
+- **Local storage**: `~/.codex/skills/`
 - **Version tracking**: Each skill records crate version
 - **Workspace support**: Parses all workspace members
 
@@ -298,7 +273,7 @@ User Question
      ▼
 ┌─────────────────────────────────────────┐
 │           Hook Layer                     │
-│  400+ keywords trigger meta-cognition    │
+│  Rust-only matcher triggers meta-cognition│
 └─────────────────────────────────────────┘
      │
      ▼

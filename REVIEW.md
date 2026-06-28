@@ -203,7 +203,7 @@ queries=(
 
 for q in "${queries[@]}"; do
   echo "=== Query: $q ==="
-  claude -p "$q" --verbose 2>&1 | grep -E "skill|trigger"
+  codex exec "$q" --verbose 2>&1 | grep -E "skill|trigger"
   echo ""
 done
 ```

@@ -44,10 +44,10 @@ This skill can run in two modes:
 
 ```bash
 # If crate_name provided
-skill_dir=~/.claude/skills/{crate_name}
+skill_dir=~/.codex/skills/{crate_name}
 
 # Otherwise scan all
-for dir in ~/.claude/skills/*/; do
+for dir in ~/.codex/skills/*/; do
     # Process each skill
 done
 ```
@@ -91,7 +91,7 @@ Task(
   run_in_background: true,
   prompt: "Fetch documentation for {crate_name}/{module} from docs.rs.
            Use agent-browser CLI to navigate to https://docs.rs/{crate_name}/latest/{crate_name}/{module}/
-           Extract the main documentation and save to ~/.claude/skills/{crate_name}/references/{module}.md"
+           Extract the main documentation and save to ~/.codex/skills/{crate_name}/references/{module}.md"
 )
 ```
 
@@ -105,10 +105,10 @@ Task(
 
 ```bash
 # List all skills
-ls ~/.claude/skills/
+ls ~/.codex/skills/
 
 # Or check specific skill
-ls ~/.claude/skills/{crate_name}/
+ls ~/.codex/skills/{crate_name}/
 ```
 
 ### Step 2: Parse SKILL.md for References
@@ -117,7 +117,7 @@ Read SKILL.md and extract all `./references/*.md` patterns:
 
 ```bash
 # Using Read tool
-Read("~/.claude/skills/{crate_name}/SKILL.md")
+Read("~/.codex/skills/{crate_name}/SKILL.md")
 
 # Look for lines like:
 # - `./references/sync.md` - Sync primitives
@@ -129,7 +129,7 @@ Read("~/.claude/skills/{crate_name}/SKILL.md")
 ```bash
 # Check each referenced file
 for ref in references; do
-  if [ ! -f "~/.claude/skills/{crate_name}/references/${ref}.md" ]; then
+  if [ ! -f "~/.codex/skills/{crate_name}/references/${ref}.md" ]; then
     echo "MISSING: ${ref}.md"
   fi
 done
@@ -156,7 +156,7 @@ For each missing file:
 ```bash
 agent-browser open "https://docs.rs/{crate_name}/latest/{crate_name}/{module}/"
 agent-browser get text ".docblock"
-# Save output to ~/.claude/skills/{crate_name}/references/{module}.md
+# Save output to ~/.codex/skills/{crate_name}/references/{module}.md
 agent-browser close
 ```
 
@@ -168,7 +168,7 @@ WebFetch("https://docs.rs/{crate_name}/latest/{crate_name}/{module}/",
 
 Then write the content:
 ```bash
-Write("~/.claude/skills/{crate_name}/references/{module}.md", <fetched_content>)
+Write("~/.codex/skills/{crate_name}/references/{module}.md", <fetched_content>)
 ```
 
 ### Step 6: Update SKILL.md (if --remove-invalid)
@@ -177,10 +177,10 @@ If `--remove-invalid` flag is set and file cannot be fetched:
 
 ```bash
 # Read current SKILL.md
-Read("~/.claude/skills/{crate_name}/SKILL.md")
+Read("~/.codex/skills/{crate_name}/SKILL.md")
 
 # Remove the invalid reference line
-Edit("~/.claude/skills/{crate_name}/SKILL.md",
+Edit("~/.codex/skills/{crate_name}/SKILL.md",
      old_string="- `./references/{invalid_file}.md` - Description",
      new_string="")
 ```
@@ -245,5 +245,5 @@ Summary: 1 file missing in 1 skill
 | Agent not available | Skills-only install | Use inline mode |
 | Skills directory empty | No skills installed | Run /sync-crate-skills first |
 | docs.rs unavailable | Network issue | Retry or use --remove-invalid |
-| Permission denied | Directory issue | Check ~/.claude/skills/ permissions |
+| Permission denied | Directory issue | Check ~/.codex/skills/ permissions |
 | Invalid SKILL.md format | Corrupted skill | Re-generate skill |

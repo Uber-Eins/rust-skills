@@ -105,13 +105,13 @@ WebFetch("<documentation_url>", "Extract API documentation including types, func
 ### Step 3: Create Skill Directory
 
 ```bash
-mkdir -p ~/.claude/skills/{crate_name}
-mkdir -p ~/.claude/skills/{crate_name}/references
+mkdir -p ~/.codex/skills/{crate_name}
+mkdir -p ~/.codex/skills/{crate_name}/references
 ```
 
 ### Step 4: Generate SKILL.md
 
-Create `~/.claude/skills/{crate_name}/SKILL.md` with this template:
+Create `~/.codex/skills/{crate_name}/SKILL.md` with this template:
 
 ```markdown
 ---
@@ -163,7 +163,7 @@ For each major module or type, create a reference file:
 ```bash
 # Fetch and save module documentation
 agent-browser open "https://docs.rs/{crate}/latest/{crate}/{module}/"
-agent-browser get text ".docblock" > ~/.claude/skills/{crate_name}/references/{module}.md
+agent-browser get text ".docblock" > ~/.codex/skills/{crate_name}/references/{module}.md
 agent-browser close
 ```
 
@@ -171,8 +171,8 @@ agent-browser close
 
 ```bash
 # Check skill structure
-ls -la ~/.claude/skills/{crate_name}/
-cat ~/.claude/skills/{crate_name}/SKILL.md
+ls -la ~/.codex/skills/{crate_name}/
+cat ~/.codex/skills/{crate_name}/SKILL.md
 ```
 
 ---
@@ -210,7 +210,7 @@ cat ~/.claude/skills/{crate_name}/SKILL.md
 ```
 User: "Create a dynamic skill for tokio"
 
-Claude:
+Codex:
 1. Identify: Third-party crate "tokio"
 2. Execute: /create-llms-for-skills https://docs.rs/tokio/latest/tokio/
 3. Wait for llms.txt generation
@@ -222,12 +222,12 @@ Claude:
 ```
 User: "Create a dynamic skill for tokio"
 
-Claude:
+Codex:
 1. Identify: Third-party crate "tokio"
 2. Fetch: agent-browser open "https://docs.rs/tokio/latest/tokio/"
 3. Extract documentation
-4. Create: ~/.claude/skills/tokio/SKILL.md
-5. Create: ~/.claude/skills/tokio/references/
+4. Create: ~/.codex/skills/tokio/SKILL.md
+5. Create: ~/.codex/skills/tokio/references/
 6. Save reference files for key modules (sync, task, runtime, etc.)
 ```
 
@@ -236,7 +236,7 @@ Claude:
 ```
 User: "Create a skill for Send and Sync traits"
 
-Claude:
+Codex:
 1. Identify: Std library traits
 2. (Agent Mode) Execute: /create-llms-for-skills https://doc.rust-lang.org/std/marker/trait.Send.html https://doc.rust-lang.org/std/marker/trait.Sync.html
    (Inline Mode) Fetch each URL, create skill manually
@@ -253,7 +253,7 @@ Claude:
 
 ## Output Location
 
-All generated skills are saved to: `~/.claude/skills/`
+All generated skills are saved to: `~/.codex/skills/`
 
 ## Error Handling
 
@@ -262,4 +262,4 @@ All generated skills are saved to: `~/.claude/skills/`
 | Commands not found | Skills-only install | Use inline mode |
 | URL not found | Invalid crate/module | Verify crate exists on crates.io |
 | Empty documentation | API changed | Use alternative selectors |
-| Permission denied | Directory issue | Check ~/.claude/skills/ permissions |
+| Permission denied | Directory issue | Check ~/.codex/skills/ permissions |

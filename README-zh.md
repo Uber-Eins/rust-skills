@@ -4,13 +4,13 @@
 
 > 基于元认知框架的 AI Rust 开发助手
 
-[![Version](https://img.shields.io/badge/version-2.0.9-green.svg)](https://github.com/actionbook/rust-skills/releases)
+[![Version](https://img.shields.io/badge/version-2.1.0-green.svg)](https://github.com/actionbook/rust-skills/releases)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Claude Code](https://img.shields.io/badge/Claude%20Code-Plugin-blue)](https://github.com/anthropics/claude-code)
+[![Codex](https://img.shields.io/badge/Codex-Plugin-blue)](https://openai.com/codex/)
 
 ## 什么是 Rust Skills？
 
-**Rust Skills** 是一个 Claude Code 插件，它改变了 AI 辅助 Rust 开发的方式。它不再给出表面答案，而是通过认知层追溯，提供**领域正确的架构方案**。
+**Rust Skills** 是一个 Codex 插件，它改变了 AI 辅助 Rust 开发的方式。它不再给出表面答案，而是通过认知层追溯，提供**领域正确的架构方案**。
 
 ### 问题
 
@@ -48,14 +48,14 @@ AI (使用 Rust Skills):
 
 Rust Skills 支持两种安装模式：
 
-- **Plugin 模式**（Claude Code）：完整功能，包含 hooks、agents 和自动元认知触发
-- **Skills-only 模式**：适用于任何支持 skills 的编码助手（Claude Code、Vercel AI 等）
+- **Codex Plugin 模式**：完整功能，包含 hooks、agents、MCP 和自动元认知触发
+- **Skills-only 模式**：适用于任何支持 skills 的编码助手
 
 ---
 
 ### Skills-only 安装（推荐）
 
-最简单的安装方式。适用于**任何支持 skills 的编码助手**，包括 Claude Code、[Vercel `add-skills`](https://github.com/nicepkg/add-skills) 等。
+最简单的安装方式。适用于**任何支持 skills 的编码助手**，包括 [Vercel `add-skills`](https://github.com/nicepkg/add-skills) 等。
 
 Skills 现已内置**内联回退逻辑** —— 当 agent 文件不可用时，skills 会使用内置工具（actionbook、agent-browser、WebFetch）直接执行。
 
@@ -101,44 +101,45 @@ trusted_authors = ["ZhangHanDong"]
 
 ```bash
 git clone https://github.com/actionbook/rust-skills.git
-cp -r rust-skills/skills/* ~/.claude/skills/
+cp -r rust-skills/skills/* ~/.codex/skills/
 ```
 
 > **注意**：Skills-only 模式不包含 hooks，元认知不会自动触发。可以手动调用 `/rust-router` 或特定 skills。后台 agents 会自动回退到内联执行模式。
 
 ---
 
-### Claude Code Plugin 安装（完整功能）
+### Codex Plugin 安装（完整功能）
 
-适用于想要获得完整体验的 **Claude Code 用户**，包含 hooks、后台 agents 和自动元认知触发。
+适用于想要获得完整体验的 Codex 用户，包含 hooks、后台 agents、MCP 和自动元认知触发。
 
-#### 方式 A：Marketplace
+#### 方式 A：Git Marketplace
 
 ```bash
-# 步骤 1: 添加 marketplace
-/plugin marketplace add actionbook/rust-skills
+# 步骤 1: 从 GitHub 添加 marketplace
+codex plugin marketplace add actionbook/rust-skills
 
 # 步骤 2: 安装插件
-/plugin install rust-skills@rust-skills
+codex plugin add rust-skills@rust-skills
 ```
 
 > **注意**：步骤 1 仅添加 marketplace（插件源）。步骤 2 才是真正安装 rust-skills 插件，启用所有功能。
 
-#### 方式 B：完整插件（本地）
+#### 方式 B：本地 Marketplace
 
 ```bash
 # 克隆仓库
 git clone https://github.com/actionbook/rust-skills.git
 
-# 使用插件目录启动
-claude --plugin-dir /path/to/rust-skills
+# 添加本地 marketplace 并安装插件
+codex plugin marketplace add /path/to/rust-skills
+codex plugin add rust-skills@rust-skills
 ```
 
 ---
 
 ### 功能对比
 
-| 功能 | Plugin（Marketplace） | Plugin（本地） | Skills-only（NPX/CoWork/手动） |
+| 功能 | Codex Plugin（Git） | Codex Plugin（本地） | Skills-only（NPX/CoWork/手动） |
 |------|---------------------|---------------|-------------------------------|
 | 全部 31 个 Skills | ✅ | ✅ | ✅ |
 | 自动触发元认知 | ✅ | ✅ | ❌（手动调用） |
@@ -146,32 +147,6 @@ claude --plugin-dir /path/to/rust-skills
 | 后台 Agents | ✅ | ✅ | ✅（内联回退） |
 | 便捷更新 | ✅ | ❌ | ✅（NPX/CoWork） |
 | 兼容其他编码助手 | ❌ | ❌ | ✅ |
-
-### 权限配置
-
-后台 agents 需要运行 `agent-browser` 的权限。在项目中配置：
-
-```bash
-# 复制示例配置
-cp /path/to/rust-skills/.claude/settings.example.json .claude/settings.local.json
-```
-
-或手动创建：
-
-```bash
-mkdir -p .claude
-cat > .claude/settings.local.json << 'EOF'
-{
-  "permissions": {
-    "allow": [
-      "Bash(agent-browser *)"
-    ]
-  }
-}
-EOF
-```
-
-参见 [.claude/settings.example.json](.claude/settings.example.json) 示例。
 
 ### 其他平台
 
@@ -281,12 +256,12 @@ cd my-rust-project
 # 同步所有依赖
 /sync-crate-skills
 
-# Skills 创建在 ~/.claude/skills/{crate}/
+# Skills 创建在 ~/.codex/skills/{crate}/
 ```
 
 ### 特性
 - **按需生成**: 从 Cargo.toml 依赖创建
-- **本地存储**: `~/.claude/skills/`
+- **本地存储**: `~/.codex/skills/`
 - **版本追踪**: 每个 skill 记录 crate 版本
 - **Workspace 支持**: 解析所有 workspace 成员
 

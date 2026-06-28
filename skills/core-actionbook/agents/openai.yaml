@@ -1,2 +1,11 @@
+interface:
+  display_name: "Actionbook Context Agent"
+  short_description: "Search saved Actionbook context before fetching new Rust docs."
+  default_prompt: "Look for existing Actionbook context before researching this Rust topic."
+  brand_color: "#CE412B"
 policy:
   allow_implicit_invocation: false
+dependencies:
+  tools:
+    - list_mcp_resources
+    - read_mcp_resource

@@ -1,0 +1,10 @@
+interface:
+  display_name: "Unsafe Rust Review Agent"
+  short_description: "Review unsafe Rust, FFI boundaries, and safety invariants."
+  default_prompt: "Review this unsafe Rust code for soundness and missing SAFETY notes."
+  brand_color: "#CE412B"
+policy:
+  allow_implicit_invocation: true
+dependencies:
+  tools:
+    - functions.exec_command

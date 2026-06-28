@@ -1,0 +1,46 @@
+{
+  "name": "rust-skills",
+  "version": "2.1.0",
+  "description": "Rust development assistant with routing skills, hooks, background agents, and meta-cognition workflows for Codex.",
+  "author": {
+    "name": "ZhangHanDong",
+    "url": "https://github.com/ZhangHanDong"
+  },
+  "homepage": "https://github.com/actionbook/rust-skills",
+  "repository": "https://github.com/actionbook/rust-skills",
+  "license": "MIT",
+  "keywords": [
+    "rust",
+    "cargo",
+    "ownership",
+    "borrow-checker",
+    "async",
+    "tokio",
+    "error-handling",
+    "unsafe",
+    "ffi",
+    "codex-plugin"
+  ],
+  "skills": "./skills/",
+  "hooks": "./hooks/hooks.json",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "Rust Skills",
+    "shortDescription": "Layered Rust reasoning, docs lookup, and code review skills.",
+    "longDescription": "Rust Skills helps Codex route Rust questions through ownership, borrowing, async, error handling, unsafe, ecosystem, and domain-specific reasoning. It includes UserPromptSubmit hooks for Rust-only meta-cognition, background agent manifests, and docs/crate research workflows.",
+    "developerName": "ZhangHanDong",
+    "category": "Developer Tools",
+    "capabilities": [
+      "Interactive",
+      "Write",
+      "Hooks",
+      "MCP"
+    ],
+    "defaultPrompt": [
+      "Fix this Rust borrow checker error.",
+      "Review this unsafe Rust API.",
+      "Explain this Cargo dependency choice."
+    ],
+    "brandColor": "#CE412B"
+  }
+}

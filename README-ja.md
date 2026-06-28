@@ -4,13 +4,13 @@
 
 > メタ認知フレームワークを備えた AI Rust 開発アシスタント
 
-[![Version](https://img.shields.io/badge/version-2.0.9-green.svg)](https://github.com/actionbook/rust-skills/releases)
+[![Version](https://img.shields.io/badge/version-2.1.0-green.svg)](https://github.com/actionbook/rust-skills/releases)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Claude Code](https://img.shields.io/badge/Claude%20Code-Plugin-blue)](https://github.com/anthropics/claude-code)
+[![Codex](https://img.shields.io/badge/Codex-Plugin-blue)](https://openai.com/codex/)
 
 ## Rust Skills とは？
 
-**Rust Skills** は Claude Code プラグインで、AI による Rust 開発支援の方法を変革します。表面的な回答ではなく、認知層を遡って**ドメイン的に正しいアーキテクチャソリューション**を提供します。
+**Rust Skills** は Codex プラグインで、AI による Rust 開発支援の方法を変革します。表面的な回答ではなく、認知層を遡って**ドメイン的に正しいアーキテクチャソリューション**を提供します。
 
 ### 問題点
 
@@ -48,14 +48,14 @@ AI (Rust Skills 使用):
 
 Rust Skills は2つのインストールモードをサポートしています：
 
-- **Plugin モード**（Claude Code）：hooks、agents、自動メタ認知トリガーを含む完全機能
-- **Skills-only モード**：skills をサポートする任意のコーディングエージェントで動作（Claude Code、Vercel AI など）
+- **Codex Plugin モード**：hooks、agents、MCP、自動メタ認知トリガーを含む完全機能
+- **Skills-only モード**：skills をサポートする任意のコーディングエージェントで動作
 
 ---
 
 ### Skills-only インストール（推奨）
 
-最もシンプルな方法。Claude Code、[Vercel `add-skills`](https://github.com/nicepkg/add-skills) など、**skills をサポートする任意のコーディングエージェント**で動作します。
+最もシンプルな方法。Codex、[Vercel `add-skills`](https://github.com/nicepkg/add-skills) など、**skills をサポートする任意のコーディングエージェント**で動作します。
 
 Skills には**インラインフォールバックロジック**が組み込まれており、エージェントファイルが利用できない場合、組み込みツール（actionbook、agent-browser、WebFetch）を使用して直接実行します。
 
@@ -101,44 +101,45 @@ trusted_authors = ["ZhangHanDong"]
 
 ```bash
 git clone https://github.com/actionbook/rust-skills.git
-cp -r rust-skills/skills/* ~/.claude/skills/
+cp -r rust-skills/skills/* ~/.codex/skills/
 ```
 
 > **注意**：Skills-only モードには hooks が含まれないため、メタ認知は自動トリガーされません。`/rust-router` または特定の skills を手動で呼び出せます。バックグラウンドエージェントは自動的にインライン実行にフォールバックします。
 
 ---
 
-### Claude Code Plugin インストール（完全機能）
+### Codex Plugin インストール（完全機能）
 
-hooks、バックグラウンドエージェント、自動メタ認知トリガーを含む完全な体験を求める **Claude Code ユーザー**向け。
+hooks、バックグラウンドエージェント、自動メタ認知トリガーを含む完全な体験を求める **Codex ユーザー**向け。
 
-#### 方法 A：Marketplace
+#### 方法 A：Git Marketplace
 
 ```bash
-# ステップ 1: marketplace を追加
-/plugin marketplace add actionbook/rust-skills
+# ステップ 1: GitHub から marketplace を追加
+codex plugin marketplace add actionbook/rust-skills
 
 # ステップ 2: プラグインをインストール
-/plugin install rust-skills@rust-skills
+codex plugin add rust-skills@rust-skills
 ```
 
 > **注意**：ステップ 1 は marketplace（プラグインソース）を追加するだけです。ステップ 2 で実際に rust-skills プラグインをインストールし、すべての機能を有効にします。
 
-#### 方法 B：完全プラグイン（ローカル）
+#### 方法 B：ローカル Marketplace
 
 ```bash
 # リポジトリをクローン
 git clone https://github.com/actionbook/rust-skills.git
 
-# プラグインディレクトリで起動
-claude --plugin-dir /path/to/rust-skills
+# ローカル marketplace を追加してプラグインをインストール
+codex plugin marketplace add /path/to/rust-skills
+codex plugin add rust-skills@rust-skills
 ```
 
 ---
 
 ### 機能比較
 
-| 機能 | Plugin（Marketplace） | Plugin（ローカル） | Skills-only（NPX/CoWork/手動） |
+| 機能 | Codex Plugin（Git） | Codex Plugin（ローカル） | Skills-only（NPX/CoWork/手動） |
 |------|---------------------|-------------------|-------------------------------|
 | 全 31 Skills | ✅ | ✅ | ✅ |
 | 自動メタ認知トリガー | ✅ | ✅ | ❌（手動呼び出し） |
@@ -146,32 +147,6 @@ claude --plugin-dir /path/to/rust-skills
 | バックグラウンドエージェント | ✅ | ✅ | ✅（インラインフォールバック） |
 | 簡単な更新 | ✅ | ❌ | ✅（NPX/CoWork） |
 | 他のエージェントとの互換性 | ❌ | ❌ | ✅ |
-
-### 権限設定
-
-バックグラウンドエージェントには `agent-browser` を実行する権限が必要です。プロジェクトで設定：
-
-```bash
-# サンプル設定をコピー
-cp /path/to/rust-skills/.claude/settings.example.json .claude/settings.local.json
-```
-
-または手動で作成：
-
-```bash
-mkdir -p .claude
-cat > .claude/settings.local.json << 'EOF'
-{
-  "permissions": {
-    "allow": [
-      "Bash(agent-browser *)"
-    ]
-  }
-}
-EOF
-```
-
-[.claude/settings.example.json](.claude/settings.example.json) を参照してください。
 
 ### その他のプラットフォーム
 
@@ -281,12 +256,12 @@ cd my-rust-project
 # すべての依存関係を同期
 /sync-crate-skills
 
-# Skills は ~/.claude/skills/{crate}/ に作成されます
+# Skills は ~/.codex/skills/{crate}/ に作成されます
 ```
 
 ### 特徴
 - **オンデマンド生成**: Cargo.toml 依存関係から作成
-- **ローカルストレージ**: `~/.claude/skills/`
+- **ローカルストレージ**: `~/.codex/skills/`
 - **バージョン追跡**: 各 skill が crate バージョンを記録
 - **ワークスペースサポート**: すべてのワークスペースメンバーを解析
 

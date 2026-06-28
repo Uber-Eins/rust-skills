@@ -45,7 +45,7 @@ Arguments: $ARGUMENTS
 Check if recent cache exists:
 
 ```bash
-cache_dir=~/.claude/cache/rust-daily/
+cache_dir=~/.codex/cache/rust-daily/
 cache_file=${cache_dir}/report-{date}-{time_range}-{category}.json
 
 # If cache exists and < 4 hours old, use cached data
@@ -299,7 +299,7 @@ After saving, inform user:
 Save results for faster subsequent queries:
 
 ```bash
-mkdir -p ~/.claude/cache/rust-daily/
+mkdir -p ~/.codex/cache/rust-daily/
 # Save JSON with metadata
 ```
 

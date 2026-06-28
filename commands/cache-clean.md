@@ -19,7 +19,7 @@ Arguments: $ARGUMENTS
 ### 1. Parse Arguments
 
 ```bash
-CACHE_DIR="$HOME/.claude/cache/rust-docs"
+CACHE_DIR="$HOME/.codex/cache/rust-docs"
 MODE="expired"  # default
 TARGET=""
 

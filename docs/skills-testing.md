@@ -21,8 +21,8 @@ Before creating or modifying a skill, you must:
    - Expected knowledge gaps without the skill
 
 2. **Test WITHOUT skill loaded**
-   - Ask Claude the question in a fresh session
-   - Document what Claude gets wrong or misses
+   - Ask Codex the question in a fresh session
+   - Document what Codex gets wrong or misses
 
 3. **Document baseline**
    ```markdown
@@ -156,7 +156,7 @@ Common excuses and counters for skipping TDD:
 ## Running Tests
 
 ### Manual Testing
-1. Start fresh Claude session (no skills loaded)
+1. Start fresh Codex session (no skills loaded)
 2. Ask pressure scenario question
 3. Document response quality
 4. Load skills

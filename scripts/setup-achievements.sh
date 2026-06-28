@@ -31,23 +31,23 @@ if [ ! -f "$RUST_SKILLS_DIR/scripts/achievement-tracker.sh" ]; then
 fi
 
 echo -e "${YELLOW}Step 1: Creating directories...${NC}"
-mkdir -p ~/.claude/hooks
-mkdir -p ~/.claude/achievements
-echo -e "${GREEN}  ✓ Created ~/.claude/hooks${NC}"
-echo -e "${GREEN}  ✓ Created ~/.claude/achievements${NC}"
+mkdir -p ~/.codex/hooks
+mkdir -p ~/.codex/achievements
+echo -e "${GREEN}  ✓ Created ~/.codex/hooks${NC}"
+echo -e "${GREEN}  ✓ Created ~/.codex/achievements${NC}"
 
 echo ""
 echo -e "${YELLOW}Step 2: Installing achievement tracker...${NC}"
-cp "$RUST_SKILLS_DIR/scripts/achievement-tracker.sh" ~/.claude/hooks/
-chmod +x ~/.claude/hooks/achievement-tracker.sh
+cp "$RUST_SKILLS_DIR/scripts/achievement-tracker.sh" ~/.codex/hooks/
+chmod +x ~/.codex/hooks/achievement-tracker.sh
 echo -e "${GREEN}  ✓ Installed achievement-tracker.sh${NC}"
 
 echo ""
 echo -e "${YELLOW}Step 3: Initializing data files...${NC}"
 
 # Initialize stats file
-if [ ! -f ~/.claude/achievements/stats.json ]; then
-  cat > ~/.claude/achievements/stats.json << 'EOF'
+if [ ! -f ~/.codex/achievements/stats.json ]; then
+  cat > ~/.codex/achievements/stats.json << 'EOF'
 {
   "bugs_fixed": 0,
   "tests_written": 0,
@@ -72,8 +72,8 @@ else
 fi
 
 # Initialize achievements file
-if [ ! -f ~/.claude/achievements/unlocked.json ]; then
-  echo '{"unlocked":[]}' > ~/.claude/achievements/unlocked.json
+if [ ! -f ~/.codex/achievements/unlocked.json ]; then
+  echo '{"unlocked":[]}' > ~/.codex/achievements/unlocked.json
   echo -e "${GREEN}  ✓ Created unlocked.json${NC}"
 else
   echo -e "${BLUE}  ℹ unlocked.json already exists (keeping existing data)${NC}"
@@ -85,9 +85,9 @@ echo -e "${GREEN}║   ✅ Installation Complete!               ║${NC}"
 echo -e "${GREEN}╚═══════════════════════════════════════════╝${NC}"
 
 echo ""
-echo -e "${YELLOW}Next Step: Configure Claude Code Hooks${NC}"
+echo -e "${YELLOW}Next Step: Configure Codex Hooks${NC}"
 echo ""
-echo "Add this to your ~/.claude/settings.json:"
+echo "Add this to your ~/.codex/settings.json:"
 echo ""
 echo -e "${BLUE}{"
 echo '  "hooks": {'
@@ -97,7 +97,7 @@ echo '        "matcher": "Edit|Write|Bash",'
 echo '        "hooks": ['
 echo '          {'
 echo '            "type": "command",'
-echo '            "command": "~/.claude/hooks/achievement-tracker.sh PostToolUse"'
+echo '            "command": "~/.codex/hooks/achievement-tracker.sh PostToolUse"'
 echo '          }'
 echo '        ]'
 echo '      }'
@@ -107,7 +107,7 @@ echo '      {'
 echo '        "hooks": ['
 echo '          {'
 echo '            "type": "command",'
-echo '            "command": "~/.claude/hooks/achievement-tracker.sh UserPromptSubmit"'
+echo '            "command": "~/.codex/hooks/achievement-tracker.sh UserPromptSubmit"'
 echo '          }'
 echo '        ]'
 echo '      }'
@@ -117,7 +117,7 @@ echo -e "}${NC}"
 
 echo ""
 echo -e "${YELLOW}Quick Test:${NC}"
-echo "  ~/.claude/hooks/achievement-tracker.sh UserPromptSubmit"
+echo "  ~/.codex/hooks/achievement-tracker.sh UserPromptSubmit"
 echo ""
 echo -e "${YELLOW}View Achievements:${NC}"
 echo "  /achievement"

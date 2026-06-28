@@ -1,0 +1,11 @@
+interface:
+  display_name: "Rust Ecosystem Research Agent"
+  short_description: "Research Rust releases, crate metadata, docs.rs, and std docs."
+  default_prompt: "Research the latest Rust crate, std API, or release notes for this question."
+  brand_color: "#CE412B"
+policy:
+  allow_implicit_invocation: true
+dependencies:
+  tools:
+    - web.run
+    - functions.exec_command

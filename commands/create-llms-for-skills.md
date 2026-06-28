@@ -19,7 +19,7 @@ Arguments: $ARGUMENTS
 2. **WebFetch** (fallback) - If agent-browser unavailable
 
 **DO NOT use:**
-- Claude in Chrome MCP
+- Codex in Chrome MCP
 - Direct Fetch without user confirmation
 
 ---

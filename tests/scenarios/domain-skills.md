@@ -14,8 +14,8 @@
 ### Test Commands
 
 ```bash
-claude -p "decimal 精度计算"
-claude -p "trading system design"
+codex exec "decimal 精度计算"
+codex exec "trading system design"
 ```
 
 ---
@@ -32,8 +32,8 @@ claude -p "trading system design"
 ### Test Commands
 
 ```bash
-claude -p "axum web server"
-claude -p "HTTP 中间件怎么写"
+codex exec "axum web server"
+codex exec "HTTP 中间件怎么写"
 ```
 
 ---
@@ -49,8 +49,8 @@ claude -p "HTTP 中间件怎么写"
 ### Test Commands
 
 ```bash
-claude -p "clap CLI argument"
-claude -p "命令行工具开发"
+codex exec "clap CLI argument"
+codex exec "命令行工具开发"
 ```
 
 ---
@@ -67,8 +67,8 @@ claude -p "命令行工具开发"
 ### Test Commands
 
 ```bash
-claude -p "no_std embedded"
-claude -p "嵌入式 Rust 开发"
+codex exec "no_std embedded"
+codex exec "嵌入式 Rust 开发"
 ```
 
 ---
@@ -84,8 +84,8 @@ claude -p "嵌入式 Rust 开发"
 ### Test Commands
 
 ```bash
-claude -p "kubernetes operator in Rust"
-claude -p "gRPC service"
+codex exec "kubernetes operator in Rust"
+codex exec "gRPC service"
 ```
 
 ---
@@ -101,8 +101,8 @@ claude -p "gRPC service"
 ### Test Commands
 
 ```bash
-claude -p "IoT sensor"
-claude -p "MQTT client in Rust"
+codex exec "IoT sensor"
+codex exec "MQTT client in Rust"
 ```
 
 ---
@@ -118,8 +118,8 @@ claude -p "MQTT client in Rust"
 ### Test Commands
 
 ```bash
-claude -p "机器学习 tensor"
-claude -p "ML inference in Rust"
+codex exec "机器学习 tensor"
+codex exec "ML inference in Rust"
 ```
 
 ---

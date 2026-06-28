@@ -1,2 +1,11 @@
+interface:
+  display_name: "Rust Dynamic Skill Agent"
+  short_description: "Create crate-specific Rust skills from current docs."
+  default_prompt: "Create or update a crate-specific Rust skill from current documentation."
+  brand_color: "#CE412B"
 policy:
   allow_implicit_invocation: false
+dependencies:
+  tools:
+    - web.run
+    - functions.exec_command

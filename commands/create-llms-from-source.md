@@ -301,7 +301,7 @@ Local Rust Source
         ↓
 /create-skills-via-llms {crate} {llms_path}
         ↓
-~/.claude/skills/{crate}-*/
+~/.codex/skills/{crate}-*/
 ```
 
 **Or via sync-crate-skills:**

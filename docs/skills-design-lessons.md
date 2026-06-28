@@ -14,7 +14,7 @@ Meta-cognition approach:
   User Question → Identify Layer → Trace Through Layers → Context-Aware Answer
 ```
 
-The real value is not teaching Claude facts (it already knows Rust), but providing a **thinking framework** that produces deeper, domain-aware answers.
+The real value is not teaching Codex facts (it already knows Rust), but providing a **thinking framework** that produces deeper, domain-aware answers.
 
 ---
 
@@ -176,7 +176,7 @@ skills/core-actionbook/SKILL.md
         "hooks": [
           {
             "type": "command",
-            "command": "${CLAUDE_PLUGIN_ROOT}/.claude/hooks/rust-skill-eval-hook.sh"
+            "command": "./hooks/rust-skill-eval-hook.sh"
           }
         ]
       }
@@ -252,14 +252,14 @@ Answer must reference BOTH layers.
 
 ### 1. Skills Are Thinking Frameworks, Not Knowledge Bases
 
-Claude already knows Rust. Skills provide:
+Codex already knows Rust. Skills provide:
 - Structured reasoning paths
 - Domain-specific constraints
 - Decision frameworks
 
 ### 2. Tracing Is Mandatory, Not Optional
 
-Without enforcement, Claude stops at Layer 1 (quick fix).
+Without enforcement, Codex stops at Layer 1 (quick fix).
 Hook must **mandate** tracing through all relevant layers.
 
 ### 3. Domain Detection Is Critical
@@ -276,7 +276,7 @@ Vague instructions like "trace through layers" don't work.
 
 ### 5. Flat Directory Structure
 
-Claude Code plugin system requires flat skill directories.
+Codex plugin system requires flat skill directories.
 Nested structures (`skills/domains/web/`) won't be registered.
 
 ### 6. Keyword Matching Matters
@@ -364,9 +364,9 @@ Solution: [follows Web best practices]
 | `skills/m0x-*/SKILL.md` | Layer 1 skills |
 | `skills/m1x-*/SKILL.md` | Layer 2 skills |
 | `skills/domain-*/SKILL.md` | Layer 3 skills |
-| `.claude/hooks/rust-skill-eval-hook.sh` | Hook script |
+| `hooks/rust-skill-eval-hook.sh` | Hook script |
 | `hooks/hooks.json` | Plugin hook config |
-| `.claude-plugin/plugin.json` | Plugin manifest |
+| `.codex-plugin/plugin.json` | Plugin manifest |
 | `_meta/reasoning-framework.md` | Core reasoning docs |
 
 ### Plugin.json Required Fields

@@ -11,7 +11,7 @@ Skill ≠ FAQ Collection
 Skill ≠ Code Snippets Library
 ```
 
-Claude already knows Rust. Teaching it "ownership rules" or "how Arc works" adds no value.
+Codex already knows Rust. Teaching it "ownership rules" or "how Arc works" adds no value.
 
 ---
 
@@ -19,7 +19,7 @@ Claude already knows Rust. Teaching it "ownership rules" or "how Arc works" adds
 
 ### Definition
 
-> **A Skill is a Cognitive Protocol that shapes HOW Claude thinks about a problem, not WHAT it knows.**
+> **A Skill is a Cognitive Protocol that shapes HOW Codex thinks about a problem, not WHAT it knows.**
 
 ### Components
 
@@ -55,7 +55,7 @@ rust-router:
 
 ```markdown
 ## Core Question
-**Who should own this data?**  ← Forces Claude to ASK, not TELL
+**Who should own this data?**  ← Forces Codex to ASK, not TELL
 
 ## Error → Design Question
 | Error | Don't Just Say | Ask Instead |
@@ -81,7 +81,7 @@ rust-router:
 
 ### 4. Attention Director
 
-**What it does**: Points Claude's attention to what matters for THIS context.
+**What it does**: Points Codex's attention to what matters for THIS context.
 
 ```markdown
 ## Trace Up ↑
@@ -173,7 +173,7 @@ This is a **cognitive traffic controller**.
 ```
 User: "Web API reports Rc cannot be sent"
 
-Claude's thinking:
+Codex's thinking:
   → I know Rc is !Send
   → I know Arc is Send
   → Answer: "Use Arc"
@@ -313,7 +313,7 @@ Result: Right design for this domain
 
 ### One-Line Definition
 
-> **A Skill is a reusable reasoning protocol that transforms how Claude thinks about a class of problems, not what it knows about them.**
+> **A Skill is a reusable reasoning protocol that transforms how Codex thinks about a class of problems, not what it knows about them.**
 
 ---
 

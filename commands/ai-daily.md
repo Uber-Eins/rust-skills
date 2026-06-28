@@ -18,7 +18,7 @@ Arguments: $ARGUMENTS
 | Community | URL | Focus |
 |-----------|-----|-------|
 | r/AI_Agents | https://www.reddit.com/r/AI_Agents/ | AI Agent development, tools |
-| r/ClaudeAI | https://www.reddit.com/r/ClaudeAI/ | Claude, Anthropic updates |
+| r/CodexAI | https://www.reddit.com/r/CodexAI/ | Codex, OpenAI updates |
 | r/ChatGPT | https://www.reddit.com/r/ChatGPT/ | ChatGPT, OpenAI updates |
 
 ---
@@ -71,12 +71,12 @@ Bash("agent-browser close")
 
 Where `{time_range}` is: `day`, `week`, or `month`
 
-#### Step 2b: r/ClaudeAI
+#### Step 2b: r/CodexAI
 
 **Use the Bash tool:**
 
 ```
-Bash("agent-browser --headed open 'https://www.reddit.com/r/ClaudeAI/top/?t={time_range}'")
+Bash("agent-browser --headed open 'https://www.reddit.com/r/CodexAI/top/?t={time_range}'")
 Bash("agent-browser get text 'article' --limit 20")
 Bash("agent-browser close")
 ```
@@ -157,24 +157,24 @@ Display the report in markdown format:
 
 ---
 
-## 🟠 r/ClaudeAI - Claude & Anthropic
+## 🟠 r/CodexAI - Codex & OpenAI
 
 ### Top Posts
 
 #### 1. {Post Title}
-- **Link:** https://reddit.com/r/ClaudeAI/comments/{id}
+- **Link:** https://reddit.com/r/CodexAI/comments/{id}
 - **Score:** {upvotes} ⬆️ | **Comments:** {comments} 💬 | **Posted:** {time_ago}
 - **Author:** u/{username}
-- **Key Takeaway:** {what Claude users should know}
+- **Key Takeaway:** {what Codex users should know}
 - **Tags:** `{feature}` `{use-case}`
 
 {... more posts}
 
-**🔥 Hot Topics in r/ClaudeAI:**
+**🔥 Hot Topics in r/CodexAI:**
 - {topic 1}: {context}
 - {topic 2}: {context}
 
-**📢 Official/Notable Updates:** {any Anthropic announcements or significant feature discoveries}
+**📢 Official/Notable Updates:** {any OpenAI announcements or significant feature discoveries}
 
 ---
 
@@ -205,10 +205,10 @@ Topics generating discussion across multiple subreddits:
 
 ### 1. {Trending Topic}
 - **Why it matters:** {explanation}
-- **Discussed in:** [r/AI_Agents]({url}), [r/ClaudeAI]({url}), [r/ChatGPT]({url})
+- **Discussed in:** [r/AI_Agents]({url}), [r/CodexAI]({url}), [r/ChatGPT]({url})
 - **Key perspectives:**
   - AI_Agents: {viewpoint}
-  - ClaudeAI: {viewpoint}
+  - CodexAI: {viewpoint}
   - ChatGPT: {viewpoint}
 
 ### 2. {Trending Topic}
@@ -233,7 +233,7 @@ Topics generating discussion across multiple subreddits:
 | Community | Sentiment | Top Concern |
 |-----------|-----------|-------------|
 | r/AI_Agents | {positive/neutral/negative} | {main topic} |
-| r/ClaudeAI | {sentiment} | {topic} |
+| r/CodexAI | {sentiment} | {topic} |
 | r/ChatGPT | {sentiment} | {topic} |
 
 ---
@@ -388,12 +388,12 @@ After saving, inform user:
 
 ### Top Posts
 
-#### 1. Claude Code Now Supports MCP Servers Natively
+#### 1. Codex Now Supports MCP Servers Natively
 - **Link:** https://reddit.com/r/AI_Agents/comments/xyz789
 - **Score:** 234 ⬆️ | **Comments:** 45 💬 | **Posted:** 4 hours ago
 - **Author:** u/mcp_developer
-- **Key Takeaway:** MCP (Model Context Protocol) integration allows Claude Code to connect to external tools and data sources. This is a major step toward truly autonomous agents that can interact with real-world systems.
-- **Tags:** `claude-code` `mcp` `tooling` `intermediate`
+- **Key Takeaway:** MCP (Model Context Protocol) integration allows Codex to connect to external tools and data sources. This is a major step toward truly autonomous agents that can interact with real-world systems.
+- **Tags:** `codex` `mcp` `tooling` `intermediate`
 
 #### 2. Building a Multi-Agent System with LangGraph - Complete Tutorial
 - **Link:** https://reddit.com/r/AI_Agents/comments/abc456
@@ -410,29 +410,29 @@ After saving, inform user:
 
 ---
 
-## 🟠 r/ClaudeAI - Claude & Anthropic
+## 🟠 r/CodexAI - Codex & OpenAI
 
 ### Top Posts
 
-#### 1. Claude 4.5 Opus Announced - First Impressions Thread
-- **Link:** https://reddit.com/r/ClaudeAI/comments/def123
+#### 1. Codex 4.5 Opus Announced - First Impressions Thread
+- **Link:** https://reddit.com/r/CodexAI/comments/def123
 - **Score:** 567 ⬆️ | **Comments:** 234 💬 | **Posted:** 2 hours ago
-- **Author:** u/anthropic_watcher
+- **Author:** u/openai_watcher
 - **Key Takeaway:** New flagship model with improved reasoning, larger context window (300K), and better code generation. Early testers report significant improvements in complex multi-step tasks.
 - **Tags:** `opus` `new-release` `benchmark`
 
-#### 2. Claude's New System Prompts Explained - What Changed
-- **Link:** https://reddit.com/r/ClaudeAI/comments/ghi789
+#### 2. Codex's New System Prompts Explained - What Changed
+- **Link:** https://reddit.com/r/CodexAI/comments/ghi789
 - **Score:** 423 ⬆️ | **Comments:** 89 💬 | **Posted:** 6 hours ago
 - **Author:** u/prompt_engineer
-- **Key Takeaway:** Anthropic updated Claude's system prompts to be more helpful while maintaining safety. Key changes include better handling of edge cases and more nuanced refusals.
+- **Key Takeaway:** OpenAI updated Codex's system prompts to be more helpful while maintaining safety. Key changes include better handling of edge cases and more nuanced refusals.
 - **Tags:** `system-prompt` `safety` `behavior`
 
-**🔥 Hot Topics in r/ClaudeAI:**
+**🔥 Hot Topics in r/CodexAI:**
 - Opus 4.5 capabilities and pricing
-- Claude Code vs Cursor comparison threads
+- Codex vs Cursor comparison threads
 
-**📢 Official/Notable Updates:** Claude 4.5 Opus release, API pricing changes
+**📢 Official/Notable Updates:** Codex 4.5 Opus release, API pricing changes
 
 ---
 
@@ -467,15 +467,15 @@ After saving, inform user:
 
 ### 1. Agent Capabilities Race
 - **Why it matters:** All major AI providers are pushing toward autonomous agents
-- **Discussed in:** [r/AI_Agents](https://reddit.com/...), [r/ClaudeAI](https://reddit.com/...), [r/ChatGPT](https://reddit.com/...)
+- **Discussed in:** [r/AI_Agents](https://reddit.com/...), [r/CodexAI](https://reddit.com/...), [r/ChatGPT](https://reddit.com/...)
 - **Key perspectives:**
   - AI_Agents: Focus on practical implementation and tooling
-  - ClaudeAI: Excitement about MCP and Claude Code
+  - CodexAI: Excitement about MCP and Codex
   - ChatGPT: Anticipation for GPT-5 agent features
 
 ### 2. Voice/Multimodal as Default
 - **Why it matters:** Shift from text-only to multimodal interaction becoming standard
-- **Related posts:** [Voice mode demo](https://reddit.com/...), [Claude vision](https://reddit.com/...)
+- **Related posts:** [Voice mode demo](https://reddit.com/...), [Codex vision](https://reddit.com/...)
 
 ---
 
@@ -497,7 +497,7 @@ After saving, inform user:
 | Community | Sentiment | Top Concern |
 |-----------|-----------|-------------|
 | r/AI_Agents | Positive | Production readiness |
-| r/ClaudeAI | Excited | Opus pricing |
+| r/CodexAI | Excited | Opus pricing |
 | r/ChatGPT | Anticipatory | GPT-5 timeline |
 
 ---
@@ -507,7 +507,7 @@ After saving, inform user:
 | Tool/Resource | Mentioned In | What It Does | Link |
 |---------------|--------------|--------------|------|
 | LangGraph | r/AI_Agents | Multi-agent orchestration | [langchain.com](https://langchain.com) |
-| MCP Protocol | r/ClaudeAI | Tool/data integration for Claude | [anthropic.com](https://anthropic.com) |
+| MCP Protocol | r/CodexAI | Tool/data integration for Codex | [openai.com](https://openai.com) |
 | GPT Store | r/ChatGPT | Marketplace for custom GPTs | [chat.openai.com](https://chat.openai.com) |
 
 ---
@@ -517,7 +517,7 @@ After saving, inform user:
 | Title | Community | Difficulty | Key Learning |
 |-------|-----------|------------|--------------|
 | [Multi-Agent LangGraph](https://reddit.com/...) | r/AI_Agents | Advanced | Agent orchestration patterns |
-| [MCP Server Setup](https://reddit.com/...) | r/ClaudeAI | Intermediate | Connecting Claude to tools |
+| [MCP Server Setup](https://reddit.com/...) | r/CodexAI | Intermediate | Connecting Codex to tools |
 | [Voice Mode Tips](https://reddit.com/...) | r/ChatGPT | Beginner | Getting best results from voice |
 
 ---
@@ -525,7 +525,7 @@ After saving, inform user:
 ## ⚡ Action Items
 
 Based on today's discussions, consider:
-- [ ] Try Claude 4.5 Opus for complex reasoning tasks
+- [ ] Try Codex 4.5 Opus for complex reasoning tasks
 - [ ] Explore MCP protocol for agent development
 - [ ] Test OpenAI's new voice mode if you have Plus
 - [ ] Bookmark LangGraph tutorial for multi-agent projects
@@ -551,7 +551,7 @@ If agent-browser commands fail:
 
 2. **Try without --headed:**
    ```bash
-   agent-browser open 'https://www.reddit.com/r/ClaudeAI/'
+   agent-browser open 'https://www.reddit.com/r/CodexAI/'
    ```
 
 3. **Check browser is installed:**

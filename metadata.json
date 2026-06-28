@@ -1,7 +1,7 @@
 {
   "name": "rust-skills",
-  "version": "2.0.9",
-  "description": "Comprehensive Rust learning and development skills for Claude",
+  "version": "2.1.0",
+  "description": "Comprehensive Rust learning and development skills for Codex",
   "author": "ZhangHanDong",
   "license": "MIT",
   "repository": "https://github.com/actionbook/rust-skills",
@@ -101,11 +101,11 @@
   ],
 
   "compatibility": {
-    "claude_code_min_version": "1.0.0",
+    "codex_min_version": "0.142.2",
     "rust_version_coverage": "1.0.0 - 1.85.0"
   },
 
-  "last_updated": "2025-01-22",
+  "last_updated": "2026-06-28",
   "quality_checks": {
     "skill_frontmatter": true,
     "agent_tools_declared": true,

@@ -1,8 +1,8 @@
 #!/bin/bash
-# Achievement Tracker Hook for Claude Code
+# Achievement Tracker Hook for Codex
 # Tracks coding behaviors and unlocks achievements
 #
-# Usage: Add to Claude Code hooks configuration
+# Usage: Add to Codex hooks configuration
 # Hook types: PostToolUse, UserPromptSubmit
 
 set -euo pipefail
@@ -11,7 +11,7 @@ set -euo pipefail
 # Configuration
 # ============================================================
 
-STATS_DIR="${HOME}/.claude/achievements"
+STATS_DIR="${HOME}/.codex/achievements"
 STATS_FILE="${STATS_DIR}/stats.json"
 ACHIEVEMENTS_FILE="${STATS_DIR}/unlocked.json"
 LOG_FILE="${STATS_DIR}/activity.log"
@@ -179,9 +179,9 @@ check_achievements() {
 # ============================================================
 
 handle_tool_use() {
-  local tool_name="${CLAUDE_TOOL_NAME:-}"
-  local tool_input="${CLAUDE_TOOL_INPUT:-}"
-  local file_path="${CLAUDE_FILE_PATH:-}"
+  local tool_name="${CODEX_TOOL_NAME:-}"
+  local tool_input="${CODEX_TOOL_INPUT:-}"
+  local file_path="${CODEX_FILE_PATH:-}"
 
   # Skip if no tool info
   [ -z "$tool_name" ] && return
@@ -240,7 +240,7 @@ handle_tool_use() {
 }
 
 handle_prompt() {
-  local prompt="${CLAUDE_USER_PROMPT:-}"
+  local prompt="${CODEX_USER_PROMPT:-}"
 
   # Skip if no prompt
   [ -z "$prompt" ] && return

@@ -20,7 +20,7 @@
 
 ### 核心价值
 
-> 提升 Claude Code 对 Rust 学习和实践中遇到问题的**语义识别**能力，从表面错误追溯到问题本质。
+> 提升 Codex 对 Rust 学习和实践中遇到问题的**语义识别**能力，从表面错误追溯到问题本质。
 
 ### 解决的问题
 
@@ -115,7 +115,7 @@
 
 ### 核心价值
 
-> Rust 生态中有大量 crate，无法为每个都预置 skills。利用 Claude Code 的**热加载特性**，按需生成 crate 专属 skills。
+> Rust 生态中有大量 crate，无法为每个都预置 skills。利用 Codex 的**热加载特性**，按需生成 crate 专属 skills。
 
 ### 解决的问题
 
@@ -128,7 +128,7 @@
 ### 存储策略
 
 ```
-~/.claude/skills/           ← 全局 (常用 crate)
+~/.codex/skills/           ← 全局 (常用 crate)
 ├── tokio/
 │   ├── SKILL.md
 │   └── references/
@@ -136,7 +136,7 @@
 ├── ratatui/
 └── std/                    ← 标准库
 
-项目/.claude/skills/        ← 项目级 (特定依赖)
+项目/.codex/skills/        ← 项目级 (特定依赖)
 ├── sqlx/
 ├── sea-orm/
 └── my-company-crate/
@@ -146,8 +146,8 @@
 
 | 场景 | 存储位置 | 示例 |
 |------|----------|------|
-| 常用 crate | 全局 `~/.claude/skills/` | tokio, serde, ratatui, std |
-| 项目特定依赖 | 项目 `.claude/skills/` | sqlx, 业务 crate |
+| 常用 crate | 全局 `~/.codex/skills/` | tokio, serde, ratatui, std |
+| 项目特定依赖 | 项目 `.codex/skills/` | sqlx, 业务 crate |
 | 临时学习 | 项目级，用完删除 | 试用新 crate |
 
 ### Skills 组成
@@ -184,7 +184,7 @@
 │     └─ 无 → 从 docs.rs 抓取生成         │
 │     │                                    │
 │     ▼                                    │
-│ 写入 ~/.claude/skills/{crate}/          │
+│ 写入 ~/.codex/skills/{crate}/          │
 └─────────────────────────────────────────┘
 
 方式二：手动为特定 crate 生成
@@ -205,7 +205,7 @@
 ### 生成的 Skill 结构
 
 ```
-~/.claude/skills/tokio/
+~/.codex/skills/tokio/
 ├── SKILL.md              # 主 skill 文件
 │   ├── 触发关键词
 │   ├── 核心概念
@@ -223,7 +223,7 @@
 对于复杂 crate，采用**父子结构**：
 
 ```
-~/.claude/skills/
+~/.codex/skills/
 ├── tokio/                 # 父 Skill: 广泛触发，概览
 │   ├── SKILL.md
 │   └── references/
@@ -248,7 +248,7 @@
 
 ### 核心价值
 
-> 让 Claude Code 精准获取 Rust 语言和生态的**最新信息**，让用户紧跟 Rust 最前沿。
+> 让 Codex 精准获取 Rust 语言和生态的**最新信息**，让用户紧跟 Rust 最前沿。
 
 ### 解决的问题
 
@@ -613,4 +613,4 @@ actionbook MCP → agent-browser CLI → WebFetch (仅备用)
 
 **rust-skills 的目标**：
 
-让 Claude Code 成为一个**理解问题本质**、**掌握最新生态**、**按需扩展知识**的 Rust 开发助手。
+让 Codex 成为一个**理解问题本质**、**掌握最新生态**、**按需扩展知识**的 Rust 开发助手。

@@ -1,6 +1,6 @@
 # Rust-Skills 能力总结
 
-> rust-skills Claude Code 插件的完整能力清单
+> rust-skills Codex 插件的完整能力清单
 
 ## 概览
 
@@ -405,7 +405,7 @@ pedantic = "warn"
 
 ## 总结
 
-**rust-skills** 将 Claude 从 Rust 知识库转变为**领域感知的 Rust 架构师**：
+**rust-skills** 将 Codex 从 Rust 知识库转变为**领域感知的 Rust 架构师**：
 
 1. **路由** 问题通过合适的认知层级
 2. **追溯** 找到底层领域约束

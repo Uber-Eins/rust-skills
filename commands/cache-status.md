@@ -17,7 +17,7 @@ Arguments: $ARGUMENTS
 ### 1. Check Cache Directory
 
 ```bash
-CACHE_DIR="$HOME/.claude/cache/rust-docs"
+CACHE_DIR="$HOME/.codex/cache/rust-docs"
 
 if [ ! -d "$CACHE_DIR" ]; then
     echo "No cache directory found at: $CACHE_DIR"
@@ -86,7 +86,7 @@ done
 ```
 === Rust Docs Cache Status ===
 
-Location: ~/.claude/cache/rust-docs
+Location: ~/.codex/cache/rust-docs
 
 std: 45 items, 1.2M (expired: 3)
 docs.rs: 128 items, 4.5M (expired: 12)

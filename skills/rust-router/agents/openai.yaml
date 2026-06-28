@@ -1,0 +1,10 @@
+interface:
+  display_name: "Rust Meta Router Agent"
+  short_description: "Route Rust prompts across language, design, and domain layers."
+  default_prompt: "Route this Rust question through the Rust Skills layered framework."
+  brand_color: "#CE412B"
+policy:
+  allow_implicit_invocation: true
+dependencies:
+  tools:
+    - functions.exec_command

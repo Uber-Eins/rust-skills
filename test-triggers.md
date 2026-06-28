@@ -5,8 +5,8 @@
 ## How to Test
 
 1. Go to a Rust project directory with rust-skills plugin installed
-2. Run each query below with `claude -p "query"`
-3. Check if the expected skill is triggered (shown in Claude Code status line)
+2. Run each query below with `codex exec "query"`
+3. Check if the expected skill is triggered (shown in Codex status line)
 
 ---
 
@@ -216,41 +216,41 @@
 
 ```bash
 # Layer 1: Language Mechanics
-claude -p "E0382 错误怎么解决"           # m01-ownership
-claude -p "E0499 multiple mutable borrows" # m03-mutability
-claude -p "newtype pattern"              # m05-type-driven
-claude -p "Send Sync trait"              # m07-concurrency
+codex exec "E0382 错误怎么解决"              # m01-ownership
+codex exec "E0499 multiple mutable borrows" # m03-mutability
+codex exec "newtype pattern"                # m05-type-driven
+codex exec "Send Sync trait"                # m07-concurrency
 
 # Layer 2: Design Choices
-claude -p "DDD in Rust"                  # m09-domain
-claude -p "benchmark 怎么写"              # m10-performance
-claude -p "推荐什么 crate"                # m11-ecosystem
-claude -p "RAII pattern"                 # m12-lifecycle
-claude -p "circuit breaker 实现"          # m13-domain-error
-claude -p "怎么学 Rust"                   # m14-mental-model
-claude -p "常见 Rust 错误"                # m15-anti-pattern
+codex exec "DDD in Rust"                    # m09-domain
+codex exec "benchmark 怎么写"                # m10-performance
+codex exec "推荐什么 crate"                  # m11-ecosystem
+codex exec "RAII pattern"                   # m12-lifecycle
+codex exec "circuit breaker 实现"            # m13-domain-error
+codex exec "怎么学 Rust"                     # m14-mental-model
+codex exec "常见 Rust 错误"                  # m15-anti-pattern
 
 # Core Skills
-claude -p "unsafe 代码怎么写"             # unsafe-checker
-claude -p "tokio 最新版本"                # rust-learner
-claude -p "Rust 命名规范"                 # coding-guidelines
+codex exec "unsafe 代码怎么写"               # unsafe-checker
+codex exec "tokio 最新版本"                  # rust-learner
+codex exec "Rust 命名规范"                   # coding-guidelines
 
 # Layer 3: Domains
-claude -p "axum web server"              # domain-web
-claude -p "decimal 精度计算"              # domain-fintech
+codex exec "axum web server"                # domain-web
+codex exec "Rust decimal 精度计算"            # domain-fintech
 ```
 
 ## Expected Behavior
 
 When a skill triggers correctly, you should see:
-1. The skill name in Claude Code's status line
+1. The skill name in Codex's status line
 2. Response content that matches the skill's expertise
 3. References to patterns/rules from that skill
 
 ## Troubleshooting
 
 If skills don't trigger:
-1. Ensure rust-skills plugin is installed: `claude /plugins`
+1. Ensure rust-skills plugin is installed: `codex plugin list`
 2. Check plugin path is correct
 3. Verify SKILL.md files have `description:` field with keywords
 4. Try more specific keywords from the skill description

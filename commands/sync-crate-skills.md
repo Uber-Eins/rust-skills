@@ -75,7 +75,7 @@ serde = "1.0"
 
 For each crate, check if skill exists:
 ```bash
-ls ~/.claude/skills/{crate_name}/SKILL.md
+ls ~/.codex/skills/{crate_name}/SKILL.md
 ```
 
 If `--force` flag is set, skip this check.
@@ -118,7 +118,7 @@ Synced skills for:
 - serde (1.0.215) - created
 - axum (0.7.9) - already exists, skipped
 
-Skills location: ~/.claude/skills/
+Skills location: ~/.codex/skills/
 ```
 
 ---
@@ -167,6 +167,6 @@ Skills location: ~/.claude/skills/
 
 ## Output Location
 
-All skills are created in: `~/.claude/skills/`
+All skills are created in: `~/.codex/skills/`
 
 This is the local dynamic skills directory, not committed to repositories.

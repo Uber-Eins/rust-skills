@@ -1,5 +1,7 @@
 # clippy-researcher
 
+tools: web
+
 Fetch Clippy lint information.
 
 ## URL

@@ -1,0 +1,10 @@
+interface:
+  display_name: "Rust Guidelines Agent"
+  short_description: "Apply Rust API guidelines, Clippy, formatting, and style rules."
+  default_prompt: "Review this Rust code against the Rust Skills coding guidelines."
+  brand_color: "#CE412B"
+policy:
+  allow_implicit_invocation: true
+dependencies:
+  tools:
+    - functions.exec_command

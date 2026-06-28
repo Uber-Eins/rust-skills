@@ -18,7 +18,7 @@ Arguments: $ARGUMENTS
 ## Data Files
 
 ```
-~/.claude/achievements/
+~/.codex/achievements/
 ├── stats.json       # Coding statistics
 ├── unlocked.json    # Unlocked achievements
 └── activity.log     # Activity history
@@ -41,8 +41,8 @@ Arguments: $ARGUMENTS
 ### 2. Read Data Files
 
 ```bash
-stats_file=~/.claude/achievements/stats.json
-achievements_file=~/.claude/achievements/unlocked.json
+stats_file=~/.codex/achievements/stats.json
+achievements_file=~/.codex/achievements/unlocked.json
 
 # Read stats
 stats=$(cat "$stats_file" 2>/dev/null || echo '{}')
@@ -217,7 +217,7 @@ This will permanently delete:
 
 If confirmed:
 ```bash
-rm -rf ~/.claude/achievements/
+rm -rf ~/.codex/achievements/
 echo "✅ Achievement data reset successfully."
 echo "🌱 Start fresh and earn new achievements!"
 ```
@@ -249,7 +249,7 @@ echo "🌱 Start fresh and earn new achievements!"
 
 ## Hook Setup
 
-To enable automatic achievement tracking, add to your Claude Code settings:
+To enable automatic achievement tracking, add to your Codex settings:
 
 ```json
 {
@@ -260,7 +260,7 @@ To enable automatic achievement tracking, add to your Claude Code settings:
         "hooks": [
           {
             "type": "command",
-            "command": "~/.claude/skills/rust-skills/scripts/achievement-tracker.sh PostToolUse"
+            "command": "~/.codex/skills/rust-skills/scripts/achievement-tracker.sh PostToolUse"
           }
         ]
       }
@@ -270,7 +270,7 @@ To enable automatic achievement tracking, add to your Claude Code settings:
         "hooks": [
           {
             "type": "command",
-            "command": "~/.claude/skills/rust-skills/scripts/achievement-tracker.sh UserPromptSubmit"
+            "command": "~/.codex/skills/rust-skills/scripts/achievement-tracker.sh UserPromptSubmit"
           }
         ]
       }
@@ -281,8 +281,8 @@ To enable automatic achievement tracking, add to your Claude Code settings:
 
 Or copy the script to a global location:
 ```bash
-cp scripts/achievement-tracker.sh ~/.claude/hooks/achievement-tracker.sh
-chmod +x ~/.claude/hooks/achievement-tracker.sh
+cp scripts/achievement-tracker.sh ~/.codex/hooks/achievement-tracker.sh
+chmod +x ~/.codex/hooks/achievement-tracker.sh
 ```
 
 ---

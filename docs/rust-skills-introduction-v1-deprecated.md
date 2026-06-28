@@ -1,6 +1,6 @@
 # Rust Skills：让 AI 写 Rust 更精准的秘密武器
 
-> 一个专为 Claude Code 打造的 Rust 开发辅助插件，通过元问题导向、动态 Skills 和精准文档获取，显著提升 AI 编写 Rust 代码的质量。
+> 一个专为 Codex 打造的 Rust 开发辅助插件，通过元问题导向、动态 Skills 和精准文档获取，显著提升 AI 编写 Rust 代码的质量。
 
 ## 1. 创作初衷：为什么 AI 写 Rust 需要专门的 Skills？
 
@@ -79,7 +79,7 @@ cd my-async-project
 系统会：
 1. 解析 `Cargo.toml` 中的依赖
 2. 为每个依赖生成专属 Skill
-3. 存储在 `~/.claude/skills/` 目录
+3. 存储在 `~/.codex/skills/` 目录
 
 生成的 tokio Skill 长这样：
 
@@ -222,26 +222,19 @@ Actionbook 目前支持 Rust 生态的关键网站：
 # 克隆仓库
 git clone https://github.com/actionbook/rust-skills.git
 
-# 使用插件启动 Claude Code
-claude --plugin-dir /path/to/rust-skills
+# 添加 marketplace 并安装插件
+codex plugin marketplace add /path/to/rust-skills
+codex plugin add rust-skills@rust-skills
 ```
 
-### 5.2 配置权限
+### 5.2 插件入口
 
-为了支持后台 Agent 运行，需要配置权限：
+Codex 插件模式会启用完整能力：
 
-```bash
-mkdir -p .claude
-cat >> .claude/settings.local.json << 'EOF'
-{
-  "permissions": {
-    "allow": [
-      "Bash(agent-browser *)"
-    ]
-  }
-}
-EOF
-```
+- `hooks/hooks.json`：Rust-only `UserPromptSubmit` 自动元认知触发
+- `hooks/rust-skill-eval-hook.sh`：注入 Rust 分层路由指令
+- `skills/*/agents/openai.yaml`：后台 agents 和研究工作流
+- `.mcp.json`：Actionbook 与 agent-browser MCP 集成
 
 ### 5.3 常用命令
 
@@ -261,7 +254,7 @@ EOF
 ```
 用户：tokio 最新版本是多少？spawn 怎么用？
 
-Claude：
+Codex：
 1. 触发 tokio Skill
 2. 调用 crate-researcher Agent 获取版本
 3. 读取本地 references/task.md 文档
@@ -278,7 +271,7 @@ unsafe {
     *ptr.add(index)
 }
 
-Claude：
+Codex：
 1. 触发 unsafe-checker Skill
 2. 检查是否有 SAFETY 注释 ❌
 3. 检查边界验证 ❌

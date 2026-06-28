@@ -1,27 +1,16 @@
-#!/bin/bash
-# Rust Skills Setup Script
+#!/usr/bin/env bash
+set -euo pipefail
 
-echo "Setting up Rust Skills for Claude Code..."
+repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# Create permissions file if it doesn't exist
-if [ ! -f ".claude/settings.local.json" ]; then
-    mkdir -p .claude
-    cat > .claude/settings.local.json << 'EOF'
-{
-  "permissions": {
-    "allow": [
-      "Bash(agent-browser *)"
-    ]
-  }
-}
-EOF
-    echo "Created .claude/settings.local.json with agent-browser permissions"
-else
-    echo ".claude/settings.local.json already exists, please add permissions manually:"
-    echo '  "Bash(agent-browser *)"'
-fi
-
-echo "Setup complete!"
+echo "Setting up Rust Skills for Codex..."
 echo ""
-echo "Usage:"
-echo "  claude --plugin-dir $(dirname "$0")"
+echo "Marketplace:"
+echo "  $repo_root/.agents/plugins/marketplace.json"
+echo ""
+echo "Run:"
+echo "  codex plugin marketplace add \"$repo_root\""
+echo "  codex plugin add rust-skills@rust-skills"
+echo ""
+echo "For one-shot hook validation without persisted hook trust:"
+echo "  codex exec --dangerously-bypass-hook-trust \"E0382 错误怎么解决\""

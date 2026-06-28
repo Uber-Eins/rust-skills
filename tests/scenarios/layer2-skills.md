@@ -14,8 +14,8 @@
 ### Test Commands
 
 ```bash
-claude -p "newtype pattern"
-claude -p "PhantomData 用法"
+codex exec "newtype pattern"
+codex exec "PhantomData 用法"
 ```
 
 ---
@@ -32,8 +32,8 @@ claude -p "PhantomData 用法"
 ### Test Commands
 
 ```bash
-claude -p "DDD in Rust"
-claude -p "领域建模"
+codex exec "DDD in Rust"
+codex exec "领域建模"
 ```
 
 ---
@@ -50,8 +50,8 @@ claude -p "领域建模"
 ### Test Commands
 
 ```bash
-claude -p "Rust 性能优化"
-claude -p "benchmark 怎么写"
+codex exec "Rust 性能优化"
+codex exec "benchmark 怎么写"
 ```
 
 ---
@@ -68,8 +68,8 @@ claude -p "benchmark 怎么写"
 ### Test Commands
 
 ```bash
-claude -p "推荐什么 crate"
-claude -p "feature flags 用法"
+codex exec "推荐什么 crate"
+codex exec "feature flags 用法"
 ```
 
 ---
@@ -86,8 +86,8 @@ claude -p "feature flags 用法"
 ### Test Commands
 
 ```bash
-claude -p "RAII pattern"
-claude -p "Drop trait 实现"
+codex exec "RAII pattern"
+codex exec "Drop trait 实现"
 ```
 
 ---
@@ -104,8 +104,8 @@ claude -p "Drop trait 实现"
 ### Test Commands
 
 ```bash
-claude -p "retry 策略"
-claude -p "circuit breaker 实现"
+codex exec "retry 策略"
+codex exec "circuit breaker 实现"
 ```
 
 ---
@@ -122,8 +122,8 @@ claude -p "circuit breaker 实现"
 ### Test Commands
 
 ```bash
-claude -p "怎么学 Rust"
-claude -p "Rust 思维方式"
+codex exec "怎么学 Rust"
+codex exec "Rust 思维方式"
 ```
 
 ---
@@ -140,8 +140,8 @@ claude -p "Rust 思维方式"
 ### Test Commands
 
 ```bash
-claude -p "常见 Rust 错误"
-claude -p "clone 滥用"
+codex exec "常见 Rust 错误"
+codex exec "clone 滥用"
 ```
 
 ---

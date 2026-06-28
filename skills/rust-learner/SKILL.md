@@ -66,7 +66,7 @@ Task(
 ```
 User: "tokio latest version"
 
-Claude:
+Codex:
 1. Read ../../agents/crate-researcher.md
 2. Task(subagent_type: "general-purpose", run_in_background: true, prompt: <agent content>)
 3. Wait for agent
@@ -77,7 +77,7 @@ Claude:
 ```
 User: "What's new in Rust 1.85?"
 
-Claude:
+Codex:
 1. Read ../../agents/rust-changelog.md
 2. Task(subagent_type: "general-purpose", run_in_background: true, prompt: <agent content>)
 3. Wait for agent

@@ -5,11 +5,27 @@ All notable changes to rust-skills will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.1.0] - 2026-06-28
+
+### Changed
+- Converted rust-skills from legacy assistant-specific packaging to a Codex
+  plugin with `.codex-plugin/plugin.json` and repository marketplace metadata.
+- Moved automatic meta-cognition to Codex `UserPromptSubmit` hooks with a
+  Rust-only matcher plus a script-level Rust prompt guard.
+- Added Codex agent manifests for routing, Rust research, coding guidelines,
+  unsafe review, and core workflow helpers.
+- Removed assistant-specific plugin manifests, settings examples, hook paths,
+  and documentation references.
+
+### Added
+- Root marketplace entry at `.agents/plugins/marketplace.json`.
+- Codex hook script at `hooks/rust-skill-eval-hook.sh`.
+
 ## [2.0.9] - 2025-01-22
 
 ### Changed
 - **Improved installation documentation** in all READMEs (EN/ZH/JA):
-  - Added two-step marketplace installation guide (`/plugin marketplace add` + `/plugin install`)
+  - Added two-step marketplace installation guide (`codex plugin marketplace add` + `codex plugin add`)
   - Clarified the difference between adding marketplace and installing plugin
 
 ### Added
@@ -62,7 +78,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `m11-ecosystem`: Auto-injects Cargo.toml dependencies
 
 ### Documentation
-- Skills now follow Claude Code Plugin Marketplace best practices
+- Skills now follow Codex Plugin Marketplace best practices
 
 ---
 
@@ -141,9 +157,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 #### Plugin Marketplace Support
-- Added `.claude-plugin/marketplace.json` with official schema
-- Simplified `.claude-plugin/plugin.json` (skills auto-discovered)
-- Support for `/plugin marketplace add actionbook/rust-skills`
+- Added repository marketplace metadata with official schema
+- Simplified `.codex-plugin/plugin.json` (skills auto-discovered)
+- Support for `codex plugin marketplace add actionbook/rust-skills`
 
 #### Domain Skills (Layer 3)
 - **domain-fintech**: Financial technology patterns
@@ -174,8 +190,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated quick test commands
 
 ### Fixed
-- Fixed incorrect repository links (`anthropics/rust-skills` → `actionbook/rust-skills`)
-- Fixed actionbook link (`anthropics/actionbook` → `actionbook/actionbook`)
+- Fixed incorrect repository links to `actionbook/rust-skills`
+- Fixed actionbook link to `actionbook/actionbook`
 
 ### Documentation
 - Added `docs/context-optimization.md` with optimization details
@@ -188,7 +204,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 #### Core Infrastructure
-- Initial release of rust-skills Claude plugin
+- Initial release of rust-skills plugin
 - 15 meta-question skills (m01-m15) for Rust learning
 - rust-router for intelligent skill routing
 - rust-learner for crate and version information

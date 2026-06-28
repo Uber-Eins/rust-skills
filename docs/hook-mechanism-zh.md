@@ -9,14 +9,14 @@
 ```
 用户: "Web API 报错 Rc cannot be sent"
 
-Claude 默认行为:
+Codex 默认行为:
   → 直接从知识库回答
   → "用 Arc 替代 Rc"
   → 不加载任何 Skill
   → 不追溯领域约束
 ```
 
-**问题**: Skill 定义了很好的认知框架，但 Claude 不会主动使用。
+**问题**: Skill 定义了很好的认知框架，但 Codex 不会主动使用。
 
 ### 有 Hook 的情况
 
@@ -65,7 +65,7 @@ Hook 触发:
                               │
                               ▼
 ┌─────────────────────────────────────────────────────────────┐
-│           .claude/hooks/rust-skill-eval-hook.sh             │
+│             hooks/rust-skill-eval-hook.sh                       │
 │                                                              │
 │  输出元认知指令:                                             │
 │  - 强制识别层级和领域                                        │
@@ -75,7 +75,7 @@ Hook 触发:
                               │
                               ▼
 ┌─────────────────────────────────────────────────────────────┐
-│                    Claude 执行                               │
+│                    Codex 执行                               │
 │                                                              │
 │  1. 收到用户问题 + Hook 注入的指令                           │
 │  2. 按指令加载 Skills                                        │
@@ -95,11 +95,11 @@ Hook 触发:
   "hooks": {
     "UserPromptSubmit": [
       {
-        "matcher": "(?i)(rust|cargo|rustc|crate|Cargo\\.toml|E0\\d{3}|ownership|borrow|lifetime|Send|Sync|async|await|Arc|Rc|Mutex|trait|generic|Result|Error|panic|unsafe|FFI|Web API|HTTP|axum|actix|所有权|借用|生命周期|异步|并发|怎么|如何|为什么)",
+        "matcher": "(?i)(\\bRust\\b|\\bcargo\\b|\\brustc\\b|\\bcrate\\b|Cargo\\.toml|\\.rs\\b|borrow checker|ownership|borrowed value|lifetime|moved value|cannot borrow|does not live long enough|trait bound|unsafe|\\bFFI\\b|\\btokio\\b|\\bserde\\b|\\baxum\\b|\\bactix\\b|\\bwarp\\b|\\bclap\\b|\\bno_std\\b|Rc<|Arc<|RefCell|Mutex|RwLock|\\bSend\\b|\\bSync\\b|E0\\d{3,4}|所有权|借用|生命周期|编译错误|错误处理|智能指针|泛型|特征|零成本|异步 Rust|Rust.*异步|并发 Rust|Rust.*并发|嵌入式 Rust|Rust.*嵌入式|Rust.*金融|Rust.*web|Rust.*CLI|Rust.*机器学习)",
         "hooks": [
           {
             "type": "command",
-            "command": "${CLAUDE_PLUGIN_ROOT}/.claude/hooks/rust-skill-eval-hook.sh"
+            "command": "./hooks/rust-skill-eval-hook.sh"
           }
         ]
       }
@@ -116,7 +116,7 @@ Hook 触发:
 | `matcher` | 正则表达式，匹配触发条件 |
 | `(?i)` | 忽略大小写 |
 | `type: command` | 执行 shell 命令 |
-| `${CLAUDE_PLUGIN_ROOT}` | 插件根目录变量 |
+| `command` 相对路径 | 相对于插件根目录执行 |
 
 ### 2. matcher 关键词设计
 
@@ -146,16 +146,19 @@ Hook 触发:
   # Unsafe
   unsafe|FFI|extern|
 
-  # 领域关键词
-  Web API|HTTP|axum|actix|payment|trading|CLI|embedded|
+  # Rust 生态和领域关键词
+  tokio|serde|axum|actix|warp|clap|no_std|
 
-  # 中文
-  所有权|借用|生命周期|异步|并发|智能指针|
-
-  # 问题词
-  怎么|如何|为什么|what|how|why
+  # Rust 中文关键词和上下文
+  所有权|借用|生命周期|编译错误|错误处理|智能指针|
+  异步 Rust|Rust.*异步|并发 Rust|Rust.*并发|
+  嵌入式 Rust|Rust.*嵌入式|Rust.*金融|Rust.*web|Rust.*CLI
 )
 ```
+
+注意：不要把 `怎么`、`如何`、`HTTP`、`CLI` 这类泛词单独放进 matcher。
+Codex 的 `UserPromptSubmit` hook 可能在任意会话触发，matcher 必须尽量只覆盖
+Rust 任务；脚本内部还会做第二层 Rust prompt guard。
 
 ### 3. rust-skill-eval-hook.sh (强制脚本)
 
@@ -212,7 +215,7 @@ EOF
 
 ## Hook 类型
 
-### Claude Code 支持的 Hook 时机
+### Codex 支持的 Hook 时机
 
 | Hook 类型 | 触发时机 | 用途 |
 |-----------|----------|------|
@@ -235,7 +238,7 @@ EOF
 ```
 
 **为什么选择 UserPromptSubmit**:
-- 最早时机，在 Claude 思考前注入
+- 最早时机，在 Codex 思考前注入
 - 可以影响整个回答流程
 - 不会遗漏任何匹配的问题
 
@@ -290,7 +293,7 @@ EOF
 
 ```
 不强制输出格式的问题:
-  → Claude 可能只输出 "用 Arc"
+  → Codex 可能只输出 "用 Arc"
   → 没有推理过程
   → 用户不知道为什么
 
@@ -331,10 +334,10 @@ Your response MUST include ALL of these sections:
 rust-skills/
 ├── hooks/
 │   └── hooks.json           ← Hook 触发配置
-├── .claude/
+├── .codex/
 │   └── hooks/
 │       └── rust-skill-eval-hook.sh  ← 强制脚本
-└── .claude-plugin/
+└── .codex-plugin/
     └── plugin.json          ← 引用 hooks
 ```
 
@@ -347,23 +350,23 @@ rust-skills/
 }
 ```
 
-### 项目级 Hook
+### 插件级 Hook
 
 ```
-my-project/
-└── .claude/
-    ├── hooks/
-    │   └── my-hook.sh
-    └── settings.json        ← 配置 hooks
-```
-
-### 全局 Hook
-
-```
-~/.claude/
+rust-skills/
 ├── hooks/
-│   └── global-hook.sh
-└── settings.json            ← 配置 hooks
+│   ├── hooks.json           ← 配置 hooks
+│   └── rust-skill-eval-hook.sh
+└── .codex-plugin/
+    └── plugin.json          ← 引用 hooks/hooks.json
+```
+
+### 安装后的全局启用
+
+```
+~/.codex/
+└── plugins/
+    └── rust-skills/         ← Codex 安装后的插件副本
 ```
 
 ---
@@ -394,7 +397,7 @@ for case in test_cases:
 
 ### 2. 查看 Hook 是否触发
 
-在 Claude Code 中，Hook 触发会显示:
+在 Codex 中，Hook 触发会显示:
 
 ```
 ⏺ <user-prompt-submit-hook>
@@ -486,7 +489,7 @@ for case in test_cases:
 
 ```
 ✓ 插件级 Hook 放在 hooks/hooks.json
-✓ 脚本放在 .claude/hooks/
+✓ 脚本放在 hooks/
 ✓ plugin.json 正确引用
 ✓ 脚本有执行权限
 ```
@@ -502,11 +505,11 @@ for case in test_cases:
   "hooks": {
     "UserPromptSubmit": [
       {
-        "matcher": "(?i)(rust|cargo|rustc|crate|Cargo\\.toml|E0\\d{3}|ownership|borrow|lifetime|move|clone|Send|Sync|async|await|thread|Arc|Rc|Box|RefCell|Mutex|trait|generic|Result|Error|panic|unsafe|FFI|Web API|HTTP|axum|actix|payment|trading|CLI|clap|embedded|no_std|所有权|借用|生命周期|异步|并发|智能指针|怎么|如何|为什么|how to|why)",
+        "matcher": "(?i)(\\bRust\\b|\\bcargo\\b|\\brustc\\b|\\bcrate\\b|Cargo\\.toml|\\.rs\\b|borrow checker|ownership|borrowed value|lifetime|moved value|cannot borrow|does not live long enough|trait bound|unsafe|\\bFFI\\b|\\btokio\\b|\\bserde\\b|\\baxum\\b|\\bactix\\b|\\bwarp\\b|\\bclap\\b|\\bno_std\\b|Rc<|Arc<|RefCell|Mutex|RwLock|\\bSend\\b|\\bSync\\b|E0\\d{3,4}|所有权|借用|生命周期|编译错误|错误处理|智能指针|泛型|特征|零成本|异步 Rust|Rust.*异步|并发 Rust|Rust.*并发|嵌入式 Rust|Rust.*嵌入式|Rust.*金融|Rust.*web|Rust.*CLI|Rust.*机器学习)",
         "hooks": [
           {
             "type": "command",
-            "command": "${CLAUDE_PLUGIN_ROOT}/.claude/hooks/rust-skill-eval-hook.sh"
+            "command": "./hooks/rust-skill-eval-hook.sh"
           }
         ]
       }
@@ -515,7 +518,7 @@ for case in test_cases:
 }
 ```
 
-### .claude/hooks/rust-skill-eval-hook.sh
+### hooks/rust-skill-eval-hook.sh
 
 ```bash
 #!/bin/bash
@@ -563,7 +566,7 @@ L1 Error → Trace UP to L3 → Find constraint → Trace DOWN to L2
 EOF
 ```
 
-### .claude-plugin/plugin.json
+### .codex-plugin/plugin.json
 
 ```json
 {

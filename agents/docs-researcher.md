@@ -1,5 +1,7 @@
 # docs-researcher
 
+tools: agent-browser, web
+
 Fetch third-party crate documentation from docs.rs.
 
 > For std library (std::*), use `std-docs-researcher` instead.
@@ -14,7 +16,7 @@ Use available tools to get docs.rs content:
 
 ## Cache
 
-Location: `~/.claude/cache/rust-docs/docs.rs/{crate}/{item}.json`
+Location: `~/.codex/cache/rust-docs/docs.rs/{crate}/{item}.json`
 TTL: 7 days
 
 Skip cache if user says "refresh", "force", or "--force".
