@@ -20,6 +20,11 @@ Display the following ASCII art exactly as shown. Do not modify spaces or line b
 
 # Unsafe Rust Checker
 
+For broad Rust review, pair this skill with `rust-best-practices` unsafe rules:
+`unsafe-safety-comment`, `unsafe-minimize-scope`, `unsafe-miri-ci`,
+`unsafe-maybeuninit`, `unsafe-extern-block`, `unsafe-send-sync-manual`, and
+`unsafe-no-mangle-unsafe`.
+
 ## When Unsafe is Valid
 
 | Use Case | Example |

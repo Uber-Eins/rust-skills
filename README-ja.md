@@ -4,7 +4,7 @@
 
 > メタ認知フレームワークを備えた AI Rust 開発アシスタント
 
-[![Version](https://img.shields.io/badge/version-2.1.0-green.svg)](https://github.com/actionbook/rust-skills/releases)
+[![Version](https://img.shields.io/badge/version-2.2.0-green.svg)](https://github.com/actionbook/rust-skills/releases)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Codex](https://img.shields.io/badge/Codex-Plugin-blue)](https://openai.com/codex/)
 
@@ -43,6 +43,7 @@ AI (Rust Skills 使用):
 - **動的 Skills**: Cargo.toml の依存関係から自動的に skills を生成
 - **ドメイン拡張**: FinTech、ML、クラウドネイティブ、IoT、組み込み、Web、CLI をサポート
 - **コーディング規約**: 完全な Rust コーディング規約とベストプラクティス
+- **ベストプラクティス規則**: `leonardomso/rust-skills` 由来の 265 個の idiomatic Rust ルール
 
 ## インストール
 
@@ -197,6 +198,7 @@ Layer 1: 言語機構 (HOW - どのように)
 - `rust-router` - すべての Rust 質問のマスタールーター（最初に呼び出し）
 - `rust-learner` - 最新の Rust/crate バージョン情報を取得
 - `coding-guidelines` - コーディング規約の検索
+- `rust-best-practices` - 265 個の詳細な idiomatic Rust レビュールール
 
 ### Layer 1: 言語機構 (m01-m07)
 

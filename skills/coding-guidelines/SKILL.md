@@ -7,6 +7,11 @@ user-invocable: false
 
 # Rust Coding Guidelines (50 Core Rules)
 
+For detailed rule-level Rust review, also load `rust-best-practices`. That
+skill contains 265 focused rules from `leonardomso/rust-skills`; this skill is
+the concise project guideline layer, while `rust-best-practices` is the
+progressive-disclosure rule library.
+
 ## Naming (Rust-Specific)
 
 | Rule | Guideline |

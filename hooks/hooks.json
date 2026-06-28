@@ -2,7 +2,7 @@
   "hooks": {
     "UserPromptSubmit": [
       {
-        "matcher": "(?i)(\\bRust\\b|\\bcargo\\b|\\brustc\\b|\\bcrate\\b|Cargo\\.toml|\\.rs\\b|borrow checker|ownership|borrowed value|lifetime|moved value|cannot borrow|does not live long enough|trait bound|unsafe|\\bFFI\\b|\\btokio\\b|\\bserde\\b|\\baxum\\b|\\bactix\\b|\\bwarp\\b|\\bclap\\b|\\bno_std\\b|Rc<|Arc<|RefCell|Mutex|RwLock|\\bSend\\b|\\bSync\\b|E0\\d{3,4}|所有权|借用|生命周期|编译错误|错误处理|智能指针|泛型|特征|零成本|异步 Rust|Rust.*异步|并发 Rust|Rust.*并发|嵌入式 Rust|Rust.*嵌入式|Rust.*金融|Rust.*web|Rust.*CLI|Rust.*机器学习)",
+        "matcher": "(?i)(\\bRust\\b|\\bcargo\\b|\\brustc\\b|\\bcrate\\b|Cargo\\.toml|\\.rs\\b|borrow checker|ownership|borrowed value|lifetime|moved value|cannot borrow|does not live long enough|trait bound|unsafe|\\bFFI\\b|\\btokio\\b|\\bserde\\b|\\baxum\\b|\\bactix\\b|\\bwarp\\b|\\bclap\\b|\\bno_std\\b|Rc<|Arc<|RefCell|Mutex|RwLock|\\bSend\\b|\\bSync\\b|E0\\d{3,4}|idiomatic Rust|Rust.*idiomatic|Rust.*review|Rust.*best practice|Rust.*规则|Rust.*代码审查|所有权|借用|生命周期|编译错误|错误处理|智能指针|泛型|特征|零成本|异步 Rust|Rust.*异步|并发 Rust|Rust.*并发|嵌入式 Rust|Rust.*嵌入式|Rust.*金融|Rust.*web|Rust.*CLI|Rust.*机器学习)",
         "hooks": [
           {
             "type": "command",

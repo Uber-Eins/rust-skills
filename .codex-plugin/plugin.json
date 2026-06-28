@@ -1,7 +1,7 @@
 {
   "name": "rust-skills",
-  "version": "2.1.0",
-  "description": "Rust development assistant with routing skills, hooks, background agents, and meta-cognition workflows for Codex.",
+  "version": "2.2.0",
+  "description": "Rust development assistant with routing skills, hooks, background agents, meta-cognition workflows, and 265 idiomatic Rust rules for Codex.",
   "author": {
     "name": "ZhangHanDong",
     "url": "https://github.com/ZhangHanDong"
@@ -19,6 +19,8 @@
     "error-handling",
     "unsafe",
     "ffi",
+    "idiomatic-rust",
+    "code-review",
     "codex-plugin"
   ],
   "skills": "./skills/",
@@ -26,8 +28,8 @@
   "mcpServers": "./.mcp.json",
   "interface": {
     "displayName": "Rust Skills",
-    "shortDescription": "Layered Rust reasoning, docs lookup, and code review skills.",
-    "longDescription": "Rust Skills helps Codex route Rust questions through ownership, borrowing, async, error handling, unsafe, ecosystem, and domain-specific reasoning. It includes UserPromptSubmit hooks for Rust-only meta-cognition, background agent manifests, and docs/crate research workflows.",
+    "shortDescription": "Layered Rust reasoning, docs lookup, code review, and rule checks.",
+    "longDescription": "Rust Skills helps Codex route Rust questions through ownership, borrowing, async, error handling, unsafe, ecosystem, domain-specific reasoning, and detailed idiomatic Rust rule checks. It includes UserPromptSubmit hooks for Rust-only meta-cognition, background agent manifests, and docs/crate research workflows.",
     "developerName": "ZhangHanDong",
     "category": "Developer Tools",
     "capabilities": [
@@ -39,7 +41,7 @@
     "defaultPrompt": [
       "Fix this Rust borrow checker error.",
       "Review this unsafe Rust API.",
-      "Explain this Cargo dependency choice."
+      "Review this Rust code for idiomatic best practices."
     ],
     "brandColor": "#CE412B"
   }

@@ -4,7 +4,7 @@
 
 > AI-powered Rust development assistant with meta-cognition framework
 
-[![Version](https://img.shields.io/badge/version-2.1.0-green.svg)](https://github.com/actionbook/rust-skills/releases)
+[![Version](https://img.shields.io/badge/version-2.2.0-green.svg)](https://github.com/actionbook/rust-skills/releases)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Codex](https://img.shields.io/badge/Codex-Plugin-blue)](https://openai.com/codex/)
 
@@ -43,6 +43,7 @@ AI (with Rust Skills):
 - **Dynamic Skills**: Auto-generate skills from your Cargo.toml dependencies
 - **Domain Extensions**: FinTech, ML, Cloud-Native, IoT, Embedded, Web, CLI support
 - **Coding Guidelines**: Complete Rust coding conventions and best practices
+- **Best Practice Rules**: 265 idiomatic Rust rules from `leonardomso/rust-skills`
 
 ## Installation
 
@@ -197,6 +198,7 @@ Layer 1: Language Mechanics (HOW)
 - `rust-router` - Master router for all Rust questions (invoked first)
 - `rust-learner` - Fetch latest Rust/crate version info
 - `coding-guidelines` - Coding conventions lookup
+- `rust-best-practices` - 265 detailed idiomatic Rust review rules
 
 ### Layer 1: Language Mechanics (m01-m07)
 

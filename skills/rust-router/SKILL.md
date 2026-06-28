@@ -152,6 +152,7 @@ pedantic = "warn"
 | domain error, recovery strategy | m13-domain-error |
 | mental model, how to think | m14-mental-model |
 | anti-pattern, common mistake, pitfall | m15-anti-pattern |
+| idiomatic Rust, best practice, code review, refactor | **rust-best-practices** |
 
 ## Layer 3 Skills (Domain Constraints)
 
@@ -196,6 +197,7 @@ pedantic = "warn"
 | latest version, what's new | **rust-learner** | Use agents |
 | API, docs, documentation | **docs-researcher** | Use agent |
 | code style, naming, clippy | **coding-guidelines** | Read skill |
+| idiomatic Rust, best practices, rule checks | **rust-best-practices** | Read relevant rule files |
 | unsafe code, FFI | **unsafe-checker** | Read skill |
 | code review | **os-checker** | See `integrations/os-checker.md` |
 
@@ -218,6 +220,7 @@ pedantic = "warn"
 | `RAII` | **m12** for design, **m01** for implementation |
 | `crate` | **rust-learner** for version, **m11** for integration |
 | `tokio` | **tokio-*** for API, **m07** for concepts |
+| `idiomatic` / `best practice` | **rust-best-practices** plus the relevant L1/L2 skill |
 
 **Priority Hierarchy:**
 

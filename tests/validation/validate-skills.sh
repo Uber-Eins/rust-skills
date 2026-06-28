@@ -49,6 +49,7 @@ dirs=(
     "skills/coding-guidelines"
     "skills/rust-router"
     "skills/rust-learner"
+    "skills/rust-best-practices"
     "agents"
     "commands"
     "cache"
@@ -78,6 +79,7 @@ skill_files=(
     "skills/coding-guidelines/SKILL.md"
     "skills/rust-router/SKILL.md"
     "skills/rust-learner/SKILL.md"
+    "skills/rust-best-practices/SKILL.md"
 )
 
 for file in "${skill_files[@]}"; do

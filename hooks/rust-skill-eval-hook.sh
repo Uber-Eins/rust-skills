@@ -10,7 +10,7 @@ if [ -z "$prompt" ]; then
   prompt="$input"
 fi
 
-rust_signal='(Rust|cargo|rustc|crate|Cargo\.toml|\.rs\b|borrow checker|ownership|lifetime|moved value|cannot borrow|does not live long enough|trait bound|unsafe|FFI|tokio|serde|axum|actix|warp|clap|no_std|Rc<|Arc<|RefCell|Mutex|RwLock|Send|Sync|E0[0-9]{3,4}|所有权|借用|生命周期|编译错误|错误处理|智能指针|泛型|特征|宏|零成本|异步 Rust|Rust.*异步|并发 Rust|Rust.*并发|嵌入式 Rust|Rust.*嵌入式)'
+rust_signal='(Rust|cargo|rustc|crate|Cargo\.toml|\.rs\b|borrow checker|ownership|lifetime|moved value|cannot borrow|does not live long enough|trait bound|unsafe|FFI|tokio|serde|axum|actix|warp|clap|no_std|Rc<|Arc<|RefCell|Mutex|RwLock|Send|Sync|E0[0-9]{3,4}|idiomatic Rust|Rust.*idiomatic|Rust.*review|Rust.*best practice|Rust.*规则|Rust.*代码审查|所有权|借用|生命周期|编译错误|错误处理|智能指针|泛型|特征|宏|零成本|异步 Rust|Rust.*异步|并发 Rust|Rust.*并发|嵌入式 Rust|Rust.*嵌入式)'
 
 if [ -n "$prompt" ] && ! printf '%s' "$prompt" | grep -Eiq "$rust_signal"; then
   exit 0
@@ -30,6 +30,9 @@ before answering.
    matching domain skill.
 4. For version, crate, docs, changelog, or ecosystem questions, use
    rust-learner and the background agent files under ./agents when present.
+5. For Rust code review, idiomatic Rust, lint, refactoring, or best-practice
+   questions, load coding-guidelines first and then rust-best-practices for
+   detailed rule files under rules/.
 
 Mandatory response shape for non-trivial Rust questions:
 

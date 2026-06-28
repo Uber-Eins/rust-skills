@@ -4,7 +4,7 @@
 
 > 基于元认知框架的 AI Rust 开发助手
 
-[![Version](https://img.shields.io/badge/version-2.1.0-green.svg)](https://github.com/actionbook/rust-skills/releases)
+[![Version](https://img.shields.io/badge/version-2.2.0-green.svg)](https://github.com/actionbook/rust-skills/releases)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Codex](https://img.shields.io/badge/Codex-Plugin-blue)](https://openai.com/codex/)
 
@@ -43,6 +43,7 @@ AI (使用 Rust Skills):
 - **动态 Skills**: 从 Cargo.toml 依赖自动生成 skills
 - **领域扩展**: 金融科技、机器学习、云原生、物联网、嵌入式、Web、CLI 支持
 - **编码规范**: 完整的 Rust 编码规范和最佳实践
+- **最佳实践规则库**: 来自 `leonardomso/rust-skills` 的 265 条 idiomatic Rust 规则
 
 ## 安装
 
@@ -197,6 +198,7 @@ Layer 1: 语言机制 (HOW - 怎么做)
 - `rust-router` - Rust 问题主路由器 (首先调用)
 - `rust-learner` - 获取最新 Rust/crate 版本信息
 - `coding-guidelines` - 编码规范查询
+- `rust-best-practices` - 265 条细粒度 idiomatic Rust 审查规则
 
 ### Layer 1: 语言机制 (m01-m07)
 

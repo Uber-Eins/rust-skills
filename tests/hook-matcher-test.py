@@ -37,12 +37,15 @@ test_cases = [
     ("Send Sync trait 是什么", True, "Send"),
     ("借用检查器报错", True, "借用"),
     ("Rust 类型不匹配怎么办", True, "Rust"),
+    ("Rust 代码审查：这段实现 idiomatic 吗", True, "Rust"),
+    ("Review this Rust function for best practices", True, "Rust"),
 
     # 非 Rust 问题 - 不应匹配
     ("今天天气怎么样", False, None),
     ("帮我订一张机票", False, None),
     ("HTTP 中间件怎么写", False, None),
     ("支付系统精度问题", False, None),
+    ("is this code idiomatic?", False, None),
 
     # 纯非技术问题 - 没有关键词不应匹配
     ("明天几点开会", False, None),

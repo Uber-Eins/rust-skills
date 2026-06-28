@@ -1,0 +1,10 @@
+interface:
+  display_name: "Rust Best Practices Rule Agent"
+  short_description: "Find and apply detailed idiomatic Rust rules."
+  default_prompt: "Select the relevant rust-best-practices rules for this Rust code review."
+  brand_color: "#CE412B"
+policy:
+  allow_implicit_invocation: true
+dependencies:
+  tools:
+    - functions.exec_command
