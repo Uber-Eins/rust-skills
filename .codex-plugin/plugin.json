@@ -1,6 +1,6 @@
 {
   "name": "rust-skills",
-  "version": "2.3.0",
+  "version": "2.3.1",
   "description": "Rust development assistant with routing skills, hooks, background agents, meta-cognition workflows, and 265 idiomatic Rust rules for Codex.",
   "author": {
     "name": "Uber-Eins",

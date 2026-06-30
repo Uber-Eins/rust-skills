@@ -104,7 +104,7 @@ EVALUATE → ACTIVATE → IMPLEMENT
         "hooks": [
           {
             "type": "command",
-            "command": "./hooks/rust-skill-eval-hook.sh"
+            "command": "bash \"${PLUGIN_ROOT}/hooks/rust-skill-eval-hook.sh\""
           }
         ]
       }
@@ -112,6 +112,9 @@ EVALUATE → ACTIVATE → IMPLEMENT
   }
 }
 ```
+
+> 插件模式下，hook `command` 不应依赖当前工作目录。应通过 `PLUGIN_ROOT`
+> 指向已安装插件根目录，再执行实际脚本。
 
 **配置说明**：
 - `UserPromptSubmit`: 用户提交 prompt 时触发

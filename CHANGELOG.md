@@ -5,6 +5,15 @@ All notable changes to rust-skills will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.3.1] - 2026-06-30
+
+### Fixed
+- Fixed plugin hook execution by resolving `rust-skill-eval-hook.sh` through
+  `${PLUGIN_ROOT}` instead of relying on the caller's current working
+  directory.
+- Updated hook design documentation and examples to use plugin-root-based hook
+  commands.
+
 ## [2.3.0] - 2026-06-30
 
 ### Added

@@ -133,7 +133,7 @@ my-plugin/
         "hooks": [
           {
             "type": "command",
-            "command": "./hooks/inject-rules.sh"
+            "command": "bash \"${PLUGIN_ROOT}/hooks/inject-rules.sh\""
           }
         ]
       }

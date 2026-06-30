@@ -4,7 +4,7 @@
 
 > 基于元认知框架的 AI Rust 开发助手
 
-[![Version](https://img.shields.io/badge/version-2.3.0-green.svg)](https://github.com/Uber-Eins/rust-skills/releases)
+[![Version](https://img.shields.io/badge/version-2.3.1-green.svg)](https://github.com/Uber-Eins/rust-skills/releases)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Codex](https://img.shields.io/badge/Codex-Plugin-blue)](https://openai.com/codex/)
 

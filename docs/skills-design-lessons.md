@@ -176,7 +176,7 @@ skills/core-actionbook/SKILL.md
         "hooks": [
           {
             "type": "command",
-            "command": "./hooks/rust-skill-eval-hook.sh"
+            "command": "bash \"${PLUGIN_ROOT}/hooks/rust-skill-eval-hook.sh\""
           }
         ]
       }

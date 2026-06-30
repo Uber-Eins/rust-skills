@@ -99,7 +99,7 @@ Hook 触发:
         "hooks": [
           {
             "type": "command",
-            "command": "./hooks/rust-skill-eval-hook.sh"
+            "command": "bash \"${PLUGIN_ROOT}/hooks/rust-skill-eval-hook.sh\""
           }
         ]
       }
@@ -107,6 +107,9 @@ Hook 触发:
   }
 }
 ```
+
+> 插件级 Hook 的 `command` 会在当前工作区环境下执行，因此脚本路径必须通过
+> `PLUGIN_ROOT` 指向安装后的插件目录，不能依赖 `./hooks/...` 这样的相对路径。
 
 **关键点**:
 
@@ -509,7 +512,7 @@ for case in test_cases:
         "hooks": [
           {
             "type": "command",
-            "command": "./hooks/rust-skill-eval-hook.sh"
+            "command": "bash \"${PLUGIN_ROOT}/hooks/rust-skill-eval-hook.sh\""
           }
         ]
       }
