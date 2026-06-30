@@ -139,7 +139,7 @@ User Question
 | **rust-daily** | Aggregates Rust news from Reddit, TWIR, blogs |
 | **rust-skill-creator** | Generates new skills from documentation |
 | **core-actionbook** | Pre-computed website selectors |
-| **core-agent-browser** | Browser automation infrastructure |
+| **core-chrome-devtools** | Chrome DevTools MCP browser automation infrastructure |
 | **core-dynamic-skills** | Dynamic skill generation from Cargo.toml |
 | **core-fix-skill-docs** | Skill documentation maintenance |
 
@@ -161,7 +161,7 @@ User Question
 
 ```
 1. actionbook MCP    → Pre-computed selectors
-2. agent-browser CLI → Browser automation
+2. chrome-devtools MCP → Browser automation
 3. WebFetch          → Last resort fallback
 ```
 

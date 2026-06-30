@@ -1,7 +1,7 @@
 ---
 name: rust-learner
 description: "Use when asking about Rust versions or crate info. Keywords: latest version, what's new, changelog, Rust 1.x, Rust release, stable, nightly, crate info, crates.io, lib.rs, docs.rs, API documentation, crate features, dependencies, which crate, what version, Rust edition, edition 2021, edition 2024, cargo add, cargo update, 最新版本, 版本号, 稳定版, 最新, 哪个版本, crate 信息, 文档, 依赖, Rust 版本, 新特性, 有什么特性"
-allowed-tools: ["Task", "Read", "Glob", "mcp__actionbook__*", "Bash"]
+allowed-tools: ["Task", "Read", "Glob", "mcp__actionbook__*", "mcp__chrome_devtools__*", "Bash"]
 ---
 
 # Rust Learner
@@ -95,10 +95,9 @@ Codex:
 ```
 1. actionbook: mcp__actionbook__search_actions("lib.rs crate info")
 2. Get action details: mcp__actionbook__get_action_by_id(<action_id>)
-3. agent-browser CLI (or WebFetch fallback):
-   - open "https://lib.rs/crates/{crate_name}"
-   - get text using selector from actionbook
-   - close
+3. chrome-devtools MCP (or WebFetch fallback):
+   - `new_page({ url: "https://lib.rs/crates/{crate_name}" })`
+   - `evaluate_script(...)` using the selector from actionbook
 4. Parse and format output
 ```
 
@@ -121,10 +120,9 @@ Codex:
 ```
 1. actionbook: mcp__actionbook__search_actions("releases.rs rust changelog")
 2. Get action details for selectors
-3. agent-browser CLI (or WebFetch fallback):
-   - open "https://releases.rs/docs/1.{version}.0/"
-   - get text using selector from actionbook
-   - close
+3. chrome-devtools MCP (or WebFetch fallback):
+   - `new_page({ url: "https://releases.rs/docs/1.{version}.0/" })`
+   - `evaluate_script(...)` using the selector from actionbook
 4. Parse and format output
 ```
 
@@ -152,10 +150,9 @@ Codex:
    - Traits: std/{module}/trait.{Name}.html
    - Structs: std/{module}/struct.{Name}.html
    - Modules: std/{module}/index.html
-2. agent-browser CLI (or WebFetch fallback):
-   - open <url>
-   - get text "main .docblock"
-   - close
+2. chrome-devtools MCP (or WebFetch fallback):
+   - `new_page({ url: <url> })`
+   - `evaluate_script({ function: "() => document.querySelector('main .docblock')?.innerText ?? ''" })`
 3. Parse and format output
 ```
 
@@ -192,10 +189,9 @@ Codex:
 
 ```
 1. Construct URL: "https://docs.rs/{crate}/latest/{crate}/{path}"
-2. agent-browser CLI (or WebFetch fallback):
-   - open <url>
-   - get text ".docblock"
-   - close
+2. chrome-devtools MCP (or WebFetch fallback):
+   - `new_page({ url: <url> })`
+   - `evaluate_script({ function: "() => document.querySelector('.docblock')?.innerText ?? ''" })`
 3. Parse and format output
 ```
 
@@ -220,11 +216,9 @@ Codex:
 ### Clippy Lints
 
 ```
-1. agent-browser CLI (or WebFetch fallback):
-   - open "https://rust-lang.github.io/rust-clippy/stable/"
-   - search for lint name in page
-   - get text ".lint-doc" for matching lint
-   - close
+1. chrome-devtools MCP (or WebFetch fallback):
+   - `new_page({ url: "https://rust-lang.github.io/rust-clippy/stable/" })`
+   - use `evaluate_script(...)` to locate the matching lint and extract `.lint-doc`
 2. Parse and format output
 ```
 
@@ -259,25 +253,26 @@ Both modes use the same tool chain order:
    - `mcp__actionbook__search_actions("site_name")` → get action ID
    - `mcp__actionbook__get_action_by_id(id)` → get URL + selectors
 
-2. **agent-browser CLI** - Primary execution tool
-   ```bash
-   agent-browser open <url>
-   agent-browser get text <selector_from_actionbook>
-   agent-browser close
+2. **chrome-devtools MCP** - Primary execution tool
+   ```text
+   mcp__chrome_devtools__new_page({ url: <url> })
+   mcp__chrome_devtools__evaluate_script({
+     function: "() => document.querySelector('<selector_from_actionbook>')?.innerText ?? ''"
+   })
    ```
 
-3. **WebFetch** - Last resort only if agent-browser unavailable
+3. **WebFetch** - Last resort only if chrome-devtools is unavailable
 
 ### Fallback Principle (CRITICAL)
 
 ```
-actionbook → agent-browser → WebFetch (only if agent-browser unavailable)
+actionbook → chrome-devtools → WebFetch (only if chrome-devtools is unavailable)
 ```
 
 **DO NOT:**
-- Skip agent-browser because it's slower
-- Use WebFetch as primary when agent-browser is available
-- Block on WebFetch without trying agent-browser first
+- Skip chrome-devtools because it's slower
+- Use WebFetch as primary when chrome-devtools is available
+- Block on WebFetch without trying chrome-devtools first
 
 ---
 
@@ -286,7 +281,7 @@ actionbook → agent-browser → WebFetch (only if agent-browser unavailable)
 | Deprecated | Use Instead | Reason |
 |------------|-------------|--------|
 | WebSearch for crate info | Task + agent or inline mode | Structured data |
-| Direct WebFetch | actionbook + agent-browser | Pre-computed selectors |
+| Direct WebFetch | actionbook + chrome-devtools | Pre-computed selectors |
 | Guessing version numbers | Always fetch from source | Prevents misinformation |
 
 ## Error Handling
@@ -295,7 +290,7 @@ actionbook → agent-browser → WebFetch (only if agent-browser unavailable)
 |-------|-------|----------|
 | Agent file not found | Skills-only install | Use inline mode |
 | actionbook unavailable | MCP not configured | Fall back to WebFetch |
-| agent-browser not found | CLI not installed | Fall back to WebFetch |
+| chrome-devtools not found | MCP server not installed | Fall back to WebFetch |
 | Agent timeout | Site slow/down | Retry or inform user |
 | Empty results | Selector mismatch | Report and use WebFetch fallback |
 

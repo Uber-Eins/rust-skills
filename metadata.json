@@ -1,6 +1,6 @@
 {
   "name": "rust-skills",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "description": "Comprehensive Rust learning and development skills for Codex",
   "author": "Uber-Eins",
   "license": "MIT",
@@ -63,7 +63,7 @@
       "rust-daily",
       "rust-skill-creator",
       "core-actionbook",
-      "core-agent-browser",
+      "core-chrome-devtools",
       "core-dynamic-skills",
       "core-fix-skill-docs"
     ],
@@ -108,7 +108,7 @@
     "rust_version_coverage": "1.0.0 - 1.96.0"
   },
 
-  "last_updated": "2026-06-28",
+  "last_updated": "2026-06-30",
   "quality_checks": {
     "skill_frontmatter": true,
     "agent_tools_declared": true,

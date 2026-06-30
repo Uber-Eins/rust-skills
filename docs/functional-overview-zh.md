@@ -396,7 +396,7 @@ crate info, docs.rs, API documentation, which crate
 | **后台执行** | 所有 Agent 用 `run_in_background: true` |
 | **不猜版本** | 永远通过 Agent 获取真实数据 |
 | **禁用 WebSearch** | 不用 WebSearch 查 crate 信息 |
-| **Fallback 机制** | actionbook → agent-browser → WebFetch |
+| **Fallback 机制** | actionbook → chrome-devtools → WebFetch |
 
 ### 核心依赖：Actionbook MCP
 
@@ -484,27 +484,28 @@ rust-learner
     └── std-docs-researcher → actionbook: doc.rust-lang.org 选择器
 ```
 
-### agent-browser 浏览器自动化
+### chrome-devtools 浏览器自动化
 
-**agent-browser** 是执行层工具，配合 Actionbook 的选择器进行数据提取。
+**chrome-devtools MCP** 是执行层工具，配合 Actionbook 的选择器进行数据提取。
 
-```bash
+```text
 # 基本工作流
-agent-browser open <url>           # 打开页面
-agent-browser get text <selector>  # 用 actionbook 选择器提取
-agent-browser close                # 关闭
+mcp__chrome_devtools__new_page({ url: <url> })          # 打开页面
+mcp__chrome_devtools__evaluate_script({                 # 用 actionbook 选择器提取
+  function: "() => document.querySelector('<selector>')?.innerText ?? ''"
+})
 ```
 
 **核心命令**:
 
 | 命令 | 功能 |
 |------|------|
-| `open <url>` | 导航到页面 |
-| `snapshot -i` | 获取可交互元素 (带 ref) |
-| `get text <selector>` | 提取文本 |
-| `click @ref` | 点击元素 |
-| `fill @ref "text"` | 填充输入 |
-| `screenshot` | 截图 |
+| `new_page({ url })` | 导航到页面 |
+| `take_snapshot({})` | 获取页面结构和可交互元素 |
+| `evaluate_script(...)` | 提取文本或结构化数据 |
+| `click({ uid })` | 点击元素 |
+| `fill_form(...)` | 批量填写表单 |
+| `take_screenshot(...)` | 截图 |
 
 ### 工具链协作
 
@@ -530,10 +531,10 @@ agent-browser close                # 关闭
 │  └─────────────────────────────────────────────────┘    │
 │                          │                               │
 │                          ▼                               │
-│  Layer 3: 数据提取 (agent-browser)                       │
+│  Layer 3: 数据提取 (chrome-devtools)                    │
 │  ┌─────────────────────────────────────────────────┐    │
-│  │ agent-browser open lib.rs/crates/tokio          │    │
-│  │ agent-browser get text ".crate-version"         │    │
+│  │ new_page({ url: "lib.rs/crates/tokio" })        │    │
+│  │ evaluate_script(使用 ".crate-version" 选择器)   │    │
 │  │ 返回: "1.49.0"                                   │    │
 │  └─────────────────────────────────────────────────┘    │
 │                          │                               │
@@ -546,7 +547,7 @@ agent-browser close                # 关闭
 **优先级 Fallback**:
 
 ```
-actionbook MCP → agent-browser CLI → WebFetch (仅备用)
+actionbook MCP → chrome-devtools MCP → WebFetch (仅备用)
      │                  │                │
      ▼                  ▼                ▼
 获取预计算选择器   执行浏览器抓取    最后手段 (无选择器)
@@ -556,7 +557,7 @@ actionbook MCP → agent-browser CLI → WebFetch (仅备用)
 
 | 工具 | 优点 | 缺点 |
 |------|------|------|
-| Actionbook + agent-browser | 精确、高效、可靠 | 需要预计算选择器 |
+| Actionbook + chrome-devtools | 精确、高效、可靠 | 需要预计算选择器 |
 | WebFetch | 简单、无依赖 | 获取整页、解析困难 |
 
 ---

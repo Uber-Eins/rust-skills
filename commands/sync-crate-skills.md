@@ -128,16 +128,15 @@ Skills location: ~/.codex/skills/
 1. **--from-source flag** - If present, use `/create-llms-from-source` for local source
 2. **actionbook MCP** - Check for pre-generated llms.txt first
 3. **/create-llms-for-skills** - Generate from docs.rs if not in actionbook
-   - Uses **agent-browser CLI** (preferred)
-   - Falls back to **WebFetch** if agent-browser unavailable
+   - Uses **chrome-devtools MCP** (preferred)
+   - Falls back to **WebFetch** if chrome-devtools is unavailable
 4. **/create-llms-from-source** - Generate from local Rust source
    - Uses **rustdoc JSON** (preferred)
    - Falls back to **source code parsing** if rustdoc unavailable
 5. **/create-skills-via-llms** - Create skills from llms.txt
 
 **DO NOT use:**
-- Chrome MCP for documentation fetching
-- Direct Fetch without agent-browser attempt first
+- Direct Fetch without chrome-devtools attempt first
 
 ---
 

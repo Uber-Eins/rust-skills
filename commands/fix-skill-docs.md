@@ -72,16 +72,16 @@ Action needed: 2 files missing
 
 **If --remove-invalid**: Update SKILL.md to remove invalid references.
 
-**Otherwise (default)**: Generate missing reference files using agent-browser:
+**Otherwise (default)**: Generate missing reference files using chrome-devtools MCP:
 
-```bash
+```text
 # For each missing file
-agent-browser "Navigate to docs.rs/{crate_name}/latest/{crate_name}/{module}/
-Extract documentation for {topic} including:
-- API reference
-- Code examples
-- Common patterns
-Save as markdown."
+mcp__chrome_devtools__new_page({
+  url: "https://docs.rs/{crate_name}/latest/{crate_name}/{module}/"
+})
+mcp__chrome_devtools__evaluate_script({
+  function: "() => document.querySelector('.docblock')?.innerText ?? ''"
+})
 
 # Save to references/{filename}
 ```
@@ -102,8 +102,8 @@ Refer to the local files for detailed documentation:
 
 ## Tool Priority
 
-1. **agent-browser CLI** - Generate missing documentation
-2. **WebFetch** - Fallback if agent-browser unavailable
+1. **chrome-devtools MCP** - Generate missing documentation
+2. **WebFetch** - Fallback if chrome-devtools is unavailable
 3. **Edit SKILL.md** - Remove invalid references (--remove-invalid mode)
 
 ---

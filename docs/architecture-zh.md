@@ -114,7 +114,7 @@ rust-skills/
 │   │
 │   ├── core-dynamic-skills/     # 动态 Skill 框架
 │   ├── core-actionbook/         # 网站选择器
-│   ├── core-agent-browser/      # 浏览器自动化
+│   ├── core-chrome-devtools/    # 浏览器自动化
 │   └── core-fix-skill-docs/     # 文档维护
 │
 ├── agents/                      # 后台研究 Agents

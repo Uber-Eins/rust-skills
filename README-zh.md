@@ -4,7 +4,7 @@
 
 > 基于元认知框架的 AI Rust 开发助手
 
-[![Version](https://img.shields.io/badge/version-2.2.0-green.svg)](https://github.com/Uber-Eins/rust-skills/releases)
+[![Version](https://img.shields.io/badge/version-2.3.0-green.svg)](https://github.com/Uber-Eins/rust-skills/releases)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Codex](https://img.shields.io/badge/Codex-Plugin-blue)](https://openai.com/codex/)
 
@@ -58,7 +58,7 @@ Rust Skills 支持两种安装模式：
 
 最简单的安装方式。适用于**任何支持 skills 的编码助手**，包括 [Vercel `add-skills`](https://github.com/nicepkg/add-skills) 等。
 
-Skills 现已内置**内联回退逻辑** —— 当 agent 文件不可用时，skills 会使用内置工具（actionbook、agent-browser、WebFetch）直接执行。
+Skills 现已内置**内联回退逻辑** —— 当 agent 文件不可用时，skills 会使用内置工具（actionbook、chrome-devtools、WebFetch）直接执行。
 
 #### 方式 A：NPX（最简单）
 
@@ -161,7 +161,7 @@ Rust Skills 依赖以下外部工具以获得完整功能：
 | 工具 | 说明 | GitHub |
 |------|------|--------|
 | **actionbook** | 网站操作手册 MCP 服务器。用于 agents 获取结构化网页内容（Rust 版本、crate 信息、文档）。 | [actionbook/actionbook](https://github.com/actionbook/actionbook) |
-| **agent-browser** | 浏览器自动化工具，用于获取实时网页数据。作为 actionbook 不可用时的备选方案。 | [vercel-labs/agent-browser](https://github.com/vercel-labs/agent-browser) |
+| **chrome-devtools-mcp** | Chrome DevTools MCP 服务器，用于执行带 JavaScript 的页面自动化和内容提取。作为 actionbook 选择器不可用时的备选方案。 | [ChromeDevTools/chrome-devtools-mcp](https://github.com/ChromeDevTools/chrome-devtools-mcp) |
 
 ## 元认知框架
 

@@ -39,56 +39,66 @@ Arguments: $ARGUMENTS
 
 ### 2. Fetch Content
 
-**YOU MUST USE THE BASH TOOL TO RUN agent-browser COMMANDS.**
-
-agent-browser IS installed at `/opt/homebrew/bin/agent-browser`.
-
-**Use `--headed` flag to use local browser with user's cookies/login state.**
+**YOU MUST USE chrome-devtools MCP for Reddit pages before giving up.**
 
 ```
-┌─────────────────────────────────────────────────────────┐
-│  FOR EACH SUBREDDIT:                                    │
-│                                                         │
-│  1. USE BASH TOOL: agent-browser --headed open/get     │
-│         ↓ (only if Bash returns error)                 │
-│  2. Mark source as "unavailable"                       │
-│                                                         │
-│  ⚠️  YOU MUST ACTUALLY RUN THE BASH COMMANDS           │
-│  ⚠️  DO NOT ASSUME agent-browser is unavailable        │
-│  ⚠️  Reddit REQUIRES JavaScript - WebFetch WILL FAIL   │
-└─────────────────────────────────────────────────────────┘
+┌────────────────────────────────────────────────────────────┐
+│  FOR EACH SUBREDDIT:                                       │
+│                                                            │
+│  1. USE chrome-devtools: new_page + evaluate_script        │
+│         ↓ (only if MCP fails)                              │
+│  2. Mark source as "unavailable" or retry with WebFetch    │
+│                                                            │
+│  ⚠️  DO NOT ASSUME chrome-devtools is unavailable          │
+│  ⚠️  Reddit REQUIRES JavaScript                            │
+└────────────────────────────────────────────────────────────┘
 ```
 
 #### Step 2a: r/AI_Agents
 
-**Use the Bash tool to execute these commands:**
+**Use chrome-devtools MCP:**
 
-```
-Bash("agent-browser --headed open 'https://www.reddit.com/r/AI_Agents/top/?t={time_range}'")
-Bash("agent-browser get text 'article' --limit 20")
-Bash("agent-browser close")
+```text
+mcp__chrome_devtools__new_page({
+  url: "https://www.reddit.com/r/AI_Agents/top/?t={time_range}"
+})
+mcp__chrome_devtools__evaluate_script({
+  function: `() => Array.from(
+    document.querySelectorAll('[data-testid="post-container"], article')
+  ).slice(0, 20).map((el) => el.innerText)`
+})
 ```
 
 Where `{time_range}` is: `day`, `week`, or `month`
 
 #### Step 2b: r/CodexAI
 
-**Use the Bash tool:**
+**Use chrome-devtools MCP:**
 
-```
-Bash("agent-browser --headed open 'https://www.reddit.com/r/CodexAI/top/?t={time_range}'")
-Bash("agent-browser get text 'article' --limit 20")
-Bash("agent-browser close")
+```text
+mcp__chrome_devtools__new_page({
+  url: "https://www.reddit.com/r/CodexAI/top/?t={time_range}"
+})
+mcp__chrome_devtools__evaluate_script({
+  function: `() => Array.from(
+    document.querySelectorAll('[data-testid="post-container"], article')
+  ).slice(0, 20).map((el) => el.innerText)`
+})
 ```
 
 #### Step 2c: r/ChatGPT
 
-**Use the Bash tool:**
+**Use chrome-devtools MCP:**
 
-```
-Bash("agent-browser --headed open 'https://www.reddit.com/r/ChatGPT/top/?t={time_range}'")
-Bash("agent-browser get text 'article' --limit 20")
-Bash("agent-browser close")
+```text
+mcp__chrome_devtools__new_page({
+  url: "https://www.reddit.com/r/ChatGPT/top/?t={time_range}"
+})
+mcp__chrome_devtools__evaluate_script({
+  function: `() => Array.from(
+    document.querySelectorAll('[data-testid="post-container"], article')
+  ).slice(0, 20).map((el) => el.innerText)`
+})
 ```
 
 #### Step 2d: Alternative Selectors (if 'article' returns empty)
@@ -313,21 +323,14 @@ After saving, inform user:
 
 ```
 ┌────────────────────────────────────────────────────────┐
-│  1. agent-browser --headed  ←── REQUIRED (Reddit=JS)  │
-│  2. ❌ WebFetch             ←── WILL FAIL for Reddit  │
-│  3. ❌ WebSearch            ←── FORBIDDEN             │
+│  1. chrome-devtools MCP  ←── REQUIRED (Reddit=JS)    │
+│  2. ❌ WebSearch         ←── FORBIDDEN                │
 └────────────────────────────────────────────────────────┘
 ```
 
-**Why --headed?**
-- Uses local browser instance
-- Preserves user's cookies and login state
-- Can bypass some anti-bot measures
-- User can see what's happening
-
 **DO NOT:**
-- Skip agent-browser and assume it's unavailable
-- Use WebFetch for Reddit (will fail - requires JS)
+- Skip chrome-devtools and assume it's unavailable
+- Use WebFetch as the primary Reddit fetcher
 - Use WebSearch for fetching posts
 
 ---
@@ -541,22 +544,21 @@ Based on today's discussions, consider:
 
 ## Troubleshooting
 
-If agent-browser commands fail:
+If chrome-devtools extraction fails:
 
-1. **Check installation:**
-   ```bash
-   which agent-browser
-   agent-browser install
+1. **Inspect the rendered page structure:**
+   ```text
+   mcp__chrome_devtools__take_snapshot({})
    ```
 
-2. **Try without --headed:**
-   ```bash
-   agent-browser open 'https://www.reddit.com/r/CodexAI/'
+2. **Check console output for site errors or anti-bot pages:**
+   ```text
+   mcp__chrome_devtools__list_console_messages({})
    ```
 
-3. **Check browser is installed:**
-   ```bash
-   agent-browser install --with-deps
+3. **Capture a screenshot to confirm selector drift:**
+   ```text
+   mcp__chrome_devtools__take_screenshot({ fullPage: true })
    ```
 
 ---

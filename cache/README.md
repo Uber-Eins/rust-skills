@@ -110,7 +110,7 @@ cache:
    - If valid (exists and not expired), return cached data
 
 2. **Fetch if Needed**
-   - Use actionbook/agent-browser to fetch
+   - Use actionbook/chrome-devtools to fetch
    - Parse and structure the data
 
 3. **Update Cache**

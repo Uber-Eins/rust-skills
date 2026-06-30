@@ -42,7 +42,7 @@
     "url": "https://doc.rust-lang.org/std/marker/trait.Send.html",
     "fetched_at": "2025-01-16T23:30:00Z",
     "expires_at": "2025-01-23T23:30:00Z",
-    "source": "agent-browser",
+    "source": "chrome-devtools",
     "version": "1"
   },
   "content": {
@@ -64,7 +64,7 @@
 url: https://doc.rust-lang.org/std/marker/trait.Send.html
 fetched_at: 2025-01-16T23:30:00Z
 expires_at: 2025-01-23T23:30:00Z
-source: agent-browser
+source: chrome-devtools
 ---
 
 # std::marker::Send
@@ -102,7 +102,7 @@ Types that can be transferred across thread boundaries...
 ### 2. 获取并缓存
 
 ```
-1. 使用 actionbook + agent-browser 获取
+1. 使用 actionbook + chrome-devtools 获取
 2. 解析内容
 3. 生成缓存文件（JSON 或 Markdown）
 4. 保存到对应路径

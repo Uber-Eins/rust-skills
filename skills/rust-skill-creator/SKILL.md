@@ -90,11 +90,12 @@ After llms.txt is generated, use:
 
 ### Step 2: Fetch Documentation
 
-```bash
-# Using agent-browser CLI
-agent-browser open "<documentation_url>"
-agent-browser get text ".docblock"
-agent-browser close
+```text
+# Using chrome-devtools MCP
+mcp__chrome_devtools__new_page({ url: "<documentation_url>" })
+mcp__chrome_devtools__evaluate_script({
+  function: "() => document.querySelector('.docblock')?.innerText ?? ''"
+})
 ```
 
 **Or with WebFetch fallback:**
@@ -160,11 +161,15 @@ description: "Documentation for {crate_name} crate. Keywords: {keywords}"
 
 For each major module or type, create a reference file:
 
-```bash
+```text
 # Fetch and save module documentation
-agent-browser open "https://docs.rs/{crate}/latest/{crate}/{module}/"
-agent-browser get text ".docblock" > ~/.codex/skills/{crate_name}/references/{module}.md
-agent-browser close
+mcp__chrome_devtools__new_page({
+  url: "https://docs.rs/{crate}/latest/{crate}/{module}/"
+})
+mcp__chrome_devtools__evaluate_script({
+  function: "() => document.querySelector('.docblock')?.innerText ?? ''"
+})
+# Save to ~/.codex/skills/{crate_name}/references/{module}.md
 ```
 
 ### Step 6: Verify Skill
@@ -224,7 +229,7 @@ User: "Create a dynamic skill for tokio"
 
 Codex:
 1. Identify: Third-party crate "tokio"
-2. Fetch: agent-browser open "https://docs.rs/tokio/latest/tokio/"
+2. Fetch: open "https://docs.rs/tokio/latest/tokio/" with chrome-devtools MCP
 3. Extract documentation
 4. Create: ~/.codex/skills/tokio/SKILL.md
 5. Create: ~/.codex/skills/tokio/references/

@@ -1,6 +1,6 @@
 # docs-researcher
 
-tools: agent-browser, web
+tools: chrome-devtools, web
 
 Fetch third-party crate documentation from docs.rs.
 
@@ -9,7 +9,7 @@ Fetch third-party crate documentation from docs.rs.
 ## Fetch
 
 Use available tools to get docs.rs content:
-- agent-browser if available
+- chrome-devtools MCP if available
 - WebFetch otherwise
 
 **URL format:** `docs.rs/<crate>/latest/<crate>/<path>`

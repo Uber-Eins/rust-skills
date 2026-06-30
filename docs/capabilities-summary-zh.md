@@ -139,7 +139,7 @@
 | **rust-daily** | 聚合 Reddit, TWIR, 博客的 Rust 新闻 |
 | **rust-skill-creator** | 从文档生成新 skills |
 | **core-actionbook** | 预计算的网站选择器 |
-| **core-agent-browser** | 浏览器自动化基础设施 |
+| **core-chrome-devtools** | Chrome DevTools MCP 浏览器自动化基础设施 |
 | **core-dynamic-skills** | 从 Cargo.toml 动态生成 skills |
 | **core-fix-skill-docs** | Skill 文档维护 |
 
@@ -161,7 +161,7 @@
 
 ```
 1. actionbook MCP    → 预计算选择器
-2. agent-browser CLI → 浏览器自动化
+2. chrome-devtools MCP → 浏览器自动化
 3. WebFetch          → 最后回退
 ```
 

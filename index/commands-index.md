@@ -11,7 +11,7 @@ Available slash commands.
 | /cache-status | `` | Show the status of cached Rust documenta... |
 | /clean-crate-skills | `` | Remove dynamically generated crate skill... |
 | /crate-info | `` | Get information about a Rust crate inclu... |
-| /create-llms-for-skills | `` | Use agent-browser CLI to access target U... |
+| /create-llms-for-skills | `` | Use chrome-devtools MCP to access target... |
 | /create-llms-from-source | `` | Generate llms.txt from local Rust source... |
 | /create-skills-via-llms | `` | Create high-quality skills for a Rust cr... |
 | /docs | `` | Fetch API documentation for Rust crates ... |

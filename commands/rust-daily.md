@@ -53,76 +53,79 @@ cache_file=${cache_dir}/report-{date}-{time_range}-{category}.json
 
 ### 3. Fetch Content
 
-**YOU MUST USE THE BASH TOOL TO RUN agent-browser COMMANDS.**
-
-Do NOT assume agent-browser is unavailable. It IS installed at `/opt/homebrew/bin/agent-browser`.
+**YOU MUST USE chrome-devtools MCP tools for dynamic pages before falling back.**
 
 ```
-┌─────────────────────────────────────────────────────────┐
-│  FOR EACH SOURCE:                                       │
-│                                                         │
-│  1. USE BASH TOOL to run: agent-browser open/get/close │
-│         ↓ (only if Bash returns error)                 │
-│  2. USE WebFetch tool as fallback                      │
-│                                                         │
-│  ⚠️  YOU MUST ACTUALLY RUN THE BASH COMMANDS           │
-│  ⚠️  DO NOT ASSUME agent-browser is unavailable        │
-└─────────────────────────────────────────────────────────┘
+┌──────────────────────────────────────────────────────────────┐
+│  FOR EACH SOURCE:                                            │
+│                                                              │
+│  1. USE chrome-devtools: new_page + evaluate_script          │
+│         ↓ (only if MCP is unavailable or extraction fails)   │
+│  2. USE WebFetch as fallback                                 │
+│                                                              │
+│  ⚠️  DO NOT SKIP THE MCP STEP FOR JS-HEAVY PAGES            │
+└──────────────────────────────────────────────────────────────┘
 ```
 
-#### Step 3a: Reddit (Bash + agent-browser REQUIRED)
+#### Step 3a: Reddit (chrome-devtools REQUIRED)
 
-**Use the Bash tool to execute these commands:**
+**Use chrome-devtools MCP:**
 
-```
-Bash("agent-browser open 'https://www.reddit.com/r/rust/top/?t=day'")
-Bash("agent-browser get text '[data-testid=\"post-container\"]' --limit 15")
-Bash("agent-browser close")
-```
-
-Reddit requires JavaScript. WebFetch will fail. Only mark unavailable if Bash command fails.
-
-#### Step 3b: This Week in Rust (Bash first)
-
-**Use the Bash tool:**
-
-```
-Bash("agent-browser open 'https://this-week-in-rust.org/'")
-Bash("agent-browser get text '.post-content'")
-Bash("agent-browser close")
+```text
+mcp__chrome_devtools__new_page({ url: "https://www.reddit.com/r/rust/top/?t=day" })
+mcp__chrome_devtools__evaluate_script({
+  function: `() => Array.from(
+    document.querySelectorAll('[data-testid="post-container"]')
+  ).slice(0, 15).map((el) => el.innerText)`
+})
 ```
 
-If Bash fails → Use WebFetch tool
+Reddit requires JavaScript. Only fall back if chrome-devtools cannot be used.
 
-#### Step 3c: Rust Blog (Bash first)
+#### Step 3b: This Week in Rust (chrome-devtools first)
 
-**Use the Bash tool:**
+**Use chrome-devtools MCP:**
 
-```
-Bash("agent-browser open 'https://blog.rust-lang.org/'")
-Bash("agent-browser get text '.post-list'")
-Bash("agent-browser close")
-```
-
-If Bash fails → Use WebFetch tool
-
-#### Step 3d: Foundation News (Bash first)
-
-**Use the Bash tool:**
-
-```
-Bash("agent-browser open 'https://foundation.rust-lang.org/news/'")
-Bash("agent-browser get text '.news-list'")
-Bash("agent-browser close")
+```text
+mcp__chrome_devtools__new_page({ url: "https://this-week-in-rust.org/" })
+mcp__chrome_devtools__evaluate_script({
+  function: "() => document.querySelector('.post-content')?.innerText ?? ''"
+})
 ```
 
-If Bash fails → Use WebFetch tool
+If chrome-devtools fails → Use WebFetch tool
+
+#### Step 3c: Rust Blog (chrome-devtools first)
+
+**Use chrome-devtools MCP:**
+
+```text
+mcp__chrome_devtools__new_page({ url: "https://blog.rust-lang.org/" })
+mcp__chrome_devtools__evaluate_script({
+  function: "() => document.querySelector('.post-list')?.innerText ?? ''"
+})
+```
+
+If chrome-devtools fails → Use WebFetch tool
+
+#### Step 3d: Foundation News (chrome-devtools first)
+
+**Use chrome-devtools MCP:**
+
+```text
+mcp__chrome_devtools__new_page({ url: "https://foundation.rust-lang.org/news/" })
+mcp__chrome_devtools__evaluate_script({
+  function: "() => document.querySelector('.news-list')?.innerText ?? ''"
+})
+```
+
+If chrome-devtools fails → Use WebFetch tool
 
 #### Step 3e: FORBIDDEN
 
-- ❌ **Assuming agent-browser unavailable without trying** - YOU MUST RUN BASH COMMANDS
+- ❌ **Assuming chrome-devtools unavailable without trying**
 - ❌ **WebSearch** - Never use for fetching news
-- ❌ **WebFetch for Reddit** - Will always fail
+- ❌ **WebFetch as primary for Reddit** - JS pages need browser execution
 
 ### 4. Format Output
 
@@ -469,22 +472,22 @@ mkdir -p ~/.codex/cache/rust-daily/
 
 ```
 ┌────────────────────────────────────────────────────┐
-│  1. agent-browser CLI  ←── PRIMARY (always first) │
-│  2. WebFetch           ←── FALLBACK (static only) │
-│  3. ❌ WebSearch       ←── FORBIDDEN              │
+│  1. chrome-devtools MCP ←── PRIMARY (always first) │
+│  2. WebFetch            ←── FALLBACK (static only) │
+│  3. ❌ WebSearch        ←── FORBIDDEN              │
 └────────────────────────────────────────────────────┘
 ```
 
-| Site | agent-browser | WebFetch | WebSearch |
-|------|---------------|----------|-----------|
-| Reddit | ✅ Required | ❌ Fails | ❌ Never |
+| Site | chrome-devtools | WebFetch | WebSearch |
+|------|-----------------|----------|-----------|
+| Reddit | ✅ Required | ⚠️ Partial fallback | ❌ Never |
 | TWIR | ✅ First | ✅ Fallback | ❌ Never |
 | Rust Blog | ✅ First | ✅ Fallback | ❌ Never |
 | Foundation | ✅ First | ✅ Fallback | ❌ Never |
 
 **DO NOT:**
-- Skip agent-browser and go directly to WebFetch
-- Use WebFetch for Reddit (will fail)
+- Skip chrome-devtools and go directly to WebFetch
+- Use WebFetch as the primary Reddit fetcher
 - Use WebSearch for any news fetching
 
 ---

@@ -8,7 +8,7 @@
 **Expected Sources (priority order):**
 1. cache/crates/tokio.json (if exists and fresh)
 2. actionbook MCP → lib.rs
-3. agent-browser → lib.rs
+3. chrome-devtools → lib.rs
 4. cargo search (last resort)
 
 **Verification:**
@@ -42,7 +42,7 @@
 **Expected Sources (priority order):**
 1. cache/rust-versions/1.75.json
 2. actionbook → releases.rs
-3. agent-browser → releases.rs
+3. chrome-devtools → releases.rs
 
 **Verification:**
 - [ ] Agent launched correctly
@@ -124,7 +124,7 @@
 ## Error Handling Tests
 
 ### Test 12: Network Failure
-**Setup:** Simulate actionbook/agent-browser unavailable
+**Setup:** Simulate actionbook/chrome-devtools unavailable
 **Prompt:** "latest serde version"
 **Verification:**
 - [ ] Falls back to cargo search

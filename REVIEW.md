@@ -11,7 +11,7 @@
 | Core | 4 | rust-router, rust-learner, coding-guidelines, unsafe-checker |
 | Meta-Questions (m01-m15) | 15 | m01-m15 |
 | Domains | 7 | cloud-native, fintech, web, cli, iot, ml, embedded |
-| Utilities | 4 | agent-browser, actionbook, dynamic-skills, fix-skill-docs |
+| Utilities | 4 | chrome-devtools, actionbook, dynamic-skills, fix-skill-docs |
 
 ---
 
@@ -34,7 +34,7 @@ These skills are internal tools, not user-facing:
 
 | Skill | Problem |
 |-------|---------|
-| `agent-browser` | User shouldn't trigger this directly |
+| `chrome-devtools` | User shouldn't trigger this directly |
 | `actionbook` | Internal tool for other skills |
 | `dynamic-skills` | Command-based, not question-based |
 | `fix-skill-docs` | Internal maintenance tool |
@@ -103,7 +103,7 @@ KEEP:
 
 ```
 skills/internal/
-├── agent-browser/SKILL.md    # No auto-trigger
+├── chrome-devtools/SKILL.md  # No auto-trigger
 ├── actionbook/SKILL.md       # No auto-trigger
 ├── dynamic-skills/SKILL.md   # Command-only
 └── fix-skill-docs/SKILL.md   # Internal tool
@@ -223,7 +223,7 @@ done
 ## Changes Made
 
 1. **Removed m08-safety** - Merged content into unsafe-checker
-2. **Internal skills** - Removed descriptions from agent-browser, actionbook, dynamic-skills, fix-skill-docs
+2. **Internal skills** - Removed descriptions from chrome-devtools, actionbook, dynamic-skills, fix-skill-docs
 3. **Domain naming** - Standardized to domain-xxx prefix (domain-fintech, domain-ml, etc.)
 4. **Error codes** - E0499/E0502 now only in m03-mutability, added E0106/E0271/E0282
 5. **rust-router** - Updated routing tables to reflect all changes

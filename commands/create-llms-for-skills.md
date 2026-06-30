@@ -1,11 +1,11 @@
 ---
-description: Generate comprehensive llms.txt from URLs using agent-browser
+description: Generate comprehensive llms.txt from URLs using chrome-devtools MCP
 argument-hint: <urls> [requirements]
 ---
 
 # Create llms.txt from URLs
 
-Use agent-browser CLI to access target URLs, extract content, and generate comprehensive llms.txt files.
+Use chrome-devtools MCP to access target URLs, extract content, and generate comprehensive llms.txt files.
 
 Arguments: $ARGUMENTS
 - First argument(s): urls (required) - one or more URLs, space-separated
@@ -15,11 +15,10 @@ Arguments: $ARGUMENTS
 
 ## Tool Priority
 
-1. **agent-browser CLI** (preferred) - Full browser automation
-2. **WebFetch** (fallback) - If agent-browser unavailable
+1. **chrome-devtools MCP** (preferred) - Full browser automation with JavaScript support
+2. **WebFetch** (fallback) - If chrome-devtools is unavailable
 
 **DO NOT use:**
-- Codex in Chrome MCP
 - Direct Fetch without user confirmation
 
 ---
@@ -32,22 +31,32 @@ From `$ARGUMENTS`, parse:
 - Identify all URLs (starting with http:// or https://)
 - Remaining content serves as additional requirements
 
-### 2. Use agent-browser CLI
+### 2. Use chrome-devtools MCP
 
-agent-browser is a **command-line tool** with specific subcommands:
+Use the page tools directly:
 
-```bash
+```text
 # Step 1: Open the page
-agent-browser open "https://docs.rs/{crate}/latest/{crate}/"
+mcp__chrome_devtools__new_page({
+  url: "https://docs.rs/{crate}/latest/{crate}/"
+})
 
-# Step 2: Extract content using CSS selectors
-agent-browser get text ".docblock"              # Main documentation
-agent-browser get text ".module-item"           # Module list
-agent-browser get text ".item-decl"             # Type declarations
-agent-browser get text "pre.rust"               # Code examples
-
-# Step 3: Close browser
-agent-browser close
+# Step 2: Extract structured content
+mcp__chrome_devtools__evaluate_script({
+  function: `() => ({
+    docblocks: Array.from(document.querySelectorAll('.docblock'))
+      .map((el) => el.innerText),
+    modules: Array.from(document.querySelectorAll('.module-item'))
+      .map((el) => el.innerText),
+    declarations: Array.from(document.querySelectorAll('.item-decl'))
+      .map((el) => el.innerText),
+    examples: Array.from(document.querySelectorAll('pre.rust'))
+      .map((el) => el.innerText),
+    featureFlags: Array.from(document.querySelectorAll('.feature-flag'))
+      .map((el) => el.innerText),
+    reexports: document.querySelector('#reexports')?.innerText ?? ""
+  })`
+})
 ```
 
 **Common selectors for docs.rs:**
@@ -61,7 +70,7 @@ agent-browser close
 | `.feature-flag` | Feature flags |
 | `#reexports` | Re-exports section |
 
-**For multiple pages**, repeat open/get/close for each submodule.
+**For multiple pages**, repeat `new_page`/`evaluate_script` for each submodule.
 
 ### 3. Content Extraction Strategy
 
@@ -171,7 +180,7 @@ Inform the user of the file path after output is complete.
 
 ## Fallback: WebFetch
 
-If agent-browser is not available:
+If chrome-devtools is not available:
 
 ```
 1. Use WebFetch to get main page content

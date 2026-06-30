@@ -5,7 +5,7 @@ Generic web content fetcher.
 ## Fetch
 
 Use available tools:
-- agent-browser (preferred)
+- chrome-devtools (preferred)
 - WebFetch (fallback)
 
 ## Output

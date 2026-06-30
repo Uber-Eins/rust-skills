@@ -189,7 +189,7 @@ search_actions("crates.io tokio")
           ↓
 获取预计算的精确选择器
           ↓
-agent-browser 定点提取版本号
+chrome-devtools MCP 定点提取版本号
           ↓
 返回: tokio 1.49.0 ✓
 ```
@@ -238,7 +238,7 @@ Codex 插件模式会启用完整能力：
 - `hooks/hooks.json`：Rust-only `UserPromptSubmit` 自动元认知触发
 - `hooks/rust-skill-eval-hook.sh`：注入 Rust 分层路由指令
 - `skills/*/agents/openai.yaml`：后台 agents 和研究工作流
-- `.mcp.json`：Actionbook 与 agent-browser MCP 集成
+- `.mcp.json`：Actionbook 与 chrome-devtools MCP 集成
 
 ### 5.3 核心命令速查
 

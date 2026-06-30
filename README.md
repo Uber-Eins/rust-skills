@@ -4,7 +4,7 @@
 
 > AI-powered Rust development assistant with meta-cognition framework
 
-[![Version](https://img.shields.io/badge/version-2.2.0-green.svg)](https://github.com/Uber-Eins/rust-skills/releases)
+[![Version](https://img.shields.io/badge/version-2.3.0-green.svg)](https://github.com/Uber-Eins/rust-skills/releases)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Codex](https://img.shields.io/badge/Codex-Plugin-blue)](https://openai.com/codex/)
 
@@ -58,7 +58,7 @@ Rust Skills supports two installation modes:
 
 The simplest way to get started. Works with **any coding agent** that supports skills, including [Vercel's `add-skills`](https://github.com/nicepkg/add-skills), and others.
 
-Skills now include **inline fallback logic** — when agent files are not available, skills execute directly using built-in tools (actionbook, agent-browser, WebFetch).
+Skills now include **inline fallback logic** — when agent files are not available, skills execute directly using built-in tools (actionbook, chrome-devtools, WebFetch).
 
 #### Option A: NPX (Easiest)
 
@@ -161,7 +161,7 @@ Rust Skills relies on these external tools for full functionality:
 | Tool | Description | GitHub |
 |------|-------------|--------|
 | **actionbook** | MCP server for website action manuals. Used by agents to fetch structured web content (Rust releases, crate info, documentation). | [actionbook/actionbook](https://github.com/actionbook/actionbook) |
-| **agent-browser** | Browser automation tool for fetching real-time web data. Fallback when actionbook is unavailable. | [vercel-labs/agent-browser](https://github.com/vercel-labs/agent-browser) |
+| **chrome-devtools-mcp** | Chrome DevTools MCP server for JavaScript-aware page automation and extraction. Fallback when actionbook selectors are unavailable. | [ChromeDevTools/chrome-devtools-mcp](https://github.com/ChromeDevTools/chrome-devtools-mcp) |
 
 ## Meta-Cognition Framework
 

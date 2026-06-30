@@ -116,10 +116,14 @@ Compare with dependencies to find missing skills.
 
 For each missing crate:
 
-```bash
+```text
 # 1. Fetch crate documentation
-agent-browser open "https://docs.rs/{crate}/latest/{crate}/"
-agent-browser get text ".docblock"
+mcp__chrome_devtools__new_page({
+  url: "https://docs.rs/{crate}/latest/{crate}/"
+})
+mcp__chrome_devtools__evaluate_script({
+  function: "() => document.querySelector('.docblock')?.innerText ?? ''"
+})
 # Save content
 
 # 2. Create skill directory
@@ -130,11 +134,13 @@ mkdir -p ~/.codex/skills/{crate}/references
 # Use template from rust-skill-creator inline mode
 
 # 4. Create reference files for key modules
-agent-browser open "https://docs.rs/{crate}/latest/{crate}/{module}/"
-agent-browser get text ".docblock"
+mcp__chrome_devtools__new_page({
+  url: "https://docs.rs/{crate}/latest/{crate}/{module}/"
+})
+mcp__chrome_devtools__evaluate_script({
+  function: "() => document.querySelector('.docblock')?.innerText ?? ''"
+})
 # Save to ~/.codex/skills/{crate}/references/{module}.md
-
-agent-browser close
 ```
 
 **WebFetch fallback:**

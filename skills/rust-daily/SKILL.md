@@ -57,11 +57,13 @@ Try to read: `../../agents/rust-daily-reporter.md`
 
 ### 1. Reddit r/rust
 
-```bash
-# Using agent-browser CLI
-agent-browser open "https://www.reddit.com/r/rust/hot/"
-agent-browser get text ".Post" --limit 10
-agent-browser close
+```text
+1. mcp__chrome_devtools__new_page({ url: "https://www.reddit.com/r/rust/hot/" })
+2. mcp__chrome_devtools__evaluate_script({
+     function: `() => Array.from(
+       document.querySelectorAll('[data-testid="post-container"]')
+     ).slice(0, 10).map((el) => el.innerText)`
+   })
 ```
 
 **Or with WebFetch fallback:**
@@ -75,15 +77,16 @@ WebFetch("https://www.reddit.com/r/rust/hot/", "Extract top 10 posts with scores
 
 ### 2. This Week in Rust
 
-```bash
+```text
 # Check actionbook first
 mcp__actionbook__search_actions("this week in rust")
 mcp__actionbook__get_action_by_id(<action_id>)
 
 # Then fetch
-agent-browser open "https://this-week-in-rust.org/"
-agent-browser get text "<selector_from_actionbook>"
-agent-browser close
+mcp__chrome_devtools__new_page({ url: "https://this-week-in-rust.org/" })
+mcp__chrome_devtools__evaluate_script({
+  function: "() => document.querySelector('<selector_from_actionbook>')?.innerText ?? ''"
+})
 ```
 
 **Parse output into:**
@@ -91,10 +94,13 @@ agent-browser close
 
 ### 3. Rust Blog (Official)
 
-```bash
-agent-browser open "https://blog.rust-lang.org/"
-agent-browser get text "article" --limit 5
-agent-browser close
+```text
+1. mcp__chrome_devtools__new_page({ url: "https://blog.rust-lang.org/" })
+2. mcp__chrome_devtools__evaluate_script({
+     function: `() => Array.from(document.querySelectorAll('article'))
+       .slice(0, 5)
+       .map((el) => el.innerText)`
+   })
 ```
 
 **Or with WebFetch fallback:**
@@ -108,10 +114,15 @@ WebFetch("https://blog.rust-lang.org/", "Extract latest 5 blog posts with dates 
 
 ### 4. Inside Rust
 
-```bash
-agent-browser open "https://blog.rust-lang.org/inside-rust/"
-agent-browser get text "article" --limit 3
-agent-browser close
+```text
+1. mcp__chrome_devtools__new_page({
+     url: "https://blog.rust-lang.org/inside-rust/"
+   })
+2. mcp__chrome_devtools__evaluate_script({
+     function: `() => Array.from(document.querySelectorAll('article'))
+       .slice(0, 3)
+       .map((el) => el.innerText)`
+   })
 ```
 
 **Or with WebFetch fallback:**
@@ -121,21 +132,34 @@ WebFetch("https://blog.rust-lang.org/inside-rust/", "Extract latest 3 posts with
 
 ### 5. Rust Foundation
 
-```bash
+```text
 # News
-agent-browser open "https://rustfoundation.org/media/category/news/"
-agent-browser get text "article" --limit 3
-agent-browser close
+mcp__chrome_devtools__new_page({
+  url: "https://rustfoundation.org/media/category/news/"
+})
+mcp__chrome_devtools__evaluate_script({
+  function: `() => Array.from(document.querySelectorAll('article'))
+    .slice(0, 3)
+    .map((el) => el.innerText)`
+})
 
 # Blog
-agent-browser open "https://rustfoundation.org/media/category/blog/"
-agent-browser get text "article" --limit 3
-agent-browser close
+mcp__chrome_devtools__new_page({
+  url: "https://rustfoundation.org/media/category/blog/"
+})
+mcp__chrome_devtools__evaluate_script({
+  function: `() => Array.from(document.querySelectorAll('article'))
+    .slice(0, 3)
+    .map((el) => el.innerText)`
+})
 
 # Events
-agent-browser open "https://rustfoundation.org/events/"
-agent-browser get text "article" --limit 3
-agent-browser close
+mcp__chrome_devtools__new_page({ url: "https://rustfoundation.org/events/" })
+mcp__chrome_devtools__evaluate_script({
+  function: `() => Array.from(document.querySelectorAll('article'))
+    .slice(0, 3)
+    .map((el) => el.innerText)`
+})
 ```
 
 ### Time Filtering
@@ -165,24 +189,25 @@ Both modes use the same tool chain order:
    mcp__actionbook__search_actions("rust blog")
    ```
 
-2. **agent-browser CLI** - For dynamic web content
-   ```bash
-   agent-browser open "<url>"
-   agent-browser get text "<selector>"
-   agent-browser close
+2. **chrome-devtools MCP** - For dynamic web content
+   ```text
+   mcp__chrome_devtools__new_page({ url: "<url>" })
+   mcp__chrome_devtools__evaluate_script({
+     function: "() => document.querySelector('<selector>')?.innerText ?? ''"
+   })
    ```
 
-3. **WebFetch** - Fallback if agent-browser unavailable
+3. **WebFetch** - Fallback if chrome-devtools is unavailable
 
 | Source | Primary Tool | Fallback |
 |--------|--------------|----------|
-| Reddit | agent-browser | WebFetch |
-| TWIR | actionbook → agent-browser | WebFetch |
+| Reddit | chrome-devtools | WebFetch |
+| TWIR | actionbook → chrome-devtools | WebFetch |
 | Rust Blog | actionbook → WebFetch | - |
 | Foundation | actionbook → WebFetch | - |
 
 **DO NOT use:**
-- Chrome MCP directly
+- Skip chrome-devtools when the page needs JavaScript execution
 - WebSearch for fetching news pages
 
 ---
@@ -228,6 +253,6 @@ Both modes use the same tool chain order:
 | Error | Cause | Solution |
 |-------|-------|----------|
 | Agent file not found | Skills-only install | Use inline mode |
-| agent-browser unavailable | CLI not installed | Use WebFetch |
+| chrome-devtools unavailable | MCP server not installed | Use WebFetch |
 | Site timeout | Network issues | Retry once, then skip source |
 | Empty results | Selector mismatch | Report and use fallback |

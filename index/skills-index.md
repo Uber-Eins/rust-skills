@@ -62,7 +62,7 @@ Complete index of all rust-skills with descriptions.
 | Name | Description |
 |------|-------------|
 | core-actionbook | Action book for skill management |
-| core-agent-browser | Browser-based agent for web fetching |
+| core-chrome-devtools | Chrome DevTools MCP agent for web fetching |
 | core-dynamic-skills | Dynamic skill loading and management |
 | core-fix-skill-docs | Fix and update skill documentation |
 | rust-daily | Daily Rust news and updates |

@@ -32,24 +32,27 @@ See: `_shared/fetch-strategy.md`
    search_actions("rust blog")
    ```
 
-2. **agent-browser CLI** - For dynamic web content
-   ```bash
-   agent-browser open "https://www.reddit.com/r/rust/hot/"
-   agent-browser get text ".Post"
-   agent-browser close
+2. **chrome-devtools MCP** - For dynamic web content
+   ```text
+   mcp__chrome_devtools__new_page({ url: "https://www.reddit.com/r/rust/hot/" })
+   mcp__chrome_devtools__evaluate_script({
+     function: `() => Array.from(
+       document.querySelectorAll('[data-testid="post-container"]')
+     ).map((el) => el.innerText)`
+   })
    ```
 
-3. **WebFetch** - Fallback if agent-browser unavailable
+3. **WebFetch** - Fallback if chrome-devtools is unavailable
 
 | Source | Primary Tool | Fallback |
 |--------|--------------|----------|
-| Reddit | agent-browser | WebFetch |
-| TWIR | actionbook → agent-browser | WebFetch |
+| Reddit | chrome-devtools | WebFetch |
+| TWIR | actionbook → chrome-devtools | WebFetch |
 | Rust Blog | actionbook → WebFetch | - |
 | Foundation | actionbook → WebFetch | - |
 
 **DO NOT use:**
-- Chrome MCP directly
+- Skip chrome-devtools when the page requires JavaScript
 - WebSearch for fetching news pages
 
 ## Time Filter

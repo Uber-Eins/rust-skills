@@ -25,6 +25,6 @@ Get information about a Rust crate including latest version, features, and chang
 
 1. Use `search_actions("lib.rs crate")` to get action ID
 2. Use `get_action_by_id()` to get page selectors
-3. Use `agent-browser` to open https://lib.rs/crates/{crate}
+3. Use chrome-devtools MCP to open `https://lib.rs/crates/{crate}`
 4. Extract crate information and changelog
 5. Summarize for user

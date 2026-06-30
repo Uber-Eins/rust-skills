@@ -5,6 +5,21 @@ All notable changes to rust-skills will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.3.0] - 2026-06-30
+
+### Added
+- Added `chrome-devtools` MCP server configuration to `.mcp.json` for
+  JavaScript-aware page automation in plugin mode.
+
+### Changed
+- Replaced `agent-browser`-based browser fetching with
+  `chrome-devtools-mcp` across internal skills, commands, and agent
+  workflows.
+- Renamed the internal browser support skill from `core-agent-browser` to
+  `core-chrome-devtools`.
+- Updated README and architecture/capability documents to reflect the new MCP
+  browser automation stack.
+
 ## [2.2.0] - 2026-06-28
 
 ### Added

@@ -1,0 +1,13 @@
+interface:
+  display_name: "Rust Chrome DevTools Fetch Agent"
+  short_description: "Fetch dynamic Rust documentation and ecosystem pages with Chrome DevTools MCP."
+  default_prompt: "Use Chrome DevTools MCP to fetch this Rust page and extract the relevant details."
+  brand_color: "#CE412B"
+policy:
+  allow_implicit_invocation: false
+dependencies:
+  tools:
+    - mcp__chrome_devtools__new_page
+    - mcp__chrome_devtools__take_snapshot
+    - mcp__chrome_devtools__evaluate_script
+    - web.run

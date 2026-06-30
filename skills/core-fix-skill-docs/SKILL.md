@@ -30,7 +30,7 @@ Check and fix missing reference files in dynamic skills.
 
 This skill can run in two modes:
 - **Agent Mode**: Uses background agents for documentation fetching
-- **Inline Mode**: Executes directly using agent-browser CLI or WebFetch
+- **Inline Mode**: Executes directly using chrome-devtools MCP or WebFetch
 
 ---
 
@@ -90,8 +90,9 @@ Task(
   subagent_type: "general-purpose",
   run_in_background: true,
   prompt: "Fetch documentation for {crate_name}/{module} from docs.rs.
-           Use agent-browser CLI to navigate to https://docs.rs/{crate_name}/latest/{crate_name}/{module}/
-           Extract the main documentation and save to ~/.codex/skills/{crate_name}/references/{module}.md"
+           Use chrome-devtools MCP to open https://docs.rs/{crate_name}/latest/{crate_name}/{module}/,
+           extract the main documentation, and save it to
+           ~/.codex/skills/{crate_name}/references/{module}.md"
 )
 ```
 
@@ -152,12 +153,15 @@ Action needed: 1 file missing
 
 For each missing file:
 
-**Using agent-browser CLI:**
-```bash
-agent-browser open "https://docs.rs/{crate_name}/latest/{crate_name}/{module}/"
-agent-browser get text ".docblock"
+**Using chrome-devtools MCP:**
+```text
+mcp__chrome_devtools__new_page({
+  url: "https://docs.rs/{crate_name}/latest/{crate_name}/{module}/"
+})
+mcp__chrome_devtools__evaluate_script({
+  function: "() => document.querySelector('.docblock')?.innerText ?? ''"
+})
 # Save output to ~/.codex/skills/{crate_name}/references/{module}.md
-agent-browser close
 ```
 
 **Using WebFetch fallback:**
@@ -189,8 +193,8 @@ Edit("~/.codex/skills/{crate_name}/SKILL.md",
 
 ## Tool Priority
 
-1. **agent-browser CLI** - Primary tool for fetching documentation
-2. **WebFetch** - Fallback if agent-browser unavailable
+1. **chrome-devtools MCP** - Primary tool for fetching documentation
+2. **WebFetch** - Fallback if chrome-devtools is unavailable
 3. **Edit SKILL.md** - For removing invalid references (--remove-invalid only)
 
 ---
